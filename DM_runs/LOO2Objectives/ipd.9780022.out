@@ -1,0 +1,1553 @@
+IBRUN: Command is python
+IBRUN: Command is /opt/python/bin/python
+IBRUN: no hostfile mod needed
+IBRUN: Nodefile is /tmp/axsa6Vb1cP
+
+IBRUN: MPI binding policy: scatter/core for 1 threads per rank (12 cores per socket)
+IBRUN: Adding MV2_USE_OLD_BCAST=1 to the environment
+IBRUN: Adding MV2_CPU_BINDING_LEVEL=core to the environment
+IBRUN: Adding MV2_ENABLE_AFFINITY=1 to the environment
+IBRUN: Adding MV2_DEFAULT_TIME_OUT=23 to the environment
+IBRUN: Adding MV2_CPU_BINDING_POLICY=scatter to the environment
+IBRUN: Adding MV2_USE_HUGEPAGES=0 to the environment
+IBRUN: Adding MV2_HOMOGENEOUS_CLUSTER=0 to the environment
+IBRUN: Adding MV2_USE_UD_HYBRID=0 to the environment
+IBRUN: Added 8 new environment variables to the execution environment
+IBRUN: Command string is [mpirun_rsh -np 12 -hostfile /tmp/axsa6Vb1cP -export /opt/python/bin/python LOOtestingnonstochastic.py]
+coop
+['defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11523805, 10498950, 156481, 10032150, 0]
+defect
+['coop', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11876148, 10358133, 161901, 10032150, 0]
+tft
+['coop', 'defect', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11831057, 10308577, 192114, 10032150, 0]
+stft
+['coop', 'defect', 'tft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 12048799, 10243999, 182441, 10032150, 0]
+pavlov
+['coop', 'defect', 'tft', 'stft', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11898800, 10481135, 213268, 10032150, 0]
+spiteful
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11876664, 10045369, 125128, 10032150, 0]
+random
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11711921, 10386681, 138836, 10032150, 0]
+CD
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11678660, 9920920, 93168,coop
+['defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11576672, 10537502, 189997, 10032150, 0]
+defect
+['coop', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11667889, 10024394, 43446, 10032150, 0]
+tft
+['coop', 'defect', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11655948, 10084298, 124547, 10032150, 0]
+stft
+['coop', 'defect', 'tft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11834041, 9954796, 91388, 10032150, 0]
+pavlov
+['coop', 'defect', 'tft', 'stft', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11585141, 10189436, 170215, 10032150, 0]
+spiteful
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11978471, 10164846, 195650, 10032150, 0]
+random
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11910208, 10306728, 147787, 10032150, 0]
+CD
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11990005, 10622375, 246189, coop
+['defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11703916, 10214151, 165346, 10032150, 0]
+defect
+['coop', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11988802, 10507657, 202136, 10032150, 0]
+tft
+['coop', 'defect', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11605969, 9709429, 16619, 10032150, 0]
+stft
+['coop', 'defect', 'tft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11632649, 9839569, 65619, 10032150, 0]
+pavlov
+['coop', 'defect', 'tft', 'stft', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], 13060822, 12664902, 211630, 10032150, 0]
+spiteful
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], 12020565, 10147240, 151111, 10032150, 0]
+random
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11950839, 10330024, 164680, 10032150, 0]
+CD
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11827660, 10106810, 157182, 1coop
+['defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11648290, 10125505, 82829, 10032150, 0]
+defect
+['coop', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11720958, 10437028, 196246, 10032150, 0]
+tft
+['coop', 'defect', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11833178, 10940603, 223297, 10032150, 0]
+stft
+['coop', 'defect', 'tft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 12039803, 10193953, 155964, 10032150, 0]
+pavlov
+['coop', 'defect', 'tft', 'stft', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11868895, 10640800, 95591, 10032150, 0]
+spiteful
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11900474, 10093119, 101504, 10032150, 0]
+random
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11802612, 10098242, 117773, 10032150, 0]
+CD
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11615931, 10292416, 129460,coop
+['defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11393011, 10147536, 117670, 10032150, 0]
+defect
+['coop', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1], 12081802, 10335937, 142610, 10032150, 0]
+tft
+['coop', 'defect', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 12377623, 10948298, 149607, 10032150, 0]
+stft
+['coop', 'defect', 'tft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11702825, 9755375, 25921, 10032150, 0]
+pavlov
+['coop', 'defect', 'tft', 'stft', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11569476, 10412291, 190316, 10032150, 0]
+spiteful
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11692053, 10017283, 131437, 10032150, 0]
+random
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], 12217251, 10686496, 357331, 10032150, 0]
+CD
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11887836, 10334506, 176281,coop
+['defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11644892, 10185637, 136290, 10032150, 0]
+defect
+['coop', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11839810, 10133680, 113720, 10032150, 0]
+tft
+['coop', 'defect', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11647463, 9758608, 11592, 10032150, 0]
+stft
+['coop', 'defect', 'tft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11835140, 10133795, 130453, 10032150, 0]
+pavlov
+['coop', 'defect', 'tft', 'stft', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11582240, 9906915, 31544, 10032150, 0]
+spiteful
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11739902, 9966512, 96568, 10032150, 0]
+random
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11492514, 10071074, 73988, 10032150, 0]
+CD
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11983470, 10226680, 174298, 1003coop
+['defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11598306, 10294441, 143950, 10032150, 0]
+defect
+['coop', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1], 12271929, 10508314, 258622, 10032150, 0]
+tft
+['coop', 'defect', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11811979, 10436379, 152218, 10032150, 0]
+stft
+['coop', 'defect', 'tft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11887892, 10086842, 110797, 10032150, 0]
+pavlov
+['coop', 'defect', 'tft', 'stft', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11962658, 10836323, 252274, 10032150, 0]
+spiteful
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11556576, 9889316, 40691, 10032150, 0]
+random
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], 12068837, 10719032, 126142, 10032150, 0]
+CD
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11577719, 10128484, 91218, coop
+['defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], 12098206, 10940521, 177365, 10032150, 0]
+defect
+['coop', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11763626, 9996066, 111827, 10032150, 0]
+tft
+['coop', 'defect', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11649359, 9998499, 55193, 10032150, 0]
+stft
+['coop', 'defect', 'tft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 0, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], 12055704, 10454209, 203665, 10032150, 0]
+pavlov
+['coop', 'defect', 'tft', 'stft', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11415473, 9738283, 8889, 10032150, 0]
+spiteful
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11626430, 9767535, 47234, 10032150, 0]
+random
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 0, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 1, 1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11771904, 10671569, 218792, 10032150, 0]
+CD
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11564758, 10411608, 118135, 10032coop
+['defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11519018, 10168658, 167410, 10032150, 0]
+defect
+['coop', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 13565613, 12359108, 930320, 10032150, 0]
+tft
+['coop', 'defect', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11993214, 10469879, 213920, 10032150, 0]
+stft
+['coop', 'defect', 'tft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11851920, 10080755, 159227, 10032150, 0]
+pavlov
+['coop', 'defect', 'tft', 'stft', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11937199, 10920294, 110281, 10032150, 0]
+spiteful
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 12163146, 10713081, 412797, 10032150, 0]
+random
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11996562, 10942202, 333596, 10032150, 0]
+CD
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11663162, 10330082, 12858coop
+['defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11644417, 10214427, 168370, 10032150, 0]
+defect
+['coop', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], 12300519, 11106444, 437343, 10032150, 0]
+tft
+['coop', 'defect', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 12092683, 10428968, 279372, 10032150, 0]
+stft
+['coop', 'defect', 'tft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11612519, 9942254, 54076, 10032150, 0]
+pavlov
+['coop', 'defect', 'tft', 'stft', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11404034, 9886439, 38746, 10032150, 0]
+spiteful
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 0, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], 12205757, 10875772, 189261, 10032150, 0]
+random
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1], 17350502, 19662852, 1190210, 10032150, 0]
+CD
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11850212, 10198332, 148049, coop
+['defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11428943, 10045548, 79010, 10032150, 0]
+defect
+['coop', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], 12107117, 10646792, 256495, 10032150, 0]
+tft
+['coop', 'defect', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 12049771, 10188001, 196604, 10032150, 0]
+stft
+['coop', 'defect', 'tft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11667678, 9843503, 12062, 10032150, 0]
+pavlov
+['coop', 'defect', 'tft', 'stft', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11758537, 10308402, 150283, 10032150, 0]
+spiteful
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 12046936, 10187336, 166632, 10032150, 0]
+random
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11746874, 10097284, 98403, 10032150, 0]
+CD
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11884943, 9997748, 117997, 10coop
+['defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11243042, 9794872, 8652, 10032150, 0]
+defect
+['coop', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], 12054347, 10722272, 355228, 10032150, 0]
+tft
+['coop', 'defect', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11892459, 10206564, 123309, 10032150, 0]
+stft
+['coop', 'defect', 'tft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11554928, 9794118, 36278, 10032150, 0]
+pavlov
+['coop', 'defect', 'tft', 'stft', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11477045, 9913880, 54127, 10032150, 0]
+spiteful
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11837065, 10427285, 134970, 10032150, 0]
+random
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11484111, 10002036, 101787, 10032150, 0]
+CD
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11388112, 10057412, 72738, 10032 10032150, 0]
+DDC
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11670246, 10059286, 75559, 10032150, 0]
+CCD
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11821385, 10259250, 149204, 10032150, 0]
+tf2t
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11510105, 9811335, 28253, 10032150, 0]
+softmaj
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11581908, 9748963, 18490, 10032150, 0]
+hardmaj
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11767687, 10274272, 208226, 10032150, 0]
+hardtft
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11838161, 10099131, 67223, 10032150, 0]
+naiveprober
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11858995, 10140920, 144585, 10032150, 0]
+remorseful
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1], 12123531, 10409926, 272749, 10032150, 0]
+10032150, 0]
+DDC
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 1, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11625218, 10215943, 141861, 10032150, 0]
+CCD
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11680054, 9835419, 47677, 10032150, 0]
+tf2t
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11705403, 10092803, 78974, 10032150, 0]
+softmaj
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11676236, 10002796, 86919, 10032150, 0]
+hardmaj
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11778241, 10320836, 197751, 10032150, 0]
+hardtft
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11844284, 10116754, 121236, 10032150, 0]
+naiveprober
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 13370647, 12905077, 506516, 10032150, 0]
+remorseful
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11966665, 10054245, 121402, 10032150, 0]
+ 10032150, 0]
+DDC
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11947996, 10278311, 201297, 10032150, 0]
+CCD
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11328750, 9798480, 12969, 10032150, 0]
+tf2t
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11955455, 10074490, 110655, 10032150, 0]
+softmaj
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11508579, 9831144, 14724, 10032150, 0]
+hardmaj
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11535495, 9943650, 64653, 10032150, 0]
+hardtft
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11795238, 9918048, 97083, 10032150, 0]
+naiveprober
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11828990, 10134135, 164882, 10032150, 0]
+remorseful
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11430185, 9981755, 56188, 10032150, 0]
+0032150, 0]
+DDC
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11393455, 9889295, 42438, 10032150, 0]
+CCD
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11933184, 10130514, 155376, 10032150, 0]
+tf2t
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11496371, 9671706, 356, 10032150, 0]
+softmaj
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11673129, 9959874, 80388, 10032150, 0]
+hardmaj
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1], 12020038, 10536123, 185218, 10032150, 0]
+hardtft
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1], 16732046, 22721386, 1583673, 10032150, 0]
+naiveprober
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 12258167, 10366747, 149406, 10032150, 0]
+remorseful
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11573712, 10128502, 63661, 10032150, 0]
+ 10032150, 0]
+DDC
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11697485, 10023015, 61517, 10032150, 0]
+CCD
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11600067, 9804832, 41716, 10032150, 0]
+tf2t
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11696911, 9752251, 39527, 10032150, 0]
+softmaj
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11599475, 9874620, 53756, 10032150, 0]
+hardmaj
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11593571, 9897061, 38154, 10032150, 0]
+hardtft
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11955267, 10197887, 149447, 10032150, 0]
+naiveprober
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], 16006873, 15214593, 559693, 10032150, 0]
+remorseful
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11876781, 10283841, 88464, 10032150, 0]
+2150, 0]
+DDC
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11566258, 10635768, 259228, 10032150, 0]
+CCD
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1], 12344977, 11124747, 232063, 10032150, 0]
+tf2t
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11569638, 10004968, 43123, 10032150, 0]
+softmaj
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11476234, 9696839, 4446, 10032150, 0]
+hardmaj
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], 12331597, 11574637, 440987, 10032150, 0]
+hardtft
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11836888, 10024783, 117203, 10032150, 0]
+naiveprober
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11853883, 10443738, 163285, 10032150, 0]
+remorseful
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11643636, 10131126, 120795, 10032150, 0]
+10032150, 0]
+DDC
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11567773, 9978008, 23934, 10032150, 0]
+CCD
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 1, 1, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11904170, 10082150, 137167, 10032150, 0]
+tf2t
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11633908, 10202728, 53834, 10032150, 0]
+softmaj
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11904853, 10082273, 102882, 10032150, 0]
+hardmaj
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 1, 0, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11724312, 10050677, 35717, 10032150, 0]
+hardtft
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11553407, 9823717, 23760, 10032150, 0]
+naiveprober
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11704196, 9937826, 93592, 10032150, 0]
+remorseful
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11636367, 10331277, 89328, 10032150, 0]
+150, 0]
+DDC
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11877338, 10541478, 276317, 10032150, 0]
+CCD
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11657741, 10099956, 121442, 10032150, 0]
+tf2t
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11875263, 10403163, 117792, 10032150, 0]
+softmaj
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11657875, 9956825, 74361, 10032150, 0]
+hardmaj
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11888997, 10699662, 309996, 10032150, 0]
+hardtft
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1], 12250044, 10252354, 136054, 10032150, 0]
+naiveprober
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11968757, 10813607, 288598, 10032150, 0]
+remorseful
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 0, 1, 1, 1, 0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 12123613, 10507083, 154165, 10032150, 0]
+7, 10032150, 0]
+DDC
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11516885, 9826260, 13403, 10032150, 0]
+CCD
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11405200, 10166515, 116231, 10032150, 0]
+tf2t
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11631216, 9695871, 9813, 10032150, 0]
+softmaj
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11584492, 9906372, 56227, 10032150, 0]
+hardmaj
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11780598, 10007803, 88579, 10032150, 0]
+hardtft
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 1, 0, 1, 1, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1], 12468809, 10383079, 157665, 10032150, 0]
+naiveprober
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11953305, 10727185, 252931, 10032150, 0]
+remorseful
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11396073, 9880433, 55946, 10032150, 0]
+10032150, 0]
+DDC
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11486765, 9816595, 17361, 10032150, 0]
+CCD
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11698656, 9922206, 53493, 10032150, 0]
+tf2t
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11608004, 9989404, 47061, 10032150, 0]
+softmaj
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11681699, 10032329, 49429, 10032150, 0]
+hardmaj
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11659999, 9961219, 45398, 10032150, 0]
+hardtft
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11597106, 10224411, 52497, 10032150, 0]
+naiveprober
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11646644, 9934984, 56442, 10032150, 0]
+remorseful
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11442521, 9984016, 93522, 10032150, 0]
+032150, 0]
+DDC
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11434765, 9745790, 7860, 10032150, 0]
+CCD
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11591926, 10010541, 62290, 10032150, 0]
+tf2t
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11686995, 10512970, 82252, 10032150, 0]
+softmaj
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11578511, 9891121, 38127, 10032150, 0]
+hardmaj
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11848712, 10353127, 148212, 10032150, 0]
+hardtft
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11793631, 10362011, 149010, 10032150, 0]
+naiveprober
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], 12008523, 10291063, 123745, 10032150, 0]
+remorseful
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11535370, 9944325, 43300, 10032150, 0]
+150, 0]
+DDC
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 0, 1, 0, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 12028877, 10218692, 156088, 10032150, 0]
+CCD
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 12083887, 10961022, 200950, 10032150, 0]
+tf2t
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 0, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11621373, 10201408, 112744, 10032150, 0]
+softmaj
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'hardmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11618277, 9915177, 33672, 10032150, 0]
+hardmaj
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardtft', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11541259, 10032974, 65136, 10032150, 0]
+hardtft
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'naiveprober', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11559318, 10324843, 62311, 10032150, 0]
+naiveprober
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'remorseful']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1], 11512465, 9802490, 16212, 10032150, 0]
+remorseful
+['coop', 'defect', 'tft', 'stft', 'pavlov', 'spiteful', 'random', 'CD', 'DDC', 'CCD', 'tf2t', 'softmaj', 'hardmaj', 'hardtft', 'naiveprober']
+-- Generation 100 --
+-- Generation 200 --
+-- Generation 300 --
+-- Generation 400 --
+-- End of evolution --
+[[1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 11750635, 10253200, 106142, 10032150, 0]
+IBRUN: Job ended with value 0
