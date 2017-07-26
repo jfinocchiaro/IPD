@@ -22,22 +22,30 @@ def evaluate(member):
     if objectives == 2:
         #max personal score and cooperation
         score1 = float(member[1]) / member[4]
-        score2 = float(member[3]) / member[4] * 6
+        score2 = min(float(member[3]) / member[4] * 6, 5)
     if objectives == 3:
         #max opp score and cooperation
         score1 = float(member[2]) / member[4]
-        score2 = float(member[3]) / member[4] * 6
+        score2 = min(float(member[3]) / member[4] * 6, 5)
     return score1, score2
+
+
+def evaluate_three_obj(member):
+    score1 = float(member[1]) / member[4]
+    score2 =  float(-member[2]) / member[4]
+    score3 = min(float(member[3]) / member[4] * 6, 5)
+
+    return score1, score2, score3
 
 
 def uniformobjectives(population):
     x = 0
     for member in population:
-        member[5] = int(x%2)
+        member[5] = int(x%4)
         x += 1
     return population
 
-def uniformobjectives2(population):
+def uniformobjectivesSelfish(population):
     for member in population:
             member[5] = 0
 
@@ -95,6 +103,44 @@ def playMultiRounds(ind1, ind2, numRounds=150):
     for x in range(numRounds):
         playround(ind1, ind2)
 
+
+def playroundtrump(member1):
+
+    ind1 = member1[0]
+    decisionind1 = (''.join(map(str, ind1[64:70])))
+    decisionind1 = int(decisionind1, 2)
+    decision1 = ind1[decisionind1]
+
+    decision2 = 1
+
+    ind1 = shift_decisions(ind1, decision2, decision1)
+
+    member1[0] = ind1
+
+    #mutual cooperation
+    if decision1 == 0 and decision2 == 0:
+        member1 = scorechange.mutualcooperation(member1)
+
+
+    #player 1 is screwed
+    elif decision1 == 0 and decision2 == 1:
+        member1 = scorechange.screwed(member1)
+
+
+    #player 2 is screwed
+    elif decision1 == 1 and decision2 == 0:
+        member1 = scorechange.tempt(member1)
+
+
+    #both players defect
+    else:
+        member1 = scorechange.mutualdefect(member1)
+
+
+def playMultiRoundsTrump(ind1, numRounds=150):
+    for x in range(numRounds):
+        playroundtrump(ind1)
+
 '''
 def finalFitness(member, population):
     for person in population:
@@ -104,13 +150,30 @@ def finalFitness(member, population):
 '''
 
 def mutInternalFlipBit(individual, indpb=0.1, indpb2 = 0.0):
-    individual[0] = (list) (tools.mutFlipBit(individual[0], indpb))
-    individual[0] = individual[0].pop(0)
+    decisionSlice = individual[0][64:]
+    genome = (individual[0][0:64])
+    genome = (list)(tools.mutFlipBit(genome, indpb))
+
+    fullGen =  genome[0] + (decisionSlice)
+    individual[0] = fullGen
+    #individual[0] = individual[0].pop(0)
     test = random.random
     if test < indpb2:
         individual[5] = random.randint(0,3)
     return individual, #comma here
 
+
+def mutInternalFlipBitWHistory(individual, indpb=0.1, indpb2=0.0):
+
+    genome = (list)(tools.mutFlipBit(individual[0], indpb))
+
+
+    individual[0] = genome
+    individual[0] = individual[0].pop(0)
+    test = random.random
+    if test < indpb2:
+        individual[5] = random.randint(0, 3)
+    return individual,  # comma here
 
 def cxOnePointGenome(ind1, ind2):
     """Executes a one point crossover on the input :term:`sequence` individuals.
@@ -123,9 +186,10 @@ def cxOnePointGenome(ind1, ind2):
     This function uses the :func:`~random.randint` function from the
     python base :mod:`random` module.
     """
-    size = min(len(ind1[0]), len(ind2[0]))
+
+    size = min(len(ind1), len(ind2))
     cxpoint = random.randint(1, size - 1)
-    ind1[0][cxpoint:], ind2[0][cxpoint:] = ind2[0][cxpoint:], ind1[0][cxpoint:]
+    ind1[cxpoint:], ind2[cxpoint:] = ind2[cxpoint:], ind1[cxpoint:]
 
     return ind1, ind2
 
@@ -136,7 +200,7 @@ def resetPlayer(member):
     member[2] = 0
     member[3] = 0
     member[4] = 0
-    member[5] = random.randint(0,3)
+    #member[5] = random.randint(0,3)
     return member
 
 
@@ -148,4 +212,16 @@ def exportGenometoCSV(filename, population):
                             quoting=csv.QUOTE_MINIMAL)
 
         for member in population:
-            writer.writerow(member[0] +[float(member[1])/member[4]] + [float(member[2])/member[4]] + [ 12* float(member[3])/member[4]] + [member[4]] +[member[5]])
+            writer.writerow(member[0] +[float(member[1])/member[4]] + [float(member[2])/member[4]] + [ min(6* float(member[3])/member[4], 5)] + [member[4]] +[member[5]])
+
+
+def exportGenometoCSVLOO(filename, population, testedPlayer):
+    import csv
+    with open(filename, 'wb') as csvfile:
+        writer = csv.writer(csvfile, delimiter=',', quotechar='|',
+                            quoting=csv.QUOTE_MINIMAL)
+
+        x = 0
+        for member in population:
+            writer.writerow(member[0] +[float(member[1])/member[4]] + [float(member[2])/member[4]] + [ 6* float(member[3])/member[4]] + [member[4]] +[member[5]] + [testedPlayer[x]])
+            x += 1
