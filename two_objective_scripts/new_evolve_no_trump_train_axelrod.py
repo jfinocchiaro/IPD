@@ -42,22 +42,14 @@ def main():
     frontfreeze = NGEN *0.01
     #freezevalue = NGEN * 0.8
 
-    '''
+
     import alexrodplayers
     axelrodPop = alexrodplayers.initAxpop()
     for member in population:
         for opponent in axelrodPop:
             alexrodplayers.playAxelrodPop(member, opponent)
-    '''
 
-    for pair in itertools.combinations(population, r=2):
-        deapplaygame.playMultiRounds(*pair)
 
-    '''
-    for member in population:
-        for x in range(60):
-            deapplaygame.playMultiRoundsTrump(member)
-    '''
 
     # Evaluate the entire population
     fitnesses = list(map(toolbox.evaluate, population))
@@ -69,32 +61,15 @@ def main():
     # Begin the evolution
     for g in range(1, NGEN):
 
-        '''
-        if g == frontfreeze:
-            toolbox.unregister("mate")
-            toolbox.register("mate", tools.cxOnePoint)
 
 
-        if g < freezevalue:
-            for x in range(len(population)):
-                if prevgen[x][5] != population[x][5]:
-                    population[x] = deapplaygame.resetPlayer(population[x])
-        '''
 
-        for pair in itertools.combinations(population, r=2):
-            deapplaygame.playMultiRounds(*pair)
 
-        '''
-        for member in population:
-            for x in range(60):
-                deapplaygame.playMultiRoundsTrump(member)
-        '''
 
-        '''
         for member in population:
             for opponent in axelrodPop:
                 alexrodplayers.playAxelrodPop(member, opponent)
-        '''
+
 
 
 
@@ -123,19 +98,13 @@ def main():
         population = toolbox.map(toolbox.clone, population)
 
 
-        for pair in itertools.combinations(population, r=2):
-            deapplaygame.playMultiRounds(*pair)
 
-        '''
-        for member in population:
-            for x in range(60):
-                deapplaygame.playMultiRoundsTrump(member)
-        '''
-        '''
+
+
         for member in population:
             for opponent in axelrodPop:
                 alexrodplayers.playAxelrodPop(member, opponent)
-        '''
+
 
         fits = toolbox.map(toolbox.evaluate, population)
         for fit, ind in zip(fits, population):

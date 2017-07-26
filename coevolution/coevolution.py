@@ -49,11 +49,11 @@ def main():
     toolbox.register("mutate", deapplaygame.mutInternalFlipBit)
     toolbox.register("select", tools.selNSGA2)
 
-    NGEN = 10000
+    NGEN = 1000
     CXPB = (0.9)
     MUTPB = (0.01428571)
-    IMPROVMENT_LENGTH = 5
-    best_fitness_history = [None] * IMPROVMENT_LENGTH
+    IMPROVEMENT_LENGTH = 5
+    best_fitness_history = [None] * IMPROVEMENT_LENGTH
     next_repr = []
 
     for g in range(0, NGEN):
@@ -68,7 +68,29 @@ def main():
 
         for (i, s), j in zip(enumerate(species), species_index):
             # Vary the species individuals
-            s = algorithms.varAnd(s, toolbox, cxpb=CXPB, mutpb=MUTPB)
+            # create offspring
+            offspring = toolbox.map(toolbox.clone, s)
+
+            # crossover
+            for child1, child2 in zip(offspring[::2], offspring[1::2]):
+                if random.random() < CXPB:
+                    toolbox.mate(child1[0], child2[0])
+                    del child1.fitness.values
+                    # customfunctions.memberReset(child1)
+                    del child2.fitness.values
+                    # customfunctions.memberReset(child2)
+
+            # mutation
+            for mutant in offspring:
+                if random.random() < MUTPB:
+                    toolbox.mutate(mutant)
+                    del mutant.fitness.values
+                    # customfunctions.memberReset(mutant)
+
+            # create combined population
+            s.extend(offspring)
+            s = toolbox.map(toolbox.clone, s)
+
             # Get the representatives excluding the current species
             r = representatives[:i] + representatives[i + 1:]
             fits = toolbox.map(toolbox.evaluate, s)
@@ -76,12 +98,16 @@ def main():
                 ind.fitness.values = fit
 
 
+            s = toolbox.select(s, len(s) / 2)
+            s = toolbox.map(toolbox.clone, s)
+
+
             # Select the individuals
             species[i] = toolbox.select(s, len(s))  # Tournament selection
             next_repr.append(tools.selBest(s, 1)[0])  # Best selection
 
 
-
+        #next generation's test members are best of each subpopulation
         representatives = next_repr
         fits = toolbox.map(toolbox.evaluate, representatives)
         for fit, ind in zip(fits, representatives):
@@ -96,9 +122,11 @@ def main():
 
 
     masterlist = species[0]+species[1]+species[2]+species[3]
-    masterlist = sorted(masterlist, key=lambda member: abs(member.fitness.values[0]) + abs(member.fitness.values[1]) / 2)
+    #masterlist = sorted(masterlist, key=lambda member: abs(member.fitness.values[0]) + abs(member.fitness.values[1]) / 2)
+    masterlist = tools.selBest(masterlist, len(masterlist))
     import time
-    timestr = time.strftime("%Y%m%d-%H%M%S")
+    timestr = 'coevolution/coevolution_results/'
+    timestr += time.strftime("%Y%m%d-%H%M%S")
     timestr += '.csv'
     deapplaygame.exportGenometoCSV(timestr, masterlist)
 

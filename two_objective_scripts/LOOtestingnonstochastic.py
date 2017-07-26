@@ -59,10 +59,7 @@ def main():
                 for opponent in axelrodPop:
                     alexrodplayers.playAxelrodPop(member, opponent)
 
-            '''
-            for pair in itertools.combinations(population, r=2):
-                deapplaygame.playMultiRounds(*pair)
-            '''
+
 
             # Evaluate the entire population
             fitnesses = list(map(toolbox.evaluate, population))
