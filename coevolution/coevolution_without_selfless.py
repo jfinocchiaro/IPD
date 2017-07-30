@@ -11,7 +11,7 @@ def main():
 
     IND_SIZE = 70
     POP_SIZE = 60
-    NUM_SPECIES = 4
+    NUM_SPECIES = 3
 
     toolbox = base.Toolbox()
 
@@ -33,7 +33,8 @@ def main():
         for member in species[x]:
             member[5] = x
 
-    species_index = [0,1,2,3]
+
+    species_index = [0,1,2]
     last_index_added = species_index[-1]
 
     # Init with random a representative for each species
@@ -64,7 +65,7 @@ def main():
                 deapplaygame.playMultiRounds(member, representatives[0])
                 deapplaygame.playMultiRounds(member, representatives[1])
                 deapplaygame.playMultiRounds(member, representatives[2])
-                deapplaygame.playMultiRounds(member, representatives[3])
+                #deapplaygame.playMultiRounds(member, representatives[3])
 
         for (i, s), j in zip(enumerate(species), species_index):
             # Vary the species individuals
@@ -121,11 +122,11 @@ def main():
             print "Generation " + str(g)
 
 
-    masterlist = species[0]+species[1]+species[2]+species[3]
+    masterlist = species[0]+species[1]+species[2]
     #masterlist = sorted(masterlist, key=lambda member: abs(member.fitness.values[0]) + abs(member.fitness.values[1]) / 2)
     masterlist = tools.selBest(masterlist, len(masterlist))
     import time
-    timestr = 'coevolution/coevolution_results/'
+    timestr = 'coevolution/coevolution_wo_selfless_results/'
     timestr += time.strftime("%Y%m%d-%H%M%S")
     timestr += '.csv'
     deapplaygame.exportGenometoCSV(timestr, masterlist)

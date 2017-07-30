@@ -1,7 +1,6 @@
 #!/bin/bash
 
-for j in {1..10}; do
+for j in {1..30}; do
 	echo "Started" &
-	python coevolution.py &
+	python coevolution/coevolution_without_selfless.py &
 done
-
