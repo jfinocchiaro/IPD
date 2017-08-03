@@ -1,43 +1,32 @@
 from deap import tools
-#0 = Cooperate
-#1 = Defect
-import scorechange
 import random
 import itertools
 
+# 0 = Join pact
+# 1 = Defect
+
+GREEN_THRESHOLD = 0.8
+COOP_COST = 3
+DEFECT_COST = 1
+THRESHOLD_BENEFIT = 2
 
 
 def evaluate(member):
-    score1 = 0
-    score2 = 0
-    objectives = member[5]
-    if objectives == 0:
-        #maximizing personal score, min opp score
-        score1 = float(member[1]) / member[4]
-        score2 =  float(-member[2]) / member[4]
-    if objectives == 1:
-        #max personal and opponent score
-        score1 = float(member[1]) / member[4]
-        score2 = float(member[2]) / member[4]
-    if objectives == 2:
-        #max personal score and cooperation
-        score1 = float(member[1]) / member[4]
-        score2 = min(float(member[3]) / member[4] * 6, 5)
-    if objectives == 3:
-        #max opp score and cooperation
-        score1 = float(member[2]) / member[4]
-        score2 = min(float(member[3]) / member[4] * 6, 5)
+
+    score1 = float(member[1]) / member[4]
+    score2 = float(member[2]) / member[4]
+
     return score1, score2
 
 
 def evaluate_three_obj(member):
     score1 = float(member[1]) / member[4]
-    score2 =  float(-member[2]) / member[4]
+    score2 = float(-member[2]) / member[4]
     score3 = min(float(member[3]) / member[4] * 6, 5)
 
     return score1, score2, score3
 
-
+'''
 def uniformobjectives(population):
     x = 0
     for member in population:
@@ -50,77 +39,80 @@ def uniformobjectivesSelfish(population):
             member[5] = 0
 
     return population
+'''
+
+def update_score(member, dec, greens, pop_size):
+    # cost for going green
+    if dec == 0:
+        member[1] += 3
+    # penalty of 1 for each member that defected
+    member[1] += pop_size - greens
+    # benefit if enough nations go green
+    member[2] += (greens > GREEN_THRESHOLD * pop_size) * THRESHOLD_BENEFIT
+    # increment number of rounds
+    member[4] += 1
+
+    return member
 
 
-def playround(member1, member2):
+def shift_decisions(gene, dec, group_dec):
+    gene[64:66] = gene[66:68]
+    gene[66:68] = gene[68:70]
+    gene[68] = group_dec
+    gene[69] = dec
 
-    ind1 = member1[0]
-    decisionind1 = (''.join(map(str, ind1[64:70])))
-    decisionind1 = int(decisionind1, 2)
-    decision1 = ind1[decisionind1]
-
-
-    ind1 = shift_decisions(ind1, decision2, decision1)
+    return gene
 
 
-    member1[0] = ind1
+def playround(population):
+
+    green_count = 0
+    decision_list = []
+
+    for i, nation in enumerate(population):
+        nat_gene = nation[0]
+        history = ''.join(map(str, nat_gene[64:70]))
+        index = int(history, 2)
+        decision = nat_gene[index]
+        green_count += (1 - decision)
+        decision_list.append(decision)
+
+    coop = 0
+    if green_count >= GREEN_THRESHOLD * len(population):
+        coop += 1
+
+    for i, nation in enumerate(population):
+        nat_gene = nation[0]
+        nat_gene = shift_decisions(nat_gene, decision_list[i], coop)
+        nation[0] = nat_gene
+        nation = update_score(nation, decision_list[i], green_count, len(population))
 
 
-    #mutual cooperation
-    if decision1 == 0 and decision2 == 0:
-        member1 = scorechange.mutualcooperation(member1)
-
-    #player 1 is screwed
-    elif decision1 == 0 and decision2 == 1:
-        member1 = scorechange.screwed(member1)
-
-    #player 2 is screwed
-    elif decision1 == 1 and decision2 == 0:
-        member1 = scorechange.tempt(member1)
-
-    #both players defect
-    else:
-        member1 = scorechange.mutualdefect(member1)
-
-
-def shift_decisions(ind1, decision, player_making_decision):
-    ind1[64:66] = ind1[66:68]
-    ind1[66:68] = ind1[68:70]
-    ind1[68] = oppdec
-    ind1[69] = yourdec
-
-
-    return ind1
-
-def playMultiRounds(ind1, ind2, numRounds=150):
+def playMultiRounds(population, numRounds=150):
     for x in range(numRounds):
-        playround(ind1, ind2)
+        playround(population)
 
-def mutInternalFlipBit(individual, indpb=0.1, indpb2 = 0.0):
+def mutInternalFlipBit(individual, indpb=0.1):
     decisionSlice = individual[0][64:]
     genome = (individual[0][0:64])
     genome = (list)(tools.mutFlipBit(genome, indpb))
 
-    fullGen =  genome[0] + (decisionSlice)
+    fullGen = genome[0] + decisionSlice
     individual[0] = fullGen
     #individual[0] = individual[0].pop(0)
-    test = random.random
-    if test < indpb2:
-        individual[5] = random.randint(0,3)
+
     return individual, #comma here
 
 
-def mutInternalFlipBitWHistory(individual, indpb=0.1, indpb2=0.0):
+def mutInternalFlipBitWHistory(individual, indpb=0.1):
 
     genome = (list)(tools.mutFlipBit(individual[0], indpb))
 
-
     individual[0] = genome
     individual[0] = individual[0].pop(0)
-    test = random.random
-    if test < indpb2:
-        individual[5] = random.randint(0, 3)
+
     return individual,  # comma here
+
 
 def cxOnePointGenome(ind1, ind2):
     """Executes a one point crossover on the input :term:`sequence` individuals.
