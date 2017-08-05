@@ -3,61 +3,62 @@ import random
 from deap import tools, base, creator, algorithms
 import play_pollution_game
 import itertools
+import time
 
 def main():
     # minimize personal cost, maximize personal benefit
     creator.create("FitnessMulti", base.Fitness, weights=(-1.0, 1.0))
     creator.create("Individual", list, fitness=creator.FitnessMulti)
 
-    IND_SIZE = 70
+    GENOME_SIZE = 64
+    HIST_SIZE = 6
     POP_SIZE = 60
     GREEN_THRESHOLD = 0.8
+
+    NGEN = 3000
+    NROUNDS = 250
+    CXPB = 0.9
+    MUTPB = 0.01428571
 
     toolbox = base.Toolbox()
 
     toolbox.register("attr_int", random.randint, 0, 0)
 
     toolbox.register("bit", random.randint, 0, 1)
-    toolbox.register("genome", tools.initRepeat, list, toolbox.bit, IND_SIZE)
+    toolbox.register("genome", tools.initRepeat, list, toolbox.bit, GENOME_SIZE)
+    toolbox.register("history", tools.initRepeat, list, toolbox.bit, HIST_SIZE)
 
     # individual:
     #            [0]: genome
-    #            [1]: personal cost
-    #            [2]: personal benefit
-    #            [3]: cumulative pop cost
-    #            [4]: number of rounds
-    toolbox.register("individual", tools.initCycle, creator.Individual, (toolbox.genome, toolbox.attr_int, toolbox.attr_int,
-                                                                         toolbox.attr_int, toolbox.attr_int), n=1)
+    #            [1]: history
+    #            [2]: personal cost
+    #            [3]: personal benefit
+    #            [4]: cumulative pop cost
+    #            [5]: number of rounds
+    toolbox.register("individual", tools.initCycle, creator.Individual, (toolbox.genome, toolbox.history, toolbox.attr_int,
+                                                                         toolbox.attr_int, toolbox.attr_int, toolbox.attr_int), n=1)
     toolbox.register("population", tools.initRepeat, list, toolbox.individual)
 
     toolbox.register("evaluate", play_pollution_game.evaluate)
-    # toolbox.register("mate", tools.cxOnePoint)
-    toolbox.register("mate", play_pollution_game.cxOnePointGenome)
-    toolbox.register("mutate", play_pollution_game.mutInternalFlipBit)
+    toolbox.register("mate", tools.cxUniform, indpb=0.5)
+    # toolbox.register("mate", play_pollution_game.cxOnePointGenome)
+    toolbox.register("mutate", tools.mutFlipBit, indpb=MUTPB)
+    # toolbox.register("mutate", play_pollution_game.mutInternalFlipBit)
     toolbox.register("select", tools.selNSGA2)
-
-    NGEN = 500
-    CXPB = 0.9
-    MUTPB = 0.01428571
-    # frontfreeze = NGEN * 0.01
-    # freezevalue = NGEN * 0.8
 
     # create the population
     population = toolbox.population(n=POP_SIZE)
 
-    # play the first round and evaluate members
-    play_pollution_game.playMultiRounds(population, 50)
-
-    # Evaluate the entire population
-    fitnesses = list(map(toolbox.evaluate, population))
-    for ind, fit in zip(population, fitnesses):
-        ind.fitness.values = fit
+   # play the first round and evaluate members
+    play_pollution_game.playMultiRounds(population, NROUNDS)
 
     # Begin the evolution
     for g in range(1, NGEN):
 
-        # for pair in itertools.combinations(population, r=2):
-        play_pollution_game.playMultiRounds(population, 50)
+        # Evaluate the population
+        fitnesses = list(map(toolbox.evaluate, population))
+        for ind, fit in zip(population, fitnesses):
+            ind.fitness.values = fit
 
         # create offspring
         offspring = toolbox.map(toolbox.clone, population)
@@ -73,10 +74,14 @@ def main():
 
         # mutation
         for mutant in offspring:
-            if random.random() < MUTPB:
-                toolbox.mutate(mutant)
-                del mutant.fitness.values
-                # customfunctions.memberReset(mutant)
+            toolbox.mutate(mutant[0])
+
+            del mutant.fitness.values
+            # customfunctions.memberReset(mutant)
+
+        # play game with offspring so they can be evaluated
+        play_pollution_game.playMultiRounds(offspring, NROUNDS)
+
 
         # create combined population
         population.extend(offspring)
@@ -89,6 +94,10 @@ def main():
         # survival of the fittest
         population = toolbox.select(population, POP_SIZE)
         population = toolbox.map(toolbox.clone, population)
+
+        # play the game with the new population
+        play_pollution_game.playMultiRounds(population, NROUNDS)
+
 
         if g % 100 == 0:
             print("-- Generation %i --" % g)

@@ -5,26 +5,19 @@ import itertools
 # 0 = Join pact
 # 1 = Defect
 
-GREEN_THRESHOLD = 0.8
+GREEN_THRESHOLD = 0.3
 COOP_COST = 3
 DEFECT_COST = 1
-THRESHOLD_BENEFIT = 2
+THRESHOLD_BENEFIT = 4
 
 
 def evaluate(member):
 
-    score1 = float(member[1]) / member[4]
-    score2 = float(member[2]) / member[4]
+    score1 = float(member[2])
+    score2 = float(member[3])
 
     return score1, score2
 
-
-def evaluate_three_obj(member):
-    score1 = float(member[1]) / member[4]
-    score2 = float(-member[2]) / member[4]
-    score3 = min(float(member[3]) / member[4] * 6, 5)
-
-    return score1, score2, score3
 
 '''
 def uniformobjectives(population):
@@ -44,24 +37,24 @@ def uniformobjectivesSelfish(population):
 def update_score(member, dec, greens, pop_size):
     # cost for going green
     if dec == 0:
-        member[1] += 3
+        member[2] += COOP_COST
     # penalty of 1 for each member that defected
-    member[1] += pop_size - greens
+    member[2] += (pop_size - greens) * DEFECT_COST
     # benefit if enough nations go green
-    member[2] += (greens > GREEN_THRESHOLD * pop_size) * THRESHOLD_BENEFIT
+    member[3] += ((greens >= (GREEN_THRESHOLD * pop_size)) * THRESHOLD_BENEFIT) - ((dec == 1) * 2)
     # increment number of rounds
-    member[4] += 1
+    member[5] += 1
 
     return member
 
 
-def shift_decisions(gene, dec, group_dec):
-    gene[64:66] = gene[66:68]
-    gene[66:68] = gene[68:70]
-    gene[68] = group_dec
-    gene[69] = dec
+def shift_decisions(history, dec, group_dec):
+    history[0:2] = history[2:4]
+    history[2:4] = history[4:6]
+    history[4] = group_dec
+    history[5] = dec
 
-    return gene
+    return history
 
 
 def playround(population):
@@ -69,28 +62,33 @@ def playround(population):
     green_count = 0
     decision_list = []
 
-    for i, nation in enumerate(population):
-        nat_gene = nation[0]
-        history = ''.join(map(str, nat_gene[64:70]))
-        index = int(history, 2)
-        decision = nat_gene[index]
+    for nation in population:
+        nat_hist = ''.join(map(str, nation[1]))
+        # print nat_hist
+        # print len(nat_gene)
+        index = int(nat_hist, 2)
+        decision = nation[0][index]
         green_count += (1 - decision)
         decision_list.append(decision)
 
     coop = 0
-    if green_count >= GREEN_THRESHOLD * len(population):
+    if green_count >= (GREEN_THRESHOLD * len(population)):
         coop += 1
 
     for i, nation in enumerate(population):
-        nat_gene = nation[0]
-        nat_gene = shift_decisions(nat_gene, decision_list[i], coop)
-        nation[0] = nat_gene
+        nat_hist = nation[1]
+        nat_hist = shift_decisions(nat_hist, decision_list[i], coop)
+        nation[1] = nat_hist
         nation = update_score(nation, decision_list[i], green_count, len(population))
 
 
 def playMultiRounds(population, numRounds=150):
+    for member in population:
+        resetPlayer(member)
+
     for x in range(numRounds):
         playround(population)
+
 
 def mutInternalFlipBit(individual, indpb=0.1):
     decisionSlice = individual[0][64:]
@@ -135,10 +133,10 @@ def cxOnePointGenome(ind1, ind2):
 
 
 def resetPlayer(member):
-    member[1] = 0
     member[2] = 0
     member[3] = 0
     member[4] = 0
+    member[5] = 0
     #member[5] = random.randint(0,3)
     return member
 
