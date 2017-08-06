@@ -5,7 +5,7 @@ import itertools
 # 0 = Join pact
 # 1 = Defect
 
-GREEN_THRESHOLD = 0.3
+# GREEN_THRESHOLD = 0.5
 COOP_COST = 3
 DEFECT_COST = 1
 THRESHOLD_BENEFIT = 4
@@ -34,16 +34,20 @@ def uniformobjectivesSelfish(population):
     return population
 '''
 
-def update_score(member, dec, greens, pop_size):
+def update_score(member, dec, greens, pop_size, GREEN_THRESHOLD):
     # cost for going green
     if dec == 0:
         member[2] += COOP_COST
+    # update cumulative cost
+    member[4] += member[2]
+    # update cumulative benefit
+    member[5] += member[3]
     # penalty of 1 for each member that defected
     member[2] += (pop_size - greens) * DEFECT_COST
     # benefit if enough nations go green
-    member[3] += ((greens >= (GREEN_THRESHOLD * pop_size)) * THRESHOLD_BENEFIT) - ((dec == 1) * 2)
+    member[3] += ((greens >= (GREEN_THRESHOLD * pop_size)) * THRESHOLD_BENEFIT)
     # increment number of rounds
-    member[5] += 1
+    member[6] += 1
 
     return member
 
@@ -57,7 +61,7 @@ def shift_decisions(history, dec, group_dec):
     return history
 
 
-def playround(population):
+def playround(population, GREEN_THRESHOLD):
 
     green_count = 0
     decision_list = []
@@ -79,15 +83,23 @@ def playround(population):
         nat_hist = nation[1]
         nat_hist = shift_decisions(nat_hist, decision_list[i], coop)
         nation[1] = nat_hist
-        nation = update_score(nation, decision_list[i], green_count, len(population))
+        nation = update_score(nation, decision_list[i], green_count, len(population), GREEN_THRESHOLD)
 
 
-def playMultiRounds(population, numRounds=150):
+def playMultiRounds(population, GREEN_THRESHOLD, numRounds=150):
     for member in population:
         resetPlayer(member)
 
     for x in range(numRounds):
-        playround(population)
+        playround(population, GREEN_THRESHOLD)
+
+
+def calculate_threshold(current_val, gens):
+    new_val = current_val * 1.5**(gens/250)
+    if new_val > 0.5:
+        return 0.5
+    else:
+        return new_val
 
 
 def mutInternalFlipBit(individual, indpb=0.1):
@@ -135,9 +147,7 @@ def cxOnePointGenome(ind1, ind2):
 def resetPlayer(member):
     member[2] = 0
     member[3] = 0
-    member[4] = 0
-    member[5] = 0
-    #member[5] = random.randint(0,3)
+    member[6] = 0
     return member
 
 
