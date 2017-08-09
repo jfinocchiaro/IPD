@@ -94,7 +94,7 @@ def main():
 
 
 
-
+        #generating scores with children here?
         for pair in itertools.combinations(population, r=2):
             deapplaygame.playMultiRounds(*pair)
 
