@@ -8,8 +8,9 @@ import time
 
 def main():
     # minimize personal cost, maximize personal benefit
+    creator.create("FitnessSingle", base.Fitness, weights=(1.0,))
     creator.create("FitnessMulti", base.Fitness, weights=(-1.0, 1.0))
-    creator.create("Individual", list, fitness=creator.FitnessMulti)
+    creator.create("Individual", list, fitness=creator.FitnessSingle)
 
     GENOME_SIZE = 64
     HIST_SIZE = 6
@@ -46,7 +47,7 @@ def main():
     # toolbox.register("mate", play_pollution_game.cxOnePointGenome)
     toolbox.register("mutate", tools.mutFlipBit, indpb=MUTPB)
     # toolbox.register("mutate", play_pollution_game.mutInternalFlipBit)
-    toolbox.register("select", tools.selNSGA2)
+    toolbox.register("select", tools.selBest)
 
     # create the population
     population = toolbox.population(n=POP_SIZE)

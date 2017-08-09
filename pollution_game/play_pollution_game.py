@@ -8,15 +8,17 @@ import itertools
 # GREEN_THRESHOLD = 0.5
 COOP_COST = 3
 DEFECT_COST = 1
-THRESHOLD_BENEFIT = 4
+ABATE_BENEFIT = 3
+POLLUTE_BENEFIT = 4
 
 
 def evaluate(member):
 
-    score1 = float(member[2])
-    score2 = float(member[3])
+    # score1 = float(member[2])
+    # score2 = float(member[3])
 
-    return score1, score2
+    # return score1, score2
+    return member[3],
 
 
 '''
@@ -52,6 +54,14 @@ def update_score(member, dec, greens, pop_size, GREEN_THRESHOLD):
     return member
 
 
+def update_score2(member, dec, greens):
+    if dec == 0:
+        member[3] += (greens * ABATE_BENEFIT) - COOP_COST
+    else:
+        member[3] += greens * POLLUTE_BENEFIT
+    member[6] += 1
+
+
 def shift_decisions(history, dec, group_dec):
     history[0:2] = history[2:4]
     history[2:4] = history[4:6]
@@ -83,7 +93,8 @@ def playround(population, GREEN_THRESHOLD):
         nat_hist = nation[1]
         nat_hist = shift_decisions(nat_hist, decision_list[i], coop)
         nation[1] = nat_hist
-        nation = update_score(nation, decision_list[i], green_count, len(population), GREEN_THRESHOLD)
+        # nation = update_score(nation, decision_list[i], green_count, len(population), GREEN_THRESHOLD)
+        nation = update_score2(nation, decision_list[i], green_count)
 
 
 def playMultiRounds(population, GREEN_THRESHOLD, numRounds=150):
