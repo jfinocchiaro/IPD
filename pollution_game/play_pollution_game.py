@@ -5,11 +5,10 @@ import itertools
 # 0 = Join pact
 # 1 = Defect
 
-# GREEN_THRESHOLD = 0.5
 COOP_COST = 3
 DEFECT_COST = 1
-ABATE_BENEFIT = 3
-POLLUTE_BENEFIT = 4
+ABATE_BENEFIT = 4
+POLLUTE_BENEFIT = 3
 
 
 def evaluate(member):
@@ -36,6 +35,7 @@ def uniformobjectivesSelfish(population):
     return population
 '''
 
+# multiobjective version
 def update_score(member, dec, greens, pop_size, GREEN_THRESHOLD):
     # cost for going green
     if dec == 0:
@@ -47,31 +47,38 @@ def update_score(member, dec, greens, pop_size, GREEN_THRESHOLD):
     # penalty of 1 for each member that defected
     member[2] += (pop_size - greens) * DEFECT_COST
     # benefit if enough nations go green
-    member[3] += ((greens >= (GREEN_THRESHOLD * pop_size)) * THRESHOLD_BENEFIT)
+    member[3] += ((greens >= (GREEN_THRESHOLD * pop_size)) * ABATE_BENEFIT)
     # increment number of rounds
     member[6] += 1
 
     return member
 
 
+# single objective version
+# score as defined by:
+#   Matthew McGinty, IEA as Evo Games,
+#   Environmental Resource Economics (2010) 45:251-269
 def update_score2(member, dec, greens):
+    # objective value is:
+    #   (benefit * #_of_abaters) - cost_of_abate (if individual abates)
     if dec == 0:
         member[3] += (greens * ABATE_BENEFIT) - COOP_COST
     else:
         member[3] += greens * POLLUTE_BENEFIT
+
+    # number of rounds
     member[6] += 1
 
 
 def shift_decisions(history, dec, group_dec):
-    history[0:2] = history[2:4]
-    history[2:4] = history[4:6]
-    history[4] = group_dec
-    history[5] = dec
+    history = history[2:]
+    history.append(group_dec)
+    history.append(dec)
 
     return history
 
 
-def playround(population, GREEN_THRESHOLD):
+def playround(population, prev_greens):
 
     green_count = 0
     decision_list = []
@@ -85,24 +92,29 @@ def playround(population, GREEN_THRESHOLD):
         green_count += (1 - decision)
         decision_list.append(decision)
 
-    coop = 0
-    if green_count >= (GREEN_THRESHOLD * len(population)):
-        coop += 1
+    trend = 0
+    trend += (green_count > prev_greens)
 
     for i, nation in enumerate(population):
         nat_hist = nation[1]
-        nat_hist = shift_decisions(nat_hist, decision_list[i], coop)
+        nat_hist = shift_decisions(nat_hist, decision_list[i], trend)
         nation[1] = nat_hist
-        # nation = update_score(nation, decision_list[i], green_count, len(population), GREEN_THRESHOLD)
         nation = update_score2(nation, decision_list[i], green_count)
 
+    return green_count
 
-def playMultiRounds(population, GREEN_THRESHOLD, numRounds=150):
+
+def playMultiRounds(population, numRounds=150):
+    # reset decisions for each generation so that only results
+    # with the current genome are included
     for member in population:
         resetPlayer(member)
 
+    # number of abaters in previous round
+    # this is used to determine the trend
+    prev_greens = 0
     for x in range(numRounds):
-        playround(population, GREEN_THRESHOLD)
+        prev_greens = playround(population, prev_greens)
 
 
 def calculate_threshold(current_val, gens):
