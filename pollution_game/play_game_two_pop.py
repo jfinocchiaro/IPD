@@ -2,13 +2,14 @@ from deap import tools
 import random
 import itertools
 
-# 0 = Join pact
-# 1 = Defect
+# Decisions:
+# 0 = Abate
+# 1 = Pollute
 
-COOP_COST = 3
-DEFECT_COST = 1
-ABATE_BENEFIT = 4
-POLLUTE_BENEFIT = 3
+ABATE_COST = [-160, -100]       # denoted c in McGinty
+POLLUTE_COST = 1
+ABATE_BENEFIT = [2, 1]          # denoted d in McGinty
+POLLUTE_BENEFIT = [4, 3]        # denoted b in McGinty
 
 
 def evaluate(member):
@@ -35,17 +36,18 @@ def uniformobjectivesSelfish(population):
     return population
 '''
 
+
 # multiobjective version
 def update_score_multi(member, dec, greens, pop_size, GREEN_THRESHOLD):
     # cost for going green
     if dec == 0:
-        member[2] += COOP_COST
+        member[2] += ABATE_COST
     # update cumulative cost
     member[4] += member[2]
     # update cumulative benefit
     member[5] += member[3]
     # penalty of 1 for each member that defected
-    member[2] += (pop_size - greens) * DEFECT_COST
+    member[2] += (pop_size - greens) * POLLUTE_COST
     # benefit if enough nations go green
     member[3] += ((greens >= (GREEN_THRESHOLD * pop_size)) * ABATE_BENEFIT)
     # increment number of rounds
@@ -59,15 +61,32 @@ def update_score_multi(member, dec, greens, pop_size, GREEN_THRESHOLD):
 #   Matthew McGinty, IEA as Evo Games,
 #   Environmental Resource Economics (2010) 45:251-269
 def update_score_single(member, dec, greens):
+    i = member[7]
     # objective value is:
     #   (benefit * #_of_abaters) - cost_of_abate (if individual abates)
     if dec == 0:
-        member[3] += (greens * ABATE_BENEFIT) - COOP_COST
+        score = ABATE_BENEFIT[0] * greens[0] + ABATE_BENEFIT[1] * greens[1] - ABATE_COST[i]
     else:
-        member[3] += greens * POLLUTE_BENEFIT
+        score = POLLUTE_BENEFIT[i] * (greens[0] + greens[1])
+
+    member[3] += score
 
     # number of rounds
     member[6] += 1
+
+    return score
+
+
+def get_alt_score(member, dec, greens):
+    i = member[7]
+    alt_dec = 1 - dec
+
+    if alt_dec == 0:
+        alt_score = ABATE_BENEFIT[0] * (greens[0] + (1 - i)) + ABATE_BENEFIT[1] * (greens[1] + i) - ABATE_COST[i]
+    else:
+        alt_score = POLLUTE_BENEFIT[i] * (greens[0] + greens[1] - 1)
+
+    return alt_score
 
 
 def shift_decisions(history, dec, group_dec):
@@ -78,85 +97,115 @@ def shift_decisions(history, dec, group_dec):
     return history
 
 
-def playround_trend(population, prev_greens):
+def playround_trend(pop0, pop1, prev_greens):
 
-    green_count = 0
+    green_count = [0, 0]
     decision_list = []
 
-    for nation in population:
-        if nation[7] == "evolve":
-            nat_hist = ''.join(map(str, nation[1]))
-            # print nat_hist
-            # print len(nat_gene)
-            index = int(nat_hist, 2)
-            decision = nation[0][index]
-            green_count += (1 - decision)
-            decision_list.append(decision)
-        else:
-            decision_list.append(1)
+    for nation in pop0:
+        nat_hist = ''.join(map(str, nation[1]))
+        index = int(nat_hist, 2)
+        decision = nation[0][index]
+        green_count[0] += (1 - decision)
+        decision_list.append(decision)
+
+    for nation in pop1:
+        nat_hist = ''.join(map(str, nation[1]))
+        index = int(nat_hist, 2)
+        decision = nation[0][index]
+        green_count[1] += (1 - decision)
+        decision_list.append(decision)
 
     trend = 0
-    trend += (green_count > prev_greens)
+    total_greens = green_count[0] + green_count[1]
+    trend += (total_greens > prev_greens)
 
-    for i, nation in enumerate(population):
-        if nation[7] == "evolve":
-            nat_hist = nation[1]
-            nat_hist = shift_decisions(nat_hist, decision_list[i], trend)
-            nation[1] = nat_hist
+    for i, nation in enumerate(pop0):
+        nat_hist = nation[1]
+        nat_hist = shift_decisions(nat_hist, decision_list[i], trend)
+        nation[1] = nat_hist
         nation = update_score_single(nation, decision_list[i], green_count)
 
-    return green_count
+    for i, nation in enumerate(pop1):
+        nat_hist = nation[1]
+        nat_hist = shift_decisions(nat_hist, decision_list[i], trend)
+        nation[1] = nat_hist
+        nation = update_score_single(nation, decision_list[i], green_count)
+
+    return total_greens
 
 
-def playround_sequential(population, prev_greens):
-
-    green_count = i = 0
+def playround_threshold(pops, gen):
+    green_count = [0, 0]
     decision_list = []
 
-    ratio = 0
-    ratio_bit = 0
-    for nation in population:
-        if nation[7] == "evolve":
+    i = 0
+    for p in pops:
+        for nation in p:
             nat_hist = ''.join(map(str, nation[1]))
-            # after the first 10, members incorporate what others have done this round
-            # into their history to help make decision
-            if i > 0:
-                ratio = (float(green_count)/i > 0.5)
-                ratio_bit = int(ratio)
-            nat_hist += str(ratio_bit)
             index = int(nat_hist, 2)
             decision = nation[0][index]
-            green_count += (1 - decision)
+            green_count[i] += (1 - decision)
             decision_list.append(decision)
-        else:
-            decision_list.append(1)
         i += 1
 
-    trend = 0
-    trend += (green_count > prev_greens)
+    base = 0.1
+    delta = 0.025
+    if gen == -1:
+        pct = 0.9
+    else:
+        pct = (gen/100) * delta + base
 
-    for i, nation in enumerate(population):
-        if nation[7] == "evolve":
+    thresh = 0
+    total_greens = green_count[0] + green_count[1]
+    if total_greens >= pct * (len(pops[0]) + len(pops[1])):
+        thresh = 1
+
+    for p in pops:
+        for i, nation in enumerate(p):
             nat_hist = nation[1]
-            nat_hist = shift_decisions(nat_hist, decision_list[i], ratio_bit)
+            nat_hist = shift_decisions(nat_hist, decision_list[i], thresh)
             nation[1] = nat_hist
-        nation = update_score_single(nation, decision_list[i], green_count)
-
-    return green_count
+            update_score_single(nation, decision_list[i], green_count)
 
 
-def playMultiRounds(population, numRounds=150):
+def playround_alt_score(pops, gen):
+    green_count = [0, 0]
+    decision_list = []
+
+    i = 0
+    for p in pops:
+        for nation in p:
+            nat_hist = ''.join(map(str, nation[1]))
+            index = int(nat_hist, 2)
+            decision = nation[0][index]
+            green_count[i] += (1 - decision)
+            decision_list.append(decision)
+        i += 1
+
+    for p in pops:
+        for i, nation in enumerate(p):
+            alt_score = get_alt_score(nation, decision_list[i], green_count)
+            score = update_score_single(nation, decision_list[i], green_count)
+            other_bit = int(alt_score > score)
+            nat_hist = nation[1]
+            nat_hist = shift_decisions(nat_hist, decision_list[i], other_bit)
+            nation[1] = nat_hist
+
+
+def playMultiRounds(pops, generation, numRounds=150):
     # reset decisions for each generation so that only results
     # with the current genome are included
-    for member in population:
-        resetPlayer(member)
+    for p in pops:
+        for member in p:
+            resetPlayer(member)
 
     # number of abaters in previous round
     # this is used to determine the trend
     prev_greens = 0
     for x in range(numRounds):
-        prev_greens = playround_sequential(population, prev_greens)
-        random.shuffle(population)
+        # prev_greens = playround_trend(pop0, pop1, prev_greens)
+        playround_alt_score(pops, generation)
 
 
 def calculate_threshold(current_val, gens):
@@ -206,7 +255,6 @@ def cxOnePointGenome(ind1, ind2):
     ind1[cxpoint:], ind2[cxpoint:] = ind2[cxpoint:], ind1[cxpoint:]
 
     return ind1, ind2
-
 
 
 def resetPlayer(member):
