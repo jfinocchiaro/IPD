@@ -6,9 +6,9 @@ import itertools
 # 0 = Abate
 # 1 = Pollute
 
-ABATE_COST = [-160, -100]       # denoted c in McGinty
+ABATE_COST = [-170, -100]       # denoted c in McGinty
 POLLUTE_COST = 1
-ABATE_BENEFIT = [2, 1]          # denoted d in McGinty
+ABATE_BENEFIT = [1, 2]          # denoted d in McGinty
 POLLUTE_BENEFIT = [4, 3]        # denoted b in McGinty
 
 
@@ -97,6 +97,13 @@ def shift_decisions(history, dec, group_dec):
     return history
 
 
+def shift_decisions_single(history, dec):
+    history = history[1:]
+    history.append(dec)
+
+    return history
+
+
 def playround_trend(pop0, pop1, prev_greens):
 
     green_count = [0, 0]
@@ -171,25 +178,38 @@ def playround_threshold(pops, gen):
 
 def playround_alt_score(pops, gen):
     green_count = [0, 0]
-    decision_list = []
+    decision_list = [[], []]
 
-    i = 0
-    for p in pops:
+    for i, p in enumerate(pops):
         for nation in p:
             nat_hist = ''.join(map(str, nation[1]))
             index = int(nat_hist, 2)
             decision = nation[0][index]
             green_count[i] += (1 - decision)
-            decision_list.append(decision)
-        i += 1
+            decision_list[i].append(decision)
+
+    for i, p in enumerate(pops):
+        for j in range(len(p)):
+            alt_score = get_alt_score(p[j], decision_list[i][j], green_count)
+            score = update_score_single(p[j], decision_list[i][j], green_count)
+            other_bit = int(alt_score > score)
+            nat_hist = p[j][1]
+            nat_hist = shift_decisions(nat_hist, decision_list[i][j], other_bit)
+            p[j][1] = nat_hist
+
+
+def playround_history_single(pops):
+    green_count = [0, 0]
+    decision_list = []
 
     for p in pops:
         for i, nation in enumerate(p):
-            alt_score = get_alt_score(nation, decision_list[i], green_count)
-            score = update_score_single(nation, decision_list[i], green_count)
-            other_bit = int(alt_score > score)
-            nat_hist = nation[1]
-            nat_hist = shift_decisions(nat_hist, decision_list[i], other_bit)
+            nat_hist = ''.join(map(str, nation[1]))
+            index = int(nat_hist, 2)
+            decision = nation[0][index]
+            green_count[i] += (1 - decision)
+            decision_list.append(decision)
+            nat_hist = shift_decisions_single(nat_hist, decision)
             nation[1] = nat_hist
 
 

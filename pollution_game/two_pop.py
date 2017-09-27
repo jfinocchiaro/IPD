@@ -17,8 +17,8 @@ def main():
     POP_SIZE = 100
     POP_SIZES = [40, 60]
 
-    NGEN = 3000
-    NROUNDS = 50
+    NGEN = 5000
+    NROUNDS = 1
     TEST_CLR_HIST = False
     CXPB = 0.9
     MUTPB = 0.01428571
@@ -170,21 +170,21 @@ def main():
 
     play_game_two_pop.playMultiRounds(pops, -1, NROUNDS)
 
-    pct_abate = [0, 0]
+    abate_cnt = [0, 0]
 
-    # print outcome of evolution
-    print
+    # print outcome of testing
+    print "Outcome of testing:"
     print ("Pop 0 members: {0}  Pop 1 members: {1}".format(POP_SIZES[0], POP_SIZES[1]))
     for i in range(len(pops)):
         all_ind = tools.selBest(pops[i], POP_SIZES[i])
         all_ind = sorted(all_ind, key=lambda member: abs(member.fitness.values[0]))
         for member in all_ind:
-            pct_abate[i] += 1 - member[1][5]
+            abate_cnt[i] += 1 - member[1][5]
             print member
 
         print
 
-    for i, val in enumerate(pct_abate):
+    for i, val in enumerate(abate_cnt):
         print('Population {0} Pct Abate: {1}'.format(i, (val/float(POP_SIZES[i]))*100))
         print
     print
