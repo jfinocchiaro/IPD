@@ -5,6 +5,11 @@ import itertools
 MUT_MEAN = 0
 MUT_SD = 6
 
+REWARD = 100
+PENALTY = 10000
+COOP_REWARD = 100
+
+
 def evaluate(member):
 
     # return member score, armageddon events
@@ -95,27 +100,27 @@ def playround(member1, member2):
 
     # update scores
     if result1 == 0:
-        member1[2] += 100
+        member1[2] += REWARD
         member1[3] += 1
-        member2[4] += 100
+        member2[4] += REWARD
         member2[5] += 1
     elif result2 == 0:
-        member2[2] += 100
+        member2[2] += REWARD
         member2[3] += 1
-        member1[4] += 100
+        member1[4] += REWARD
         member1[5] += 1
     elif result1 == 3:
-        member1[2] -= 10000
-        member1[4] -= 10000
+        member1[2] -= PENALTY
+        member1[4] -= PENALTY
         member1[6] += 1
-        member2[2] -= 10000
-        member2[4] -= 10000
+        member2[2] -= PENALTY
+        member2[4] -= PENALTY
         member2[6] += 1
 
     if decision1 == 0:
-        member1[8] += 100
+        member1[8] += COOP_REWARD
     if decision2 == 0:
-        member2[8] += 100
+        member2[8] += COOP_REWARD
 
 
 def playMultiRounds(ind1, ind2, rounds=150):
