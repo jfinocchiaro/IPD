@@ -11,6 +11,7 @@ def main():
 
     IND_SIZE = 70
     POP_SIZE = 60
+    NUM_TRUMP = 5
 
 
     toolbox = base.Toolbox()
@@ -39,28 +40,33 @@ def main():
     NGEN = 2500
     CXPB = (0.9)
     MUTPB = (0.01428571)
-    frontfreeze = NGEN *0.01
+    #frontfreeze = NGEN *0.01
     #freezevalue = NGEN * 0.8
 
 
-    for pair in itertools.combinations(population, r=2):
-        deapplaygame.playMultiRounds(*pair)
+    import alexrodplayers
+    axelrodPop = alexrodplayers.initAxpop()
 
-
-    # Evaluate the entire population
-    fitnesses = list(map(toolbox.evaluate, population))
-    for ind, fit in zip(population, fitnesses):
-        ind.fitness.values = fit
-
-    prevgen = population
 
     # Begin the evolution
     for g in range(1, NGEN):
+
         for member in population:
             member = deapplaygame.resetPlayer(member)
 
-        for pair in itertools.combinations(population, r=2):
-            deapplaygame.playMultiRounds(*pair)
+
+
+        for member in population:
+            for x in range(NUM_TRUMP):
+                deapplaygame.playMultiRoundsTrump(member)
+
+
+
+        for member in population:
+            for opponent in axelrodPop:
+                alexrodplayers.playAxelrodPop(member, opponent)
+
+
 
 
 
@@ -88,9 +94,16 @@ def main():
         population = toolbox.map(toolbox.clone, population)
 
 
-        for pair in itertools.combinations(population, r=2):
-            deapplaygame.playMultiRounds(*pair)
 
+
+        for member in population:
+            for x in range(NUM_TRUMP):
+                deapplaygame.playMultiRoundsTrump(member)
+
+
+        for member in population:
+            for opponent in axelrodPop:
+                alexrodplayers.playAxelrodPop(member, opponent)
 
 
         fits = toolbox.map(toolbox.evaluate, population)
@@ -146,11 +159,11 @@ def main():
 
 
     import time
-    timestr = 'train_pop_no_trump/'
+    timestr = 'axelrod_limit_' + str(NUM_TRUMP)+ '/'
     timestr += time.strftime("%Y%m%d-%H%M%S")
     timestr += '.csv'
     #timestr = 'additionaltrials/trainresettest.csv'
-    deapplaygame.exportGenometoCSVavg(timestr, all_ind)
+    deapplaygame.exportGenometoCSV(timestr, all_ind)
 
 
 if __name__ == "__main__":

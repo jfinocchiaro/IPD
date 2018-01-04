@@ -11,7 +11,7 @@ def main():
 
     IND_SIZE = 70
     POP_SIZE = 60
-
+    NUM_TRUMP = 5
 
     toolbox = base.Toolbox()
 
@@ -36,31 +36,29 @@ def main():
     toolbox.register("mutate", deapplaygame.mutInternalFlipBitWHistory)
     toolbox.register("select", tools.selNSGA2)
 
-    NGEN = 2500
+    NGEN = 100
     CXPB = (0.9)
     MUTPB = (0.01428571)
     frontfreeze = NGEN *0.01
     #freezevalue = NGEN * 0.8
 
 
-    for pair in itertools.combinations(population, r=2):
-        deapplaygame.playMultiRounds(*pair)
-
-
-    # Evaluate the entire population
-    fitnesses = list(map(toolbox.evaluate, population))
-    for ind, fit in zip(population, fitnesses):
-        ind.fitness.values = fit
-
-    prevgen = population
-
     # Begin the evolution
     for g in range(1, NGEN):
+
         for member in population:
             member = deapplaygame.resetPlayer(member)
 
         for pair in itertools.combinations(population, r=2):
             deapplaygame.playMultiRounds(*pair)
+
+
+        for member in population:
+            for x in range(NUM_TRUMP):
+                deapplaygame.playMultiRoundsTrump(member)
+
+
+
 
 
 
@@ -92,6 +90,10 @@ def main():
             deapplaygame.playMultiRounds(*pair)
 
 
+        for member in population:
+            for x in range(NUM_TRUMP):
+                deapplaygame.playMultiRoundsTrump(member)
+
 
         fits = toolbox.map(toolbox.evaluate, population)
         for fit, ind in zip(fits, population):
@@ -104,7 +106,7 @@ def main():
 
 
 
-        if g % 10 == 0:
+        if g % 100 == 0:
             print("-- Generation %i --" % g)
 
 
@@ -146,11 +148,11 @@ def main():
 
 
     import time
-    timestr = 'train_pop_no_trump/'
+    timestr = 'pop_limit_' + str(NUM_TRUMP)+ '/'
     timestr += time.strftime("%Y%m%d-%H%M%S")
     timestr += '.csv'
     #timestr = 'additionaltrials/trainresettest.csv'
-    deapplaygame.exportGenometoCSVavg(timestr, all_ind)
+    deapplaygame.exportGenometoCSV(timestr, all_ind)
 
 
 if __name__ == "__main__":
