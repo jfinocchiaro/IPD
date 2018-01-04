@@ -45,6 +45,18 @@ def uniformobjectives(population):
         x += 1
     return population
 
+
+def uniformobjectiveszeroandtwo(population):
+    x = 0
+    for member in population:
+        if x % 2 == 0:
+            member[5] = 0
+        else:
+            member[5] = 2
+        x += 1
+    return population
+
+
 def uniformobjectivesSelfish(population):
     for member in population:
             member[5] = 0
