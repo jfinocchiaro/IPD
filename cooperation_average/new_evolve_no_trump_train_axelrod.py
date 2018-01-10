@@ -113,7 +113,7 @@ def main():
 
 
 
-        if g % 10 == 0:
+        if g % 100 == 0:
             print("-- Generation %i --" % g)
             print('Objective\tPersonal Score \tOpponent Score \tCooperation Score')
             for member in population:

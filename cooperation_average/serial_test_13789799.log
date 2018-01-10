@@ -1,0 +1,2 @@
+Running plot script on a single CPU core
+slurmstepd: *** JOB 13789799 ON comet-02-64 CANCELLED AT 2018-01-10T08:20:41 ***

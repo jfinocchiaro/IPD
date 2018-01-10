@@ -1,0 +1,54 @@
+which: no run.sh in ()
+IBRUN: Command is /run.sh
+IBRUN: Command is 
+Usage:
+    ibrun [options] <executable> [executable args]
+
+     Options:
+        -n, -np <n>
+            launch n MPI ranks (default: use all cores provided by resource manager)
+
+        -o, --offset <n>
+            assign MPI ranks starting at the nth slot provided by the resource 
+            manager (default: 0)
+    
+        -no <n>
+            assign MPI ranks starting at the nth unique node provided by the 
+            resource manager (default: 0)
+    
+        --npernode <n>
+            only launch n MPI ranks per node (default: ppn from resource manager)
+
+        --tpr|--tpp|--threads-per-rank|--threads-per-process <n>
+            how many threads each MPI rank (often referred to as 'MPI process') 
+            will spawn.  (default: $OMP_NUM_THREADS (if defined), <ppn>/<npernode>
+            if ppn is divisible by npernode, or 1 otherwise)
+    
+        --switches '<implementation-specific switches>'
+            Pass additional command-line switches to the underlying implementation's
+            MPI launcher.  These WILL be overridden by any switches ibrun 
+            subsequently enables (default: none)
+    
+        -bp|--binding-policy <scatter|compact|none>
+            Define the CPU affinity's binding policy for each MPI rank.  'scatter' 
+            distributes ranks across each binding level, 'compact' fills up a 
+            binding level before allocating another, and 'none' disables all 
+            affinity settings (default: optimized for job geometry)
+    
+        -bl|--binding-level <core|socket|numanode|none>
+            Define the level of granularity for CPU affinity for each MPI rank.  
+            'core' binds each rank to a single core; 'socket' binds each rank to 
+            all cores on a single CPU socket (good for multithreaded ranks); 
+            'numanode' binds each rank to the subset of cores belonging to a
+            numanode; 'none' disables all affinity settings. (default: optimized 
+            for job geometry)
+
+        --dryrun
+            Do everything except actually launch the application
+
+        -v|--verbose
+            Print diagnostic messages
+    
+        -? 
+            Print this message
+
