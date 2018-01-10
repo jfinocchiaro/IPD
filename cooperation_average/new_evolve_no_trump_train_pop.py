@@ -39,7 +39,7 @@ def main():
     NGEN = 2500
     CXPB = (0.9)
     MUTPB = (0.01428571)
-    frontfreeze = NGEN *0.01
+    #frontfreeze = NGEN *0.01
     #freezevalue = NGEN * 0.8
 
 
@@ -106,6 +106,9 @@ def main():
 
         if g % 10 == 0:
             print("-- Generation %i --" % g)
+            print('Objective\tPersonal Score \tOpponent Score \tCooperation Score')
+            for member in population:
+                print(str(member[5]) + '\t' + str(member[1]) + '\t' + str(member[2]) + '\t' + str(member[3]))
 
 
 

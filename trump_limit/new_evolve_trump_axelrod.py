@@ -11,7 +11,7 @@ def main():
 
     IND_SIZE = 70
     POP_SIZE = 60
-    NUM_TRUMP = 5
+    NUM_TRUMP = 10
 
 
     toolbox = base.Toolbox()
@@ -49,7 +49,7 @@ def main():
 
 
     # Begin the evolution
-    for g in range(1, NGEN):
+    for g in range(1, NGEN+1):
 
         for member in population:
             member = deapplaygame.resetPlayer(member)
@@ -58,13 +58,13 @@ def main():
 
         for member in population:
             for x in range(NUM_TRUMP):
-                deapplaygame.playMultiRoundsTrump(member)
+                deapplaygame.playMultiRoundsTrump(member, 50)
 
 
 
         for member in population:
             for opponent in axelrodPop:
-                alexrodplayers.playAxelrodPop(member, opponent)
+                alexrodplayers.playAxelrodPop(member, opponent, 50)
 
 
 
@@ -98,12 +98,12 @@ def main():
 
         for member in population:
             for x in range(NUM_TRUMP):
-                deapplaygame.playMultiRoundsTrump(member)
+                deapplaygame.playMultiRoundsTrump(member, 50)
 
 
         for member in population:
             for opponent in axelrodPop:
-                alexrodplayers.playAxelrodPop(member, opponent)
+                alexrodplayers.playAxelrodPop(member, opponent, 50)
 
 
         fits = toolbox.map(toolbox.evaluate, population)
@@ -116,9 +116,11 @@ def main():
         population = toolbox.map(toolbox.clone, population)
 
 
-
         if g % 10 == 0:
             print("-- Generation %i --" % g)
+            print('Objective\tPersonal Score \tOpponent Score \tCooperation Score')
+            for member in population:
+                print(str(member[5]) + '\t' + str(member[1]) + '\t' + str(member[2]) + '\t' + str(member[3]))
 
 
 

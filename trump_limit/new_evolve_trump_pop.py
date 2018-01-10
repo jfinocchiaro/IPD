@@ -11,7 +11,11 @@ def main():
 
     IND_SIZE = 70
     POP_SIZE = 60
-    NUM_TRUMP = 5
+    NUM_TRUMP = 60
+    NGEN = 2500
+    CXPB = (0.9)
+    MUTPB = (0.01428571)
+
 
     toolbox = base.Toolbox()
 
@@ -36,10 +40,7 @@ def main():
     toolbox.register("mutate", deapplaygame.mutInternalFlipBitWHistory)
     toolbox.register("select", tools.selNSGA2)
 
-    NGEN = 100
-    CXPB = (0.9)
-    MUTPB = (0.01428571)
-    frontfreeze = NGEN *0.01
+    #frontfreeze = NGEN *0.01
     #freezevalue = NGEN * 0.8
 
 
@@ -105,10 +106,11 @@ def main():
         population = toolbox.map(toolbox.clone, population)
 
 
-
-        if g % 100 == 0:
+        if g % 10 == 0:
             print("-- Generation %i --" % g)
-
+            print('Objective\tPersonal Score \tOpponent Score \tCooperation Score')
+            for member in population:
+                print(str(member[5]) + '\t' + str(member[1]) + '\t' + str(member[2]) + '\t' + str(member[3]))
 
 
 

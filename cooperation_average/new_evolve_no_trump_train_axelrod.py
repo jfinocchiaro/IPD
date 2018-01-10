@@ -64,17 +64,11 @@ def main():
         for member in population:
             member = deapplaygame.resetPlayer(member)
 
-
-
-
-
+        '''
         for member in population:
             for opponent in axelrodPop:
                 alexrodplayers.playAxelrodPop(member, opponent)
-
-
-
-
+        '''
 
         # create offspring
         offspring = toolbox.map(toolbox.clone, population)
@@ -119,9 +113,11 @@ def main():
 
 
 
-        if g % 100 == 0:
+        if g % 10 == 0:
             print("-- Generation %i --" % g)
-
+            print('Objective\tPersonal Score \tOpponent Score \tCooperation Score')
+            for member in population:
+                print(str(member[5]) + '\t' + str(member[1]) + '\t' + str(member[2]) + '\t' + str(member[3]))
 
 
 
