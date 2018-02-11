@@ -1,9 +1,0 @@
-5000 generations
-run on host machine
-free objectives
-play against axelrod
-first and last 20% frozen objectives
-scaled mutual cooperation, *6 rather than 12
-fixed sorting issues
-best members at top of CSV
-
