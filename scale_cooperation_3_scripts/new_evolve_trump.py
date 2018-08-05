@@ -42,18 +42,10 @@ def main():
     frontfreeze = NGEN *0.01
     #freezevalue = NGEN * 0.8
 
-    '''
-    import alexrodplayers
-    axelrodPop = alexrodplayers.initAxpop()
-    for member in population:
-        for opponent in axelrodPop:
-            alexrodplayers.playAxelrodPop(member, opponent)
-    '''
-
     for pair in itertools.combinations(population, r=2):
         deapplaygame.playMultiRounds(*pair)
 
-    
+
     for member in population:
         for x in range(60):
             deapplaygame.playMultiRoundsTrump(member)
