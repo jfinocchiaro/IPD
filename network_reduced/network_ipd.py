@@ -3,6 +3,8 @@ import random
 from deap import tools, base, creator, algorithms
 import deapplaygame
 import itertools
+import networkx as nx
+
 
 def main():
     creator.create("FitnessMulti", base.Fitness, weights=(1.0,1.0))
@@ -10,7 +12,11 @@ def main():
 
 
     IND_SIZE = 70
-    POP_SIZE = 60
+    POP_SIZE = 64
+    ROWS = 8
+    COLS = 8
+
+    G = nx.grid_2d_graph(ROWS, COLS)
 
 
     toolbox = base.Toolbox()
@@ -36,18 +42,27 @@ def main():
     toolbox.register("mutate", deapplaygame.mutInternalFlipBitWHistory)
     toolbox.register("select", tools.selNSGA2)
 
-    NGEN = 2500
+    NGEN = 250
     CXPB = (0.9)
     MUTPB = (0.01428571)
     frontfreeze = NGEN *0.01
     #freezevalue = NGEN * 0.8
 
 
+    '''
     import alexrodplayers
     axelrodPop = alexrodplayers.initAxpop()
     for member in population:
         for opponent in axelrodPop:
             alexrodplayers.playAxelrodPop(member, opponent)
+    '''
+
+    for i, node in enumerate(G.nodes()):
+        for j, neighbor in enumerate(G.neighbors(node)):
+
+            ind_node = node[0] * ROWS + node[1]
+            ind_nei = neighbor[0] * ROWS + neighbor[1]
+            deapplaygame.playMultiRounds(population[ind_node], population[ind_nei])
 
 
 
@@ -61,16 +76,12 @@ def main():
     # Begin the evolution
     for g in range(1, NGEN):
 
+        for i, node in enumerate(G.nodes()):
+            for j, neighbor in enumerate(G.neighbors(node)):
 
-
-
-
-
-        for member in population:
-            for opponent in axelrodPop:
-                alexrodplayers.playAxelrodPop(member, opponent)
-
-
+                ind_node = node[0] * ROWS + node[1]
+                ind_nei = neighbor[0] * ROWS + neighbor[1]
+                deapplaygame.playMultiRounds(population[ind_node], population[ind_nei])
 
 
 
@@ -98,12 +109,12 @@ def main():
         population = toolbox.map(toolbox.clone, population)
 
 
+        for i, node in enumerate(G.nodes()):
+            for j, neighbor in enumerate(G.neighbors(node)):
 
-
-
-        for member in population:
-            for opponent in axelrodPop:
-                alexrodplayers.playAxelrodPop(member, opponent)
+                ind_node = node[0] * ROWS + node[1]
+                ind_nei = neighbor[0] * ROWS + neighbor[1]
+                deapplaygame.playMultiRounds(population[ind_node], population[ind_nei])
 
 
         fits = toolbox.map(toolbox.evaluate, population)
@@ -160,12 +171,14 @@ def main():
 
     import time
     #timestr = 'newevolutionfreeobjs/'
-    timestr = 'axelrod_results/'
+    timestr = 'network_results/'
     timestr += time.strftime("%Y%m%d-%H%M%S")
     timestr += '.csv'
     #timestr = 'additionaltrials/trainresettest.csv'
-    deapplaygame.exportGenometoCSV(timestr, all_ind)
 
+    #deapplaygame.exportGenometoCSV(timestr, all_ind)           #saves every member in the population to a CSV
+
+    deapplaygame.drawGraph(population, G, ROWS)                 #draw the graph in matplotlib
 
 if __name__ == "__main__":
     main()

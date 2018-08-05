@@ -28,7 +28,7 @@ def main():
 
 
     #make initial objectives of population uniformly distributed
-    population = deapplaygame.uniformobjectives(population)
+    population = deapplaygame.uniformobjectivesSelfish(population)
 
     toolbox.register("evaluate", deapplaygame.evaluate)
     #toolbox.register("mate", tools.cxOnePoint)
@@ -36,7 +36,7 @@ def main():
     toolbox.register("mutate", deapplaygame.mutInternalFlipBitWHistory)
     toolbox.register("select", tools.selNSGA2)
 
-    NGEN = 5000
+    NGEN = 2500
     CXPB = (0.9)
     MUTPB = (0.01428571)
     frontfreeze = NGEN *0.01
