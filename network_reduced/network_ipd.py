@@ -42,7 +42,7 @@ def main():
     toolbox.register("mutate", deapplaygame.mutInternalFlipBitWHistory)
     toolbox.register("select", tools.selNSGA2)
 
-    NGEN = 250
+    NGEN = 2500
     CXPB = (0.9)
     MUTPB = (0.01428571)
     frontfreeze = NGEN *0.01
@@ -170,15 +170,14 @@ def main():
 
 
     import time
-    #timestr = 'newevolutionfreeobjs/'
     timestr = 'network_results/'
     timestr += time.strftime("%Y%m%d-%H%M%S")
     timestr += '.csv'
     #timestr = 'additionaltrials/trainresettest.csv'
 
-    #deapplaygame.exportGenometoCSV(timestr, all_ind)           #saves every member in the population to a CSV
+    deapplaygame.exportGenometoCSV(timestr, all_ind)           #saves every member in the population to a CSV
 
-    deapplaygame.drawGraph(population, G, ROWS)                 #draw the graph in matplotlib
+    #deapplaygame.drawGraph(population, G, ROWS)                 #draw the graph in matplotlib
 
 if __name__ == "__main__":
     main()
