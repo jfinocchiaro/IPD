@@ -3,6 +3,7 @@ import random
 from deap import tools, base, creator, algorithms
 import deapplaygame
 import itertools
+import os
 
 def main():
     creator.create("FitnessMulti", base.Fitness, weights=(1.0,1.0))
@@ -148,6 +149,7 @@ def main():
     import time
     timestr = 'train_pop_no_trump/'
     timestr += time.strftime("%Y%m%d-%H%M%S")
+    timestr += '-{}'.format(os.getpid())
     timestr += '.csv'
     #timestr = 'additionaltrials/trainresettest.csv'
     deapplaygame.exportGenometoCSV(timestr, all_ind)
