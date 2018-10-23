@@ -62,7 +62,7 @@ def evaluate_three_obj(member):
 def uniformobjectives(population):
     x = 0
     for member in population:
-        member[5] = int(x%4)
+        member[5] = int(x%2)
         x += 1
     return population
 
@@ -280,7 +280,7 @@ def drawGraph(population, G, rows=8, COLS=8):
     import matplotlib.patches as mpatches
     #labels for legend
     red_patch = mpatches.Patch(color='red', label='Selfish')
-    blue_patch = mpatches.Patch(color='blue', label='MWB')
+    blue_patch = mpatches.Patch(color='blue', label='Communal')
     green_patch = mpatches.Patch(color='green', label='Cooperative')
     black_patch = mpatches.Patch(color='black', label='Selfless')
     plt.legend(handles=[red_patch, blue_patch,green_patch,black_patch])

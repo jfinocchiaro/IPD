@@ -4,8 +4,8 @@ from deap import tools
 import scorechange
 import random
 import itertools
+from no_trump_train_pop import *
 
-COOPERATION_MAX = 3
 
 def evaluate(member):
     score1 = 0
@@ -14,7 +14,7 @@ def evaluate(member):
     if objectives == 0:
         #maximizing personal score, min opp score
         score1 = float(member[1]) / member[4]
-        score2 =  float(-member[2]) / member[4]
+        score2 =  3- float(member[2]) / member[4]
     if objectives == 1:
         #max personal and opponent score
         score1 = float(member[1]) / member[4]

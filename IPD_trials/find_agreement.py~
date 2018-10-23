@@ -1,0 +1,32 @@
+import glob
+import numpy as np
+
+POP_SIZE = 60
+NUM_FILES = 0
+
+total_cooperation = np.zeros(64) #counts the number of trials where everyone cooperates on a given strategy
+total_defection = np.zeros(64) #counts the number of trials where everyone defects on a given strategy
+
+for filename in glob.glob('train_pop_no_trump/*.csv'): #go through every file name
+    NUM_FILES += 1
+    agreement_matrix = np.zeros(64)
+    file = open(filename, 'r')
+    for line in file:
+        agreement_matrix +=  np.array([int(x) for x in line.split(',')[:64]])
+    for x in range(len(agreement_matrix)):
+        if agreement_matrix[x] == 0:
+            total_cooperation[x] += 1 #everyone cooperated
+        elif agreement_matrix[x] == POP_SIZE:
+            total_defection[x] += 1 #everyone defected
+
+print total_cooperation
+print total_defection
+
+
+print_threshold = 28
+#print out which bits had total cooperation and defection across trials
+for x in range(len(total_cooperation)):
+    if total_cooperation[x] >= print_threshold:
+        print "Bit " + str(x) + " is majority unanimous cooperation. \tTotal cooperation: " + str(total_cooperation[x]) + " times.  \tIn binary: " + str(bin(x))
+    elif total_defection[x] >= print_threshold:
+        print "Bit " + str(x) + " is majority unanimous defection.  \tTotal defection: " + str(total_defection[x]) + " times. \tIn binary: " + str(bin(x))
