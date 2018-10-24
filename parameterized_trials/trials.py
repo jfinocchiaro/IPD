@@ -21,7 +21,10 @@ def main():
     NGEN = 250
     CXPB = 0.9
 
-
+    rseed = os.getpid() * (time.time() % 4919)
+    random.seed(rseed)
+    print("Random seed: {}\n".format(rseed))
+    
     toolbox = base.Toolbox()
     toolbox.register("attr_int", random.randint, 0 , 0)
     toolbox.register("bit", random.randint, 0, 1)

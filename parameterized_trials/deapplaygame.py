@@ -178,7 +178,11 @@ def mutInternalFlipBitWHistory(individual, indpb=float(1.0/70), indpb2=float(1.0
     #with probability indpb2, changes the palyer's objective
     changeObj = random.random()
     if changeObj < indpb2:
-        individual[5] = random.randint(0, 3)
+        curr_pair = individual[5]
+        new_pair = random.randint(0, 3)
+        while new_pair == curr_pair:
+            new_pair = random.randint(0, 3)
+        individual[5] = new_pair
     return individual,  # comma here
 
 def cxOnePointGenome(ind1, ind2):
