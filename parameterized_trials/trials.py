@@ -18,12 +18,12 @@ def main():
     #global-iah variables won't be changed
     IND_SIZE = 70
     POP_SIZE = 60
-    NGEN = 250
+    NGEN = 2000
     CXPB = 0.9
 
     rseed = os.getpid() * (time.time() % 4919)
     random.seed(rseed)
-    print("Random seed: {}\n".format(rseed))
+    print("\n\n\nRandom seed: {}\n".format(rseed))
     
     toolbox = base.Toolbox()
     toolbox.register("attr_int", random.randint, 0 , 0)
@@ -69,17 +69,17 @@ def main():
         for member in population:
             member = deapplaygame.resetPlayer(member)
 
-        #conducts round-robin, depending on who's the training population
-        if TRAINING_GROUP == 'POP':
-            for pair in itertools.combinations(population, r=2):
-                deapplaygame.playMultiRounds(*pair)
-        elif TRAINING_GROUP == 'AX':
-            for member in population:
-                for opponent in axelrodPop:
-                    axelrodplayers.playAxelrodPop(member, opponent)
-        else:
-            print 'Invalid training group- please fix.'
-            quit()
+#        #conducts round-robin, depending on who's the training population
+#        if TRAINING_GROUP == 'POP':
+#            for pair in itertools.combinations(population, r=2):
+#                deapplaygame.playMultiRounds(*pair)
+#        elif TRAINING_GROUP == 'AX':
+#            for member in population:
+#                for opponent in axelrodPop:
+#                    axelrodplayers.playAxelrodPop(member, opponent)
+#        else:
+#            print 'Invalid training group- please fix.'
+#            quit()
 
 
         # create offspring
@@ -128,7 +128,7 @@ def main():
         population = toolbox.map(toolbox.clone, population)
 
         #for progress updates
-        if g % 50 == 0:
+        if g % 100 == 0:
             print("-- Generation %i --" % g)
 
 
