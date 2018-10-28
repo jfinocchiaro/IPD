@@ -13,7 +13,7 @@ def main():
     creator.create("Individual", list, fitness=creator.FitnessMulti)
 
     #change this depending on the desired trial
-    TRAINING_GROUP = 'POP' #change to 'AX' for training against Axelrod, or 'POP' to train within population
+    TRAINING_GROUP = 'AX' #change to 'AX' for training against Axelrod, or 'POP' to train within population
 
     #global-iah variables won't be changed
     IND_SIZE = 70
@@ -57,9 +57,10 @@ def main():
             deapplaygame.playMultiRounds(*pair)
     elif TRAINING_GROUP == 'AX':
         axelrodPop = axelrodplayers.initAxpop()
-        for member in population:
-            for opponent in axelrodPop:
-                axelrodplayers.playAxelrodPop(member, opponent)
+        for population in [selfish_population, communal_population, cooperative_population, selfless_population]:
+            for member in population:
+                for opponent in axelrodPop:
+                    axelrodplayers.playAxelrodPop(member, opponent)
     else:
         print 'Invalid training group- please fix.'
         quit()
@@ -185,9 +186,10 @@ def main():
             for pair in itertools.combinations(selfish_population + communal_population + cooperative_population + selfless_population, r=2):
                 deapplaygame.playMultiRounds(*pair)
         elif TRAINING_GROUP == 'AX':
-            for member in population:
-                for opponent in axelrodPop:
-                    axelrodplayers.playAxelrodPop(member, opponent)
+            for population in [selfish_population, communal_population, cooperative_population, selfless_population]:
+                for member in population:
+                    for opponent in axelrodPop:
+                        axelrodplayers.playAxelrodPop(member, opponent)
         else:
             print 'Invalid training group- please fix.'
             quit()
