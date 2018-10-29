@@ -13,7 +13,7 @@ def main():
     creator.create("Individual", list, fitness=creator.FitnessMulti)
 
     #change this depending on the desired trial
-    TRAINING_GROUP = 'AX' #change to 'AX' for training against Axelrod, or 'POP' to train within population
+    TRAINING_GROUP = 'POP' #change to 'AX' for training against Axelrod, or 'POP' to train within population
 
     #global-iah variables won't be changed
     IND_SIZE = 70
