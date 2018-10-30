@@ -18,7 +18,7 @@ def main():
     #global-iah variables won't be changed
     IND_SIZE = 70
     POP_SIZE = 60
-    NGEN = 2000
+    NGEN = 200
     CXPB = 0.9
 
     rseed = os.getpid() * (time.time() % 4919)
@@ -297,6 +297,24 @@ def main():
     timestr += '.csv'
     deapplaygame.exportGenometoCSV(timestr, all_ind)
 
+    best_members = []
+    best_members.append(deepcopy(sorted_selfish[len(sorted_selfish)-1]))
+    best_members.append(deepcopy(sorted_communal[len(sorted_communal)-1]))
+    best_members.append(deepcopy(sorted_cooperative[len(sorted_cooperative)-1]))
+    best_members.append(deepcopy(sorted_selfless[len(sorted_selfless)-1]))
+    
+    for member in best_members:
+        deapplaygame.resetPlayer(member)
+        
+    import alexrodplayers
+    axelrodPop = alexrodplayers.initAxpop()
+    for member in best_members:
+        for opponent in axelrodPop:
+            alexrodplayers.playAxelrodPop(member, opponent)
 
+    for member in best_members:
+        print member
+        print
+        
 if __name__ == "__main__":
     main()
