@@ -1,6 +1,7 @@
 import time
 import numpy as np
 import random
+from copy import deepcopy
 from deap import tools, base, creator, algorithms
 import deapplaygame
 import itertools
@@ -18,7 +19,7 @@ def main():
     #global-iah variables won't be changed
     IND_SIZE = 70
     POP_SIZE = 60
-    NGEN = 200
+    NGEN = 2000
     CXPB = 0.9
 
     rseed = os.getpid() * (time.time() % 4919)
@@ -306,11 +307,10 @@ def main():
     for member in best_members:
         deapplaygame.resetPlayer(member)
         
-    import alexrodplayers
-    axelrodPop = alexrodplayers.initAxpop()
+    axelrodPop = axelrodplayers.initAxpop()
     for member in best_members:
         for opponent in axelrodPop:
-            alexrodplayers.playAxelrodPop(member, opponent)
+            axelrodplayers.playAxelrodPop(member, opponent)
 
     for member in best_members:
         print member
