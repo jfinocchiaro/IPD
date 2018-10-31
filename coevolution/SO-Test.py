@@ -30,10 +30,19 @@ def main():
     toolbox.register("attr_int", random.randint, 0 , 0)
     toolbox.register("bit", random.randint, 0, 1)
     toolbox.register("genome", tools.initRepeat, list, toolbox.bit, IND_SIZE)
+    
+    # fields in individual:
+    #   0: genome
+    #   1: self score
+    #   2: opponent score
+    #   3: cooperation score
+    #   4: number of games
+    #   5: objective pair
     toolbox.register("individual", tools.initCycle, creator.Individual, (toolbox.genome, toolbox.attr_int,toolbox.attr_int,toolbox.attr_int,toolbox.attr_int, toolbox.attr_int), n=1)
+    
     toolbox.register("population", tools.initRepeat, list, toolbox.individual)
 
-    #4 subpopulations
+    # 4 subpopulations
     selfish_population = toolbox.population(n=POP_SIZE / 4)
     communal_population = toolbox.population(n=POP_SIZE / 4)
     cooperative_population = toolbox.population(n=POP_SIZE / 4)
@@ -296,22 +305,29 @@ def main():
 #    best_members.append(deepcopy(sorted_cooperative[len(sorted_cooperative)-1]))
 #    best_members.append(deepcopy(sorted_selfless[len(sorted_selfless)-1]))
     
+    # test_pop will be used in the testing phase against Axelrod
     test_pop = all_ind
     
+    # reset the scores for the test_pop
     for member in test_pop:
         deapplaygame.resetPlayer(member)
-        
+    
+    # play against Axelrod -- 150 rounds for each member-opponent pair
     axelrodPop = axelrodplayers.initAxpop()
     for member in test_pop:
         for opponent in axelrodPop:
             axelrodplayers.playAxelrodPop(member, opponent)
 
+    # sort the test_pop by decreasing value of self score
+    # testing is single objective - self score only
     sorted_test_pop = sorted(test_pop, key=lambda member: member[1], reverse=True)
 
+    # print the sorted test population members
     for member in sorted_test_pop:
         print member
         print
         
+    # grab just the top 10 test_pop members for writing to the csv file
     if len(sorted_test_pop) > 10:
         sorted_test_pop = sorted_test_pop[:10]
         

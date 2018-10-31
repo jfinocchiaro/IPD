@@ -233,7 +233,9 @@ def resetPlayer(member):
     return member
 
 
-#write data to a CSV
+# write data to a CSV
+# added test_pop as a parameter so that we can write data from the 
+# testing phase to the same csv, if there was a testing phase.
 def exportGenometoCSV(filename, population, test_pop=None):
     with open(filename, 'wb') as csvfile:
         writer = csv.writer(csvfile, delimiter=',', quotechar='|',
