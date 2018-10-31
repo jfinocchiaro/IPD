@@ -234,11 +234,10 @@ def resetPlayer(member):
 
 
 #write data to a CSV
-def exportGenometoCSV(filename, population):
+def exportGenometoCSV(filename, population, test_pop=None):
     with open(filename, 'wb') as csvfile:
         writer = csv.writer(csvfile, delimiter=',', quotechar='|',
                             quoting=csv.QUOTE_MINIMAL)
-
 
         for member in population:
             writer.writerow(                                            \
@@ -248,3 +247,16 @@ def exportGenometoCSV(filename, population):
             [ min(6* float(member[3])/member[4], COOPERATION_MAX)] +    \
             [member[4]] +                                               \
             [member[5]])
+            
+        if test_pop is not None:
+            writer.writerow("")
+            writer.writerow("")
+            for member in test_pop:
+                writer.writerow(                                            \
+                member[0]+                                                  \
+                [float(member[1])/member[4]] +                              \
+                [float(member[2])/member[4]] +                              \
+                [ min(6* float(member[3])/member[4], COOPERATION_MAX)] +    \
+                [member[4]] +                                               \
+                [member[5]])
+            

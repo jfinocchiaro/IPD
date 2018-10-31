@@ -289,14 +289,6 @@ def main():
     print "Mutual cooperation:  " + str(cooperative)
     print "Selfless:  " + str(selfless)
 
-    if TRAINING_GROUP == 'POP':
-        timestr = 'train_pop/'
-    else:
-        timestr = 'train_axelrod/'
-    timestr += time.strftime("%Y%m%d-%H%M%S")
-    timestr += '-{}'.format(os.getpid())
-    timestr += '.csv'
-    deapplaygame.exportGenometoCSV(timestr, all_ind)
 
     best_members = []
     best_members.append(deepcopy(sorted_selfish[len(sorted_selfish)-1]))
@@ -316,5 +308,15 @@ def main():
         print member
         print
         
+    # write to csv file    
+    if TRAINING_GROUP == 'POP':
+        timestr = 'train_pop/'
+    else:
+        timestr = 'train_axelrod/'
+    timestr += time.strftime("%Y%m%d-%H%M%S")
+    timestr += '-{}'.format(os.getpid())
+    timestr += '.csv'
+    deapplaygame.exportGenometoCSV(timestr, all_ind, best_members)
+
 if __name__ == "__main__":
     main()
