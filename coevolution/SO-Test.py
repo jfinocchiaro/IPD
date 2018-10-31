@@ -258,10 +258,10 @@ def main():
     #print outcome of evolution
     print ("%s total individuals in each population" % len(selfish_population))
     #all_ind = tools.selBest(population, (len(population)))
-    sorted_selfish = sorted(selfish_population, key=lambda member: abs(member.fitness.values[0]) + abs(member.fitness.values[1]) / 2)
-    sorted_communal = sorted(communal_population, key=lambda member: abs(member.fitness.values[0]) + abs(member.fitness.values[1]) / 2)
-    sorted_cooperative = sorted(cooperative_population, key=lambda member: abs(member.fitness.values[0]) + abs(member.fitness.values[1]) / 2)
-    sorted_selfless = sorted(selfless_population, key=lambda member: abs(member.fitness.values[0]) + abs(member.fitness.values[1]) / 2)
+    sorted_selfish = sorted(selfish_population, key=lambda member: (abs(member.fitness.values[0]) + abs(member.fitness.values[1])) / 2)
+    sorted_communal = sorted(communal_population, key=lambda member: (abs(member.fitness.values[0]) + abs(member.fitness.values[1])) / 2)
+    sorted_cooperative = sorted(cooperative_population, key=lambda member: (abs(member.fitness.values[0]) + abs(member.fitness.values[1])) / 2)
+    sorted_selfless = sorted(selfless_population, key=lambda member: (abs(member.fitness.values[0]) + abs(member.fitness.values[1])) / 2)
     all_ind = sorted_selfish + sorted_communal + sorted_cooperative + sorted_selfless
     #all_ind = sorted(population, key=lambda member: abs(member.fitness.values[0]) + abs(member.fitness.values[1]) / 2)
     for member in all_ind:
@@ -290,23 +290,30 @@ def main():
     print "Selfless:  " + str(selfless)
 
 
-    best_members = []
-    best_members.append(deepcopy(sorted_selfish[len(sorted_selfish)-1]))
-    best_members.append(deepcopy(sorted_communal[len(sorted_communal)-1]))
-    best_members.append(deepcopy(sorted_cooperative[len(sorted_cooperative)-1]))
-    best_members.append(deepcopy(sorted_selfless[len(sorted_selfless)-1]))
+#    best_members = []
+#    best_members.append(deepcopy(sorted_selfish[len(sorted_selfish)-1]))
+#    best_members.append(deepcopy(sorted_communal[len(sorted_communal)-1]))
+#    best_members.append(deepcopy(sorted_cooperative[len(sorted_cooperative)-1]))
+#    best_members.append(deepcopy(sorted_selfless[len(sorted_selfless)-1]))
     
-    for member in best_members:
+    test_pop = all_ind
+    
+    for member in test_pop:
         deapplaygame.resetPlayer(member)
         
     axelrodPop = axelrodplayers.initAxpop()
-    for member in best_members:
+    for member in test_pop:
         for opponent in axelrodPop:
             axelrodplayers.playAxelrodPop(member, opponent)
 
-    for member in best_members:
+    sorted_test_pop = sorted(test_pop, key=lambda member: member[1], reverse=True)
+
+    for member in sorted_test_pop:
         print member
         print
+        
+    if len(sorted_test_pop) > 10:
+        sorted_test_pop = sorted_test_pop[:10]
         
     # write to csv file    
     if TRAINING_GROUP == 'POP':
@@ -316,7 +323,7 @@ def main():
     timestr += time.strftime("%Y%m%d-%H%M%S")
     timestr += '-{}'.format(os.getpid())
     timestr += '.csv'
-    deapplaygame.exportGenometoCSV(timestr, all_ind, best_members)
+    deapplaygame.exportGenometoCSV(timestr, all_ind, sorted_test_pop)
 
 if __name__ == "__main__":
     main()
