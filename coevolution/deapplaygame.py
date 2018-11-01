@@ -25,11 +25,13 @@ def evaluate(member):
     if objectives == 2:
         #max personal score and cooperation
         score1 = float(member[1]) / member[4]
-        score2 = min(float(member[3]) / member[4] * 6, COOPERATION_MAX)
+        # score2 = min(float(member[3]) / member[4] * 6, COOPERATION_MAX)
+        score2 = float(member[3]) / member[4]
     if objectives == 3:
         #max opp score and cooperation
         score1 = float(member[2]) / member[4]
-        score2 = min(float(member[3]) / member[4] * 6, COOPERATION_MAX)
+        # score2 = min(float(member[3]) / member[4] * 6, COOPERATION_MAX)
+        score2 = float(member[3]) / member[4]
     return score1, score2
 
 
@@ -246,9 +248,11 @@ def exportGenometoCSV(filename, population, test_pop=None):
             member[0]+                                                  \
             [float(member[1])/member[4]] +                              \
             [float(member[2])/member[4]] +                              \
-            [ min(6* float(member[3])/member[4], COOPERATION_MAX)] +    \
+            # [ min(6* float(member[3])/member[4], COOPERATION_MAX)] +    \
+            [float(member[3]) / member[4]] +                            \
             [member[4]] +                                               \
-            [member[5]])
+            [member[5]] +                                               \
+            [member[6]])
             
         if test_pop is not None:
             writer.writerow("")
@@ -258,7 +262,9 @@ def exportGenometoCSV(filename, population, test_pop=None):
                 member[0]+                                                  \
                 [float(member[1])/member[4]] +                              \
                 [float(member[2])/member[4]] +                              \
-                [ min(6* float(member[3])/member[4], COOPERATION_MAX)] +    \
+                # [ min(6* float(member[3])/member[4], COOPERATION_MAX)] +    \
+                [float(member[3]) / member[4]] +                            \
                 [member[4]] +                                               \
-                [member[5]])
+                [member[5]] +                                               \
+                [member[6]])
             

@@ -19,7 +19,7 @@ def main():
     #global-iah variables won't be changed
     IND_SIZE = 70
     POP_SIZE = 60
-    NGEN = 2000
+    NGEN = 50
     CXPB = 0.9
 
     rseed = os.getpid() * (time.time() % 4919)
@@ -38,7 +38,8 @@ def main():
     #   3: cooperation score
     #   4: number of games
     #   5: objective pair
-    toolbox.register("individual", tools.initCycle, creator.Individual, (toolbox.genome, toolbox.attr_int,toolbox.attr_int,toolbox.attr_int,toolbox.attr_int, toolbox.attr_int), n=1)
+    #   6: id
+    toolbox.register("individual", tools.initCycle, creator.Individual, (toolbox.genome,                           toolbox.attr_int,toolbox.attr_int,toolbox.attr_int,toolbox.attr_int,                         toolbox.attr_int,toolbox.attr_int), n=1)
     
     toolbox.register("population", tools.initRepeat, list, toolbox.individual)
 
@@ -47,7 +48,19 @@ def main():
     communal_population = toolbox.population(n=POP_SIZE / 4)
     cooperative_population = toolbox.population(n=POP_SIZE / 4)
     selfless_population = toolbox.population(n=POP_SIZE / 4)
-
+    
+    # assign ids to the members
+    n = POP_SIZE/4
+    i = 0
+    while i < n:
+        selfish_population[i][6] = i
+        communal_population[i][6] = n + i
+        cooperative_population[i][6] = 2 * n + i
+        selfless_population[i][6] = 3 * n + i
+        i += 1
+    
+    # set an id variable to use for assigning ids to offspring
+    id = POP_SIZE
 
     #make initial objectives of population uniformly distributed
     selfish_population = deapplaygame.uniformobjectivesSelfish(selfish_population)
@@ -95,6 +108,10 @@ def main():
 
         # create offspring
         offspring = toolbox.map(toolbox.clone, selfish_population)
+        
+        for i in range(len(offspring)):
+            offspring[i][6] = id
+            id += 1
 
         # crossover
         for child1, child2 in zip(offspring[::2], offspring[1::2]):
@@ -120,6 +137,10 @@ def main():
 
         # create offspring
         offspring = toolbox.map(toolbox.clone, communal_population)
+
+        for i in range(len(offspring)):
+            offspring[i][6] = id
+            id += 1
 
         # crossover
         for child1, child2 in zip(offspring[::2], offspring[1::2]):
@@ -147,6 +168,10 @@ def main():
         # create offspring
         offspring = toolbox.map(toolbox.clone, cooperative_population)
 
+        for i in range(len(offspring)):
+            offspring[i][6] = id
+            id += 1
+
         # crossover
         for child1, child2 in zip(offspring[::2], offspring[1::2]):
             #mates with probability 0.9
@@ -172,6 +197,10 @@ def main():
 
         # create offspring
         offspring = toolbox.map(toolbox.clone, selfless_population)
+
+        for i in range(len(offspring)):
+            offspring[i][6] = id
+            id += 1
 
         # crossover
         for child1, child2 in zip(offspring[::2], offspring[1::2]):
@@ -299,14 +328,14 @@ def main():
     print "Selfless:  " + str(selfless)
 
 
-#    best_members = []
-#    best_members.append(deepcopy(sorted_selfish[len(sorted_selfish)-1]))
-#    best_members.append(deepcopy(sorted_communal[len(sorted_communal)-1]))
-#    best_members.append(deepcopy(sorted_cooperative[len(sorted_cooperative)-1]))
-#    best_members.append(deepcopy(sorted_selfless[len(sorted_selfless)-1]))
+#    test_pop = []
+#    test_pop.append(deepcopy(sorted_selfish[len(sorted_selfish)-1]))
+#    test_pop.append(deepcopy(sorted_communal[len(sorted_communal)-1]))
+#    test_pop.append(deepcopy(sorted_cooperative[len(sorted_cooperative)-1]))
+#    test_pop.append(deepcopy(sorted_selfless[len(sorted_selfless)-1]))
     
     # test_pop will be used in the testing phase against Axelrod
-    test_pop = all_ind
+    test_pop = deepcopy(all_ind)
     
     # reset the scores for the test_pop
     for member in test_pop:
