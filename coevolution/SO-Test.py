@@ -16,10 +16,10 @@ def main():
     #change this depending on the desired trial
     TRAINING_GROUP = 'POP' #change to 'AX' for training against Axelrod, or 'POP' to train within population
 
-    #global-iah variables won't be changed
+    #global-ish variables won't be changed
     IND_SIZE = 70
     POP_SIZE = 60
-    NGEN = 2000
+    NGEN = 2500
     CXPB = 0.9
 
     rseed = os.getpid() * (time.time() % 4919)
@@ -30,7 +30,7 @@ def main():
     toolbox.register("attr_int", random.randint, 0 , 0)
     toolbox.register("bit", random.randint, 0, 1)
     toolbox.register("genome", tools.initRepeat, list, toolbox.bit, IND_SIZE)
-    
+
     # fields in individual:
     #   0: genome
     #   1: self score
@@ -39,7 +39,7 @@ def main():
     #   4: number of games
     #   5: objective pair
     toolbox.register("individual", tools.initCycle, creator.Individual, (toolbox.genome, toolbox.attr_int,toolbox.attr_int,toolbox.attr_int,toolbox.attr_int, toolbox.attr_int), n=1)
-    
+
     toolbox.register("population", tools.initRepeat, list, toolbox.individual)
 
     # 4 subpopulations
@@ -82,7 +82,7 @@ def main():
         for ind, fit in zip(population, fitnesses):
             ind.fitness.values = fit
 
-        #prevgen = selfish_population #not sure why this line is there- it doesn't seem to serve a purpose.
+
 
 
     print "About to start evolution"
@@ -272,7 +272,7 @@ def main():
     sorted_cooperative = sorted(cooperative_population, key=lambda member: (abs(member.fitness.values[0]) + abs(member.fitness.values[1])) / 2)
     sorted_selfless = sorted(selfless_population, key=lambda member: (abs(member.fitness.values[0]) + abs(member.fitness.values[1])) / 2)
     all_ind = sorted_selfish + sorted_communal + sorted_cooperative + sorted_selfless
-    #all_ind = sorted(population, key=lambda member: abs(member.fitness.values[0]) + abs(member.fitness.values[1]) / 2)
+
     for member in all_ind:
         print member
 
@@ -304,14 +304,14 @@ def main():
 #    best_members.append(deepcopy(sorted_communal[len(sorted_communal)-1]))
 #    best_members.append(deepcopy(sorted_cooperative[len(sorted_cooperative)-1]))
 #    best_members.append(deepcopy(sorted_selfless[len(sorted_selfless)-1]))
-    
+
     # test_pop will be used in the testing phase against Axelrod
     test_pop = all_ind
-    
+
     # reset the scores for the test_pop
     for member in test_pop:
         deapplaygame.resetPlayer(member)
-    
+
     # play against Axelrod -- 150 rounds for each member-opponent pair
     axelrodPop = axelrodplayers.initAxpop()
     for member in test_pop:
@@ -322,20 +322,21 @@ def main():
     # testing is single objective - self score only
     sorted_test_pop = sorted(test_pop, key=lambda member: member[1], reverse=True)
 
+
+    # grab just the top 10 test_pop members for writing to the csv file
+    if len(sorted_test_pop) > 10:
+        sorted_test_pop = sorted_test_pop[:10]
+
     # print the sorted test population members
     for member in sorted_test_pop:
         print member
         print
-        
-    # grab just the top 10 test_pop members for writing to the csv file
-    if len(sorted_test_pop) > 10:
-        sorted_test_pop = sorted_test_pop[:10]
-        
-    # write to csv file    
+
+    # write to csv file
     if TRAINING_GROUP == 'POP':
-        timestr = 'train_pop/'
+        timestr = 'train_pop_test_ax/'
     else:
-        timestr = 'train_axelrod/'
+        timestr = 'train_axelrod_test_ax/'
     timestr += time.strftime("%Y%m%d-%H%M%S")
     timestr += '-{}'.format(os.getpid())
     timestr += '.csv'
