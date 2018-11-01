@@ -19,7 +19,7 @@ def main():
     #global-ish variables won't be changed
     IND_SIZE = 70
     POP_SIZE = 60
-    NGEN = 2000
+    NGEN = 50
     CXPB = 0.9
 
     rseed = os.getpid() * (time.time() % 4919)
@@ -349,27 +349,32 @@ def main():
 
     # sort the test_pop by decreasing value of self score
     # testing is single objective - self score only
-    sorted_test_pop = sorted(test_pop, key=lambda member: member[1], reverse=True)
+    # to use cooperation as single objective: change member[1] to member[3]
+    sorted_test_pop1 = sorted(test_pop, key=lambda member: member[1], reverse=True)
+    sorted_test_pop3 = sorted(test_pop, key=lambda member: member[3], reverse=True)
 
 
     # grab just the top 10 test_pop members for writing to the csv file
-    if len(sorted_test_pop) > 10:
-        sorted_test_pop = sorted_test_pop[:10]
+    if len(sorted_test_pop1) > 10:
+        sorted_test_pop1 = sorted_test_pop1[:10]
+
+    if len(sorted_test_pop3) > 10:
+        sorted_test_pop3 = sorted_test_pop3[:10]
 
     # print the sorted test population members
-    for member in sorted_test_pop:
+    for member in sorted_test_pop1:
         print member
         print
 
     # write to csv file
     if TRAINING_GROUP == 'POP':
-        timestr = 'train_pop_test_ax/'
+        timestr = 'train_pop/'
     else:
-        timestr = 'train_axelrod_test_ax/'
+        timestr = 'train_axelrod/'
     timestr += time.strftime("%Y%m%d-%H%M%S")
     timestr += '-{}'.format(os.getpid())
     timestr += '.csv'
-    deapplaygame.exportGenometoCSV(timestr, all_ind, sorted_test_pop)
+    deapplaygame.exportGenometoCSV(timestr, all_ind, [sorted_test_pop1, sorted_test_pop3])
 
 if __name__ == "__main__":
     main()

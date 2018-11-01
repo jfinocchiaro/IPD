@@ -238,7 +238,7 @@ def resetPlayer(member):
 # write data to a CSV
 # added test_pop as a parameter so that we can write data from the 
 # testing phase to the same csv, if there was a testing phase.
-def exportGenometoCSV(filename, population, test_pop=None):
+def exportGenometoCSV(filename, population, test_pops=None):
     with open(filename, 'wb') as csvfile:
         writer = csv.writer(csvfile, delimiter=',', quotechar='|',
                             quoting=csv.QUOTE_MINIMAL)
@@ -254,17 +254,18 @@ def exportGenometoCSV(filename, population, test_pop=None):
             [member[5]] +                                               \
             [member[6]])
             
-        if test_pop is not None:
-            writer.writerow("")
-            writer.writerow("")
-            for member in test_pop:
-                writer.writerow(                                            \
-                member[0]+                                                  \
-                [float(member[1])/member[4]] +                              \
-                [float(member[2])/member[4]] +                              \
-                # [ min(6* float(member[3])/member[4], COOPERATION_MAX)] +    \
-                [float(member[3]) / member[4]] +                            \
-                [member[4]] +                                               \
-                [member[5]] +                                               \
-                [member[6]])
+        if test_pops is not None:
+            for tp in test_pops:
+                writer.writerow("")
+                writer.writerow("")
+                for member in tp:
+                    writer.writerow(                                            \
+                    member[0]+                                                  \
+                    [float(member[1])/member[4]] +                              \
+                    [float(member[2])/member[4]] +                              \
+                    # [ min(6* float(member[3])/member[4], COOPERATION_MAX)] +    \
+                    [float(member[3]) / member[4]] +                            \
+                    [member[4]] +                                               \
+                    [member[5]] +                                               \
+                    [member[6]])
             
