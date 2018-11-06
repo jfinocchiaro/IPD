@@ -354,12 +354,14 @@ def main():
     sorted_test_pop3 = sorted(test_pop, key=lambda member: member[3], reverse=True)
 
 
-    # grab just the top 10 test_pop members for writing to the csv file
-    if len(sorted_test_pop1) > 10:
-        sorted_test_pop1 = sorted_test_pop1[:10]
+    # number of members to display after testing
+    m = 20
+    # grab just the top m test_pop members for writing to the csv file
+    if len(sorted_test_pop1) > m:
+        sorted_test_pop1 = sorted_test_pop1[:m]
 
-    if len(sorted_test_pop3) > 10:
-        sorted_test_pop3 = sorted_test_pop3[:10]
+    if len(sorted_test_pop3) > m:
+        sorted_test_pop3 = sorted_test_pop3[:m]
 
     # print the sorted test population members
     for member in sorted_test_pop1:
