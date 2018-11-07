@@ -19,7 +19,7 @@ def main():
     #global-ish variables won't be changed
     IND_SIZE = 70
     POP_SIZE = 60
-    NGEN = 20
+    NGEN = 1000
     CXPB = 0.9
 
     run_info = [POP_SIZE, NGEN, TRAINING_GROUP]
@@ -352,27 +352,41 @@ def main():
     # sort the test_pop by decreasing value of self score
     # testing is single objective - self score only
     # to use cooperation as single objective: change member[1] to member[3]
-    sorted_test_pop1 = sorted(test_pop, key=lambda member: member[1], reverse=True)
-    # sorted_test_pop3 = sorted(test_pop, key=lambda member: member[3], reverse=True)
-    sorted_test_pop3 = None
+    sorted_test_self = sorted(test_pop, key=lambda member: member[1], reverse=True)
+    sorted_test_opp = sorted(test_pop, key=lambda member: member[2], reverse=True)
+    # sorted_test_opp = None
+    sorted_test_coop = sorted(test_pop, key=lambda member: member[3], reverse=True)
+    # sorted_test_coop = None
 
-    test_pops = [None, None]
-    test_labels = [None, None]
+    # flags for which test objectives to log in csv file
+    #     test_pops[0]: self score
+    #     test_pops[1]: opppnent score
+    #     test_pops[2]: cooperation
+    # set position to None to exclude
+    test_pops = [1, None, None]
+    
+    # labels to print for each of the tests
+    test_labels = ["Self Score", "Opp Score", "Cooperation"]
     
     # number of members to display after testing
     m = 20
+    
+    # for the test objectives indicated in test_pops
     # grab just the top m test_pop members for writing to the csv file
-    if sorted_test_pop1 is not None:
-        if len(sorted_test_pop1) > m:
-            sorted_test_pop1 = sorted_test_pop1[:m]
-        test_pops[0] = sorted_test_pop1
-        test_labels[0] = "Self Score"
+    if test_pops[0] is not None:
+        if len(sorted_test_self) > m:
+            sorted_test_self = sorted_test_self[:m]
+        test_pops[0] = sorted_test_self
 
-    if sorted_test_pop3 is not None:
-        if len(sorted_test_pop3) > m:
-            sorted_test_pop3 = sorted_test_pop3[:m]
-        test_pops[1] = sorted_test_pop3
-        test_labels[1] = "Cooperation"
+    if test_pops[1] is not None:
+        if len(sorted_test_opp) > m:
+            sorted_test_opp = sorted_test_opp[:m]
+        test_pops[1] = sorted_test_opp
+
+    if test_pops[2] is not None:
+        if len(sorted_test_coop) > m:
+            sorted_test_coop = sorted_test_coop[:m]
+        test_pops[2] = sorted_test_coop
 
     # write to csv file
     if TRAINING_GROUP == 'POP':

@@ -266,7 +266,6 @@ def exportGenometoCSV(filename, population, run_vars, test_pops=None, test_label
                     writer.writerow("")
                     writer.writerow(["Testing:"])
                     writer.writerow([test_labels[i]])
-                    i += 1
                     for member in tp:
                         writer.writerow([''] +                                            \
                         member[0]+                                                  \
@@ -277,4 +276,4 @@ def exportGenometoCSV(filename, population, run_vars, test_pops=None, test_label
                         [member[4]] +                                               \
                         [member[5]] +                                               \
                         [member[6]])
-            
+                i += 1
