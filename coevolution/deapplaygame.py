@@ -238,13 +238,17 @@ def resetPlayer(member):
 # write data to a CSV
 # added test_pop as a parameter so that we can write data from the 
 # testing phase to the same csv, if there was a testing phase.
-def exportGenometoCSV(filename, population, test_pops=None):
+def exportGenometoCSV(filename, population, run_vars, test_pops=None, test_labels=None):
     with open(filename, 'wb') as csvfile:
-        writer = csv.writer(csvfile, delimiter=',', quotechar='|',
+        writer = csv.writer(csvfile, delimiter=',', quotechar='"',
                             quoting=csv.QUOTE_MINIMAL)
 
+        writer.writerow(["population: " + str(run_vars[0])])
+        writer.writerow(["generations: " + str(run_vars[1])])
+        writer.writerow(["training: " + run_vars[2]])
+        writer.writerow("")
         for member in population:
-            writer.writerow(                                            \
+            writer.writerow([''] +                                       \
             member[0]+                                                  \
             [float(member[1])/member[4]] +                              \
             [float(member[2])/member[4]] +                              \
@@ -255,12 +259,16 @@ def exportGenometoCSV(filename, population, test_pops=None):
             [member[6]])
             
         if test_pops is not None:
+            i = 0
             for tp in test_pops:
                 if tp is not None:
                     writer.writerow("")
                     writer.writerow("")
+                    writer.writerow(["Testing:"])
+                    writer.writerow([test_labels[i]])
+                    i += 1
                     for member in tp:
-                        writer.writerow(                                            \
+                        writer.writerow([''] +                                            \
                         member[0]+                                                  \
                         [float(member[1])/member[4]] +                              \
                         [float(member[2])/member[4]] +                              \

@@ -19,9 +19,11 @@ def main():
     #global-ish variables won't be changed
     IND_SIZE = 70
     POP_SIZE = 60
-    NGEN = 50
+    NGEN = 20
     CXPB = 0.9
 
+    run_info = [POP_SIZE, NGEN, TRAINING_GROUP]
+    
     rseed = os.getpid() * (time.time() % 4919)
     random.seed(rseed)
     print("\n\nRandom seed: {}\n".format(rseed))
@@ -354,16 +356,23 @@ def main():
     # sorted_test_pop3 = sorted(test_pop, key=lambda member: member[3], reverse=True)
     sorted_test_pop3 = None
 
-
+    test_pops = [None, None]
+    test_labels = [None, None]
+    
     # number of members to display after testing
     m = 20
     # grab just the top m test_pop members for writing to the csv file
-    if sorted_test_pop1 is not None and len(sorted_test_pop1) > m:
-        sorted_test_pop1 = sorted_test_pop1[:m]
+    if sorted_test_pop1 is not None:
+        if len(sorted_test_pop1) > m:
+            sorted_test_pop1 = sorted_test_pop1[:m]
+        test_pops[0] = sorted_test_pop1
+        test_labels[0] = "Self Score"
 
-    if sorted_test_pop3 is not None and len(sorted_test_pop3) > m:
-        sorted_test_pop3 = sorted_test_pop3[:m]
-
+    if sorted_test_pop3 is not None:
+        if len(sorted_test_pop3) > m:
+            sorted_test_pop3 = sorted_test_pop3[:m]
+        test_pops[1] = sorted_test_pop3
+        test_labels[1] = "Cooperation"
 
     # write to csv file
     if TRAINING_GROUP == 'POP':
@@ -373,7 +382,7 @@ def main():
     timestr += time.strftime("%Y%m%d-%H%M%S")
     timestr += '-{}'.format(os.getpid())
     timestr += '.csv'
-    deapplaygame.exportGenometoCSV(timestr, all_ind, [sorted_test_pop1, sorted_test_pop3])
+    deapplaygame.exportGenometoCSV(timestr, all_ind, run_info, test_pops, test_labels)
 
 if __name__ == "__main__":
     main()
