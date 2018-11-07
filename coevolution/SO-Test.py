@@ -351,22 +351,19 @@ def main():
     # testing is single objective - self score only
     # to use cooperation as single objective: change member[1] to member[3]
     sorted_test_pop1 = sorted(test_pop, key=lambda member: member[1], reverse=True)
-    sorted_test_pop3 = sorted(test_pop, key=lambda member: member[3], reverse=True)
+    # sorted_test_pop3 = sorted(test_pop, key=lambda member: member[3], reverse=True)
+    sorted_test_pop3 = None
 
 
     # number of members to display after testing
     m = 20
     # grab just the top m test_pop members for writing to the csv file
-    if len(sorted_test_pop1) > m:
+    if sorted_test_pop1 is not None and len(sorted_test_pop1) > m:
         sorted_test_pop1 = sorted_test_pop1[:m]
 
-    if len(sorted_test_pop3) > m:
+    if sorted_test_pop3 is not None and len(sorted_test_pop3) > m:
         sorted_test_pop3 = sorted_test_pop3[:m]
 
-    # print the sorted test population members
-    for member in sorted_test_pop1:
-        print member
-        print
 
     # write to csv file
     if TRAINING_GROUP == 'POP':

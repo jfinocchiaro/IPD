@@ -256,16 +256,17 @@ def exportGenometoCSV(filename, population, test_pops=None):
             
         if test_pops is not None:
             for tp in test_pops:
-                writer.writerow("")
-                writer.writerow("")
-                for member in tp:
-                    writer.writerow(                                            \
-                    member[0]+                                                  \
-                    [float(member[1])/member[4]] +                              \
-                    [float(member[2])/member[4]] +                              \
-                    # [ min(6* float(member[3])/member[4], COOPERATION_MAX)] +    \
-                    [float(member[3]) / member[4]] +                            \
-                    [member[4]] +                                               \
-                    [member[5]] +                                               \
-                    [member[6]])
+                if tp is not None:
+                    writer.writerow("")
+                    writer.writerow("")
+                    for member in tp:
+                        writer.writerow(                                            \
+                        member[0]+                                                  \
+                        [float(member[1])/member[4]] +                              \
+                        [float(member[2])/member[4]] +                              \
+                        # [ min(6* float(member[3])/member[4], COOPERATION_MAX)] +    \
+                        [float(member[3]) / member[4]] +                            \
+                        [member[4]] +                                               \
+                        [member[5]] +                                               \
+                        [member[6]])
             
