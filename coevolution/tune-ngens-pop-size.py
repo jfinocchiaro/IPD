@@ -19,8 +19,8 @@ def main():
 
     #global-ish variables won't be changed
     IND_SIZE = 70
-    pop_sizes = [60, 80]
-    NGEN = 3
+    pop_sizes = [60, 80, 100, 120]
+    NGEN = 2500
     CXPB = 0.9
 
     best_players = defaultdict(list)
