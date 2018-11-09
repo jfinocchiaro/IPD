@@ -5,6 +5,7 @@ from deap import tools
 import scorechange
 import random
 import itertools
+from matplotlib import pyplot as plt
 
 COOPERATION_MAX = 3
 
@@ -235,8 +236,32 @@ def resetPlayer(member):
     return member
 
 
+#used to see how population size and best player scores converge with number of generations
+def plotbestplayers(trials_dict, training_group=None, filename = None):
+    colors = list("rgbcmyk")
+    for pop_size, best_scores in trials_dict.iteritems():
+        plt.scatter(range(1, len(best_scores)+1), best_scores, color=colors.pop())
+
+
+    titlestr = "Increase in score of best player"
+    if training_group == 'POP':
+        titlestr += " when trained within population"
+    if training_group == 'AX':
+        titlestr += " when trained on Axelrod"
+
+    plt.title(titlestr)
+    plt.legend([ky for ky in trials_dict.iterkeys()])
+    plt.xlabel('Number of generations')
+    plt.ylabel('Highest self-score in population')
+    plt.xlim(1, max([len(num_gens) for num_gens in trials_dict.itervalues()]))
+    plt.ylim(2, 5)
+    if filename is not None:
+        plt.savefig(filename)
+    #plt.show()
+
+
 # write data to a CSV
-# added test_pop as a parameter so that we can write data from the 
+# added test_pop as a parameter so that we can write data from the
 # testing phase to the same csv, if there was a testing phase.
 def exportGenometoCSV(filename, population, run_vars, test_pops=None, test_labels=None):
     with open(filename, 'wb') as csvfile:
@@ -257,7 +282,7 @@ def exportGenometoCSV(filename, population, run_vars, test_pops=None, test_label
             [member[4]] +                                               \
             [member[5]] +                                               \
             [member[6]])
-            
+
         if test_pops is not None:
             i = 0
             for tp in test_pops:
