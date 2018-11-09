@@ -254,7 +254,7 @@ def plotbestplayers(trials_dict, training_group=None, filename = None):
     plt.xlabel('Number of generations')
     plt.ylabel('Highest self-score in population')
     plt.xlim(1, max([len(num_gens) for num_gens in trials_dict.itervalues()]))
-    plt.ylim(2, 5)
+    plt.ylim(2.5, 4)
     if filename is not None:
         plt.savefig(filename)
     #plt.show()
