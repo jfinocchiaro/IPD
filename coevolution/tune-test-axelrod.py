@@ -26,6 +26,11 @@ def main():
     best_players = defaultdict(list)
     filename = str((os.getpid() * time.time()) % 4919) + '.png'
 
+    # To hold the top players based on test results throughout the run
+    # Each element is a list containing a member and the generation of the test
+    num_best = 10
+    best_tested = []
+    
     for POP_SIZE in pop_sizes:
         run_info = [POP_SIZE, NGEN, TRAINING_GROUP]
 
@@ -287,10 +292,9 @@ def main():
             selfless_population = toolbox.map(toolbox.clone, selfless_population)
 
 
-
             
             #for progress updates
-            if g % 10 == 0 and g > 0:
+            if g % 10 == 9:
                 print("-- Generation %i --" % g)
                 
                 best_player_current = sorted(selfish_population + cooperative_population + communal_population + selfless_population, key=lambda member: member[1], reverse=True)[0]
@@ -316,9 +320,15 @@ def main():
                 # to use cooperation as single objective: change member[1] to member[3]
                 sorted_test_self = sorted(test_pop, key=lambda member: member[1], reverse=True)
                 current_best_score_test = sorted_test_self[0][1] / float(sorted_test_self[0][4])
-                best_players['Test'].append(current_best_score_test)
+                sorted_test_self = sorted_test_self[:num_best]
+                for e in sorted_test_self:
+                    best_tested.append([deepcopy(e), g])
+                best_tested = sorted(best_tested, key=lambda member: member[0][1], reverse=True)
+                best_tested = best_tested[:num_best]
+                # best_players['Test'].append(current_best_score_test)
 
                 del test_pop
+                del sorted_test_self
 
         print("-- End of evolution --")
 
@@ -425,10 +435,10 @@ def main():
         timestr += time.strftime("%Y%m%d-%H%M%S")
         timestr += '-{}'.format(os.getpid())
         timestr += '.csv'
-        #deapplaygame.exportGenometoCSV(timestr, all_ind, run_info, test_pops, test_labels)
+        deapplaygame.exportGenometoCSV(timestr, all_ind, run_info, test_pops, test_labels, best_tested)
 
 
-    deapplaygame.plotbestplayers(best_players, training_group=TRAINING_GROUP, filename=filename)
+    # deapplaygame.plotbestplayers(best_players, training_group=TRAINING_GROUP, filename=filename)
 
 if __name__ == "__main__":
     main()

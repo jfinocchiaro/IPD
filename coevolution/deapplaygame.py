@@ -263,7 +263,7 @@ def plotbestplayers(trials_dict, training_group=None, filename = None):
 # write data to a CSV
 # added test_pop as a parameter so that we can write data from the
 # testing phase to the same csv, if there was a testing phase.
-def exportGenometoCSV(filename, population, run_vars, test_pops=None, test_labels=None):
+def exportGenometoCSV(filename, population, run_vars, test_pops=None, test_labels=None,                                 best=None):
     with open(filename, 'wb') as csvfile:
         writer = csv.writer(csvfile, delimiter=',', quotechar='"',
                             quoting=csv.QUOTE_MINIMAL)
@@ -302,3 +302,20 @@ def exportGenometoCSV(filename, population, run_vars, test_pops=None, test_label
                         [member[5]] +                                               \
                         [member[6]])
                 i += 1
+
+        if best is not None:
+            writer.writerow("")
+            writer.writerow("")
+            writer.writerow(["Best Tested Members:"])
+            for member in best:
+                writer.writerow([member[1]] +                                            \
+                member[0][0] +                                                  \
+                [float(member[0][1])/member[0][4]] +                              \
+                [float(member[0][2])/member[0][4]] +                              \
+                # [ min(6* float(member[3])/member[4], COOPERATION_MAX)] +    \
+                [float(member[0][3]) / member[0][4]] +                            \
+                [member[0][4]] +                                               \
+                [member[0][5]] +                                               \
+                [member[0][6]])
+
+            
