@@ -20,6 +20,7 @@ def main():
     #global-ish variables won't be changed
     IND_SIZE = 70
     pop_sizes = [120]
+    NUM_SELFISH = 15
     NGEN = 2500
     CXPB = 0.9
 
@@ -99,6 +100,12 @@ def main():
         else:
             print 'Invalid training group- please fix.'
             quit()
+
+        # play against Trumps
+        for population in [selfish_population, communal_population, cooperative_population,                         selfish_population]:
+            for member in population:
+                for x in range(NUM_SELFISH):
+                    deapplaygame.playMultiRoundsTrump(member)
 
             
         # Evaluate each population
@@ -243,7 +250,13 @@ def main():
                 print 'Invalid training group- please fix.'
                 quit()
 
+            # play against Trumps
+            for population in [selfish_population, communal_population, cooperative_population,                         selfish_population]:
+                for member in population:
+                    for x in range(NUM_SELFISH):
+                        deapplaygame.playMultiRoundsTrump(member)
 
+                        
             #SELFISH
             #evaluate how well players did
             fits = toolbox.map(toolbox.evaluate, selfish_population)
