@@ -5,7 +5,7 @@ from deap import tools
 import scorechange
 import random
 import itertools
-from matplotlib import pyplot as plt
+# from matplotlib import pyplot as plt
 
 COOPERATION_MAX = 3
 
@@ -263,7 +263,7 @@ def plotbestplayers(trials_dict, training_group=None, filename = None):
 # write data to a CSV
 # added test_pop as a parameter so that we can write data from the
 # testing phase to the same csv, if there was a testing phase.
-def exportGenometoCSV(filename, population, run_vars, test_pops=None, test_labels=None,                                 best=None):
+def exportGenometoCSV(filename, population, run_vars, test_pops=None, test_labels=None, best=None, counts=None):
     with open(filename, 'wb') as csvfile:
         writer = csv.writer(csvfile, delimiter=',', quotechar='"',
                             quoting=csv.QUOTE_MINIMAL)
@@ -318,4 +318,10 @@ def exportGenometoCSV(filename, population, run_vars, test_pops=None, test_label
                 [member[0][5]] +                                               \
                 [member[0][6]])
 
-            
+
+        if counts is not None:
+            writer.writerow("")
+            writer.writerow("")
+            writer.writerow(["Objective Pair Counts for each Testing Phase:"])
+            for e in counts:
+                writer.writerow([''] + e)
