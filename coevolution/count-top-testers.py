@@ -20,7 +20,7 @@ def main():
     #global-ish variables won't be changed
     IND_SIZE = 70
     pop_sizes = [120]
-    NGEN = 30
+    NGEN = 2500
     CXPB = 0.9
 
     best_players = defaultdict(list)
@@ -442,11 +442,12 @@ def main():
                 sorted_test_coop = sorted_test_coop[:m]
             test_pops[2] = sorted_test_coop
 
+        timestr = '/oasis/scratch/comet/dmathias/temp_project/'
         # write to csv file
         if TRAINING_GROUP == 'POP':
-            timestr = 'train_pop/'
+            timestr += 'train_pop/'
         else:
-            timestr = 'train_axelrod/'
+            timestr += 'train_axelrod/'
         timestr += time.strftime("%Y%m%d-%H%M%S")
         timestr += '-{}'.format(os.getpid())
         timestr += '.csv'
