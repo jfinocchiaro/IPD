@@ -116,10 +116,10 @@ def playAxelrodPop(member1, oppName, numRounds=150):
         #naive prober
         elif oppName == 'naiveprober':
             probe = random.random()
-            if n == 0:
-                decision2 = 0
-            elif probe < 0.01:
+            if probe < 0.01:
                 decision2 = 1
+            elif n == 0:
+                decision2 = 0
             else:
                 decision2 = decisionHist1[n - 1]
 
@@ -129,7 +129,7 @@ def playAxelrodPop(member1, oppName, numRounds=150):
             probe = random.random()
             if probe < 0.01:
                 decision2 = 1
-            if n == 0:
+            elif n == 0:
                 decision2 = 0
             elif decisionHist2[n-1] == 1 and decisionHist2[n-2] == 0:
                 decision2 = 0
