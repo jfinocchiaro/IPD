@@ -204,10 +204,10 @@ def mutInternalFlipBit(individual, indpb=float(1.0/70)):
 
     genome = (list)(tools.mutFlipBit(individual[0], indpb))
 
-    individual[0] = genome.pop(0)
+    individual[0] = deepcopy(genome.pop(0))
     # individual[0] = individual[0].pop(0)
 
-    return individual,  # comma here
+    # return individual,  # comma here
 
 
 def cxOnePointGenome(ind1, ind2):

@@ -80,6 +80,7 @@ def main():
 
     toolbox.register("evaluate", dpg.evaluate)
     toolbox.register("mate", dpg.cxOnePointGenome)
+    # toolbox.register("mate", tools.cxUniform, indpb=0.2)
     toolbox.register("mutate", dpg.mutInternalFlipBit)
     toolbox.register("select", tools.selNSGA2)
 
@@ -161,12 +162,16 @@ def main():
         print("Starting evolution: \n")
         # Begin the evolution
         for g in range(NGEN):
+
             # SELFISH
             for member in selfish_population:
                 member = dpg.resetPlayer(member)
 
             # create offspring
             offspring = toolbox.map(toolbox.clone, selfish_population)
+
+            # shuffle offspring to ensure different pairings in each generation
+            random.shuffle(offspring)
 
             for i in range(len(offspring)):
                 offspring[i][6] = id
@@ -197,6 +202,9 @@ def main():
 
             # create offspring
             offspring = toolbox.map(toolbox.clone, communal_population)
+
+            # shuffle offspring to ensure different pairings in each generation
+            random.shuffle(offspring)
 
             for i in range(len(offspring)):
                 offspring[i][6] = id
@@ -229,6 +237,9 @@ def main():
             # create offspring
             offspring = toolbox.map(toolbox.clone, cooperative_population)
 
+            # shuffle offspring to ensure different pairings in each generation
+            random.shuffle(offspring)
+
             for i in range(len(offspring)):
                 offspring[i][6] = id
                 id += 1
@@ -259,6 +270,9 @@ def main():
 
             # create offspring
             offspring = toolbox.map(toolbox.clone, selfless_population)
+
+            # shuffle offspring to ensure different pairings in each generation
+            random.shuffle(offspring)
 
             for i in range(len(offspring)):
                 offspring[i][6] = id
