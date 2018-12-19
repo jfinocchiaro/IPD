@@ -1,8 +1,10 @@
 import random
 import csv
 from copy import deepcopy
-import deapplaygame
+
+import deapplaygame2 as dpg
 import scorechange
+from globals import index as i
 
 # Define standard player types (used in benchmark type)
 std_types = {0: 'COOP', 1: 'DEFECT', 2: 'TFT', 3: 'STFT', 4: 'PAVLOV', 5: 'SPITE', 6: 'RANDOM',
@@ -12,14 +14,16 @@ std_types = {0: 'COOP', 1: 'DEFECT', 2: 'TFT', 3: 'STFT', 4: 'PAVLOV', 5: 'SPITE
 
 def init_pop(pop, counts):
     sum = 0
-    for i in range(len(counts) - 1):
-        for j in range(counts[i]):
+    for k in range(len(counts) - 1):
+        for j in range(counts[k]):
             index = sum + j
-            pop[index][6] = i
-        sum += counts[i]
+            pop[index][i.type] = k
+        sum += counts[k]
+
 
 def get_decision(p, self_hist, opp_hist, n):
-    p_type = std_types[p[6]]
+    p_type = std_types[p[i.type]]
+    decision = -1
 
     # always cooperate
     if p_type == 'COOP':
@@ -153,97 +157,102 @@ def get_decision(p, self_hist, opp_hist, n):
         if n == 0:
             decision = 0
         # if defect flag set
-        elif p[7][2] == 1:
+        elif p[i.grad][i.d_flag] == 1:
             decision = 1
-            p[7][3] += 1
-            if p[7][3] == p[7][1]:
-                p[7][3] = 0
-                p[7][2] = 0
-                p[7][4] = 1
+            p[i.grad][i.d_cnt] += 1
+            if p[i.grad][i.d_cnt] == p[i.grad][i.opp_d]:
+                p[i.grad][i.d_cnt] = 0
+                p[i.grad][i.d_flag] = 0
+                p[i.grad][i.c_flag] = 1
         # if post-defect coop flag set
-        elif p[7][4] == 1:
+        elif p[i.grad][i.c_flag] == 1:
             decision = 0
-            p[7][5] += 1
-            if p[7][5] == 2:
-                p[7][4] = 0
-                p[7][5] = 0
+            p[i.grad][i.c_cnt] += 1
+            if p[i.grad][i.c_cnt] == 2:
+                p[i.grad][i.c_flag] = 0
+                p[i.grad][i.c_cnt] = 0
         else:
             if opp_hist[n-1] == 0:
                 decision = 0
             else:
                 decision = 1
-                p[7][1] += 1
-                p[7][2] = 1
-                p[7][3] = 1
+                p[i.grad][i.opp_d] += 1
+                p[i.grad][i.d_flag] = 1
+                p[i.grad][i.d_cnt] = 1
 
     elif p_type == 'EVOLVED':
-        if n < 3:
-            decision = 0
-            if random.random() < 0.5:
-                decision = 1
-        else:
-            ind = p[0]
-            decisionind = (''.join(map(str, ind[64:70])))
-            decisionind = int(decisionind, 2)
-            decision = ind[decisionind]
+        # ind = p[i.genome]
+        decisionind = (''.join(map(str, p[i.hist])))
+        decisionind = int(decisionind, 2)
+        decision = p[i.genome][decisionind]
 
     return decision
 
 
 # reset the fields added to genome for implementing "GRADUAL"
 def reset_gradual(p):
-    p[7][0] = 0
-    p[7][1] = 0
-    p[7][2] = 0
-    p[7][3] = 0
-    p[7][4] = 0
-    p[7][5] = 0
+    p[i.grad][i.opp_last] = 0
+    p[i.grad][i.opp_d] = 0
+    p[i.grad][i.d_flag] = 0
+    p[i.grad][i.d_cnt] = 0
+    p[i.grad][i.c_flag] = 0
+    p[i.grad][i.c_cnt] = 0
 
 
 # reset score fields for player
 def reset_scores(p):
-    p[1] = 0
-    p[2] = 0
-    p[3] = 0
-    p[4] = 0
+    p[i.scores][i.self] = 0
+    p[i.scores][i.opp] = 0
+    p[i.scores][i.coop] = 0
+    p[i.scores][i.games] = 0
+    p[i.scores][i.match] = 0
 
 
-def playMultiRounds(player1, player2, numRounds=150):
+def playMultiRounds(player1, player2, rounds=150):
     decisionHist1 = []
     decisionHist2 = []
-    for n in range(numRounds):
+
+    player1[i.scores][i.match] = 0
+    player2[i.scores][i.match] = 0
+
+    if player1[i.type] == 'GRADUAL':
+        reset_gradual(player1)
+
+    if player2[i.type] == 'GRADUAL':
+        reset_gradual(player2)
+
+    for n in range(rounds):
         decision1 = get_decision(player1, decisionHist1, decisionHist2, n)
         decision2 = get_decision(player2, decisionHist2, decisionHist1, n)
 
         decisionHist1.append(decision1)
         decisionHist2.append(decision2)
 
-        if std_types[player1[6]] == 'EVOLVED':
-            ind = player1[0]
-            ind = deapplaygame.shift_decisions(ind, decision2, decision1)
-            player1[0] = ind
+        if std_types[player1[i.type]] == 'EVOLVED':
+            dpg.shift_decisions(player1[i.hist], decision2, decision1)
 
-        if std_types[player2[6]] == 'EVOLVED':
-            ind = player2[0]
-            ind = deapplaygame.shift_decisions(ind, decision1, decision2)
-            player2[0] = ind
+        if std_types[player2[i.type]] == 'EVOLVED':
+            dpg.shift_decisions(player2[i.hist], decision1, decision2)
 
         # mutual cooperation
         if decision1 == 0 and decision2 == 0:
-            player1 = scorechange.mutualcooperation(player1)
-            player2 = scorechange.mutualcooperation(player2)
+            scorechange.mutualcooperation2(player1)
+            scorechange.mutualcooperation2(player2)
 
         # player 1 is screwed
         elif decision1 == 0 and decision2 == 1:
-            player1 = scorechange.screwed(player1)
-            player2 = scorechange.tempt(player2)
+            scorechange.screwed2(player1)
+            scorechange.tempt2(player2)
 
         # player 2 is screwed
         elif decision1 == 1 and decision2 == 0:
-            player1 = scorechange.tempt(player1)
-            player2 = scorechange.screwed(player2)
+            scorechange.tempt2(player1)
+            scorechange.screwed2(player2)
 
         # both players defect
         else:
-            player1 = scorechange.mutualdefect(player1)
-            player2 = scorechange.mutualdefect(player2)
+            scorechange.mutualdefect2(player1)
+            scorechange.mutualdefect2(player2)
+
+    del decisionHist1
+    del decisionHist2

@@ -75,7 +75,9 @@ def main():
     std_players.init_pop(population, type_counts)
 
     # keep track of the order in which strategies exit the competition
+    # and the score for each strategy type
     exit_order = []
+    type_sum_score = []
 
     csvfile = open('best-players-notrump.csv', 'r')
     reader = csv.reader(csvfile)
@@ -101,6 +103,9 @@ def main():
         del evolved_candidates[ind]
         j += 1
 
+    #
+    # begin main loop for competition
+    #
     types_remaining = NUM_TYPES
     rounds = 0
     while types_remaining > 1:
@@ -162,43 +167,8 @@ def main():
 
         types_remaining -= 1
 
-        # # calculate the total of normalized scores
-        # total_score = sum(type_sum_score)
-        #
-        # # determine number of members of each type for next round
-        # for i in range(len(type_sum_score)):
-        #     type_counts[i] = int(round((float(type_sum_score[i])/total_score) * POP_SIZE, 0))
-        #
-        # print("   Type counts before adjustment: ")
-        # print("      {}".format(type_counts))
-        #
-        # while sum(type_counts) < POP_SIZE:
-        #     rand = random.randint(0, len(type_counts) - 1)
-        #     type_counts[rand] += 1
-        #
-        # while sum(type_counts) > POP_SIZE:
-        #     rand = random.randint(0, len(type_counts) - 1)
-        #     if type_counts[rand] > 0:
-        #         type_counts[rand] -= 1
-        #
-        # print("   Type counts after adjustment: ")
-        # print("      {}\n".format(type_counts))
-
-        # max_one_type = max(type_counts)
-        # if max_one_type < 0.75 * POP_SIZE:
-        #     std_players.init_pop(population, type_counts)
-        #     num_to_add = type_counts[len(type_counts) - 1] - num_evolved
-        #     while num_to_add > 0:
-        #         row = reader.next()
-        #         i = 0
-        #         genome = []
-        #         for i in range(70):
-        #             genome.append(int(row[i + 1]))
-        #
-        #         index = POP_SIZE - num_evolved - num_to_add
-        #         population[index][0] = deepcopy(genome)
-        #         population[index][6] = NUM_TYPES - 1
-        #         num_to_add -= 1
+        print("    ")
+        print("{}\n".format(type_sum_score))
 
         # reset scores
         for i in range(len(population)):
@@ -206,6 +176,9 @@ def main():
 
         rounds += 1
 
+    #
+    # end main loop
+    #
 
     # timestr = 'logs/'
     # timestr += time.strftime("%Y%m%d-%H%M%S")

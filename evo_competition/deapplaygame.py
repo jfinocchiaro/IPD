@@ -15,21 +15,22 @@ def evaluate(member):
     score2 = 0
     objectives = member[5]
     if objectives == 0:
-        #maximizing personal score, min opp score
+        # maximizing personal score, min opp score
         score1 = float(member[1]) / member[4]
-        #since everyone is trying to maximize objectives, minimizing opponent score is the same as maximizing 3 - opp score, since 3 is generally treated as the baseline.
-        score2 =  3 - float(member[2]) / member[4]
+        # since everyone is trying to maximize objectives, minimizing opponent score is the same
+        # as maximizing 3 - opp score, since 3 is generally treated as the baseline.
+        score2 = 3 - float(member[2]) / member[4]
     if objectives == 1:
-        #max personal and opponent score
+        # max personal and opponent score
         score1 = float(member[1]) / member[4]
         score2 = float(member[2]) / member[4]
     if objectives == 2:
-        #max personal score and cooperation
+        # max personal score and cooperation
         score1 = float(member[1]) / member[4]
         # score2 = min(float(member[3]) / member[4] * 6, COOPERATION_MAX)
         score2 = float(member[3]) / member[4]
     if objectives == 3:
-        #max opp score and cooperation
+        # max opp score and cooperation
         score1 = float(member[2]) / member[4]
         # score2 = min(float(member[3]) / member[4] * 6, COOPERATION_MAX)
         score2 = float(member[3]) / member[4]

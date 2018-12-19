@@ -3,11 +3,14 @@ import time
 import random
 from copy import deepcopy
 from deap import tools, base, creator, algorithms
-import deapplaygame2 as dpg
 import itertools
 import os
-import axelrodplayers2 as ap
 from collections import defaultdict
+
+import deapplaygame2 as dpg
+import axelrodplayers2 as ap
+import std_players as std
+from globals import index as i
 
 # change this to determine the evaluation metric for testing
 SELF = 0    # self score
@@ -19,13 +22,13 @@ TESTING_METRIC = SELF
 # used in calls to sorted to get the sort key (rather than use a lambda function)
 def sort_key(member):
     if TESTING_METRIC == SELF:
-        return member[1]
+        return member[i.scores][i.self]
     elif TESTING_METRIC == WINS:
-        return member[9][0]
+        return member[i.stats][i.win]
     elif TESTING_METRIC == WDL:
-        return 3 * member[9][0] + member[9][1]
+        return 3 * member[i.stats][i.win] + member[i.stats][i.draw]
     elif TESTING_METRIC == DRAWS:
-        return member[9][1]
+        return member[i.stats][i.draw]
 
 # used in calls to sorted to get the sort key (rather than use a lambda function)
 # In this version, the member is a list containing a member of the
@@ -34,13 +37,13 @@ def sort_key(member):
 # index at the front of the accessors
 def sort_key_best(member):
     if TESTING_METRIC == SELF:
-        return member[0][1]
+        return member[0][i.scores][i.self]
     elif TESTING_METRIC == WINS:
-        return member[0][9][0]
+        return member[0][i.stats][i.win]
     elif TESTING_METRIC == WDL:
-        return 3 * member[0][9][0] + member[0][9][1]
+        return 3 * member[0][i.stats][i.win] + member[0][i.stats][i.draw]
     elif TESTING_METRIC == DRAWS:
-        return member[0][9][1]
+        return member[0][i.stats][i.draw]
 
 
 def main():
@@ -50,31 +53,59 @@ def main():
 
     # global-ish variables won't be changed
     IND_SIZE = 70
-    pop_sizes = [80]
-    NGEN = 2000
+    pop_sizes = [120]
+    NGEN = 2500
     CXPB = 0.9
+
+    NUM_EACH_TYPE = 1
+    NUM_TYPES = 18
 
     toolbox = base.Toolbox()
     toolbox.register("attr_int", random.randint, 0, 0)
     toolbox.register("bit", random.randint, 0, 1)
     toolbox.register("genome", tools.initRepeat, list, toolbox.bit, IND_SIZE)
+
+    # history bits:
+    #   xyxyxy
+    #   each xy is: opp_decision self_decision
+    #   left pair is oldest, right is most recent
     toolbox.register("history", tools.initRepeat, list, toolbox.bit, 6)
-    toolbox.register("wdl", tools.initRepeat, list, toolbox.attr_int, 3)
+
+    # fields in scores:
+    #   0: self score
+    #   1: opponent score
+    #   2: cooperation score
+    #   3: number of games
+    #   4: score this match (each match is some number of games)
+    toolbox.register("scores", tools.initRepeat, list, toolbox.attr_int, 5)
+
+    # fields in stats:
+    #   0: matches won
+    #   1: matches drawn
+    #   2: matches lost
+    toolbox.register("stats", tools.initRepeat, list, toolbox.attr_int, 3)
+
+    # fields for gradual players:
+    #   0: opponent last play
+    #   1: opponent defects
+    #   2: defect flag
+    #   3: self consecutive defects
+    #   4: coop flag
+    #   5: coop count
+    toolbox.register("gradual", tools.initRepeat, list, toolbox.attr_int, 6)
 
     # fields in individual:
     #   0: genome
-    #   1: self score
-    #   2: opponent score
-    #   3: cooperation score
-    #   4: number of games
-    #   5: objective pair
+    #   1: history (last 3 moves -- history in genome is only for start of game)
+    #   2: scores
+    #   3: stats
+    #   4: objective pair
+    #   5: player type
     #   6: id
-    #   7: history (last 3 moves -- history in genome is only for start of game)
-    #   8: score this meeting
-    #   9: win-draw-lose (number of wins, losses, draws in head-to-head meetings)
-    toolbox.register("individual", tools.initCycle, creator.Individual, (toolbox.genome, toolbox.attr_int,
-                                    toolbox.attr_int, toolbox.attr_int, toolbox.attr_int, toolbox.attr_int,
-                                    toolbox.attr_int, toolbox.history, toolbox.attr_int, toolbox.wdl), n=1)
+    #   7: gradual fields (for gradual players only)
+    toolbox.register("individual", tools.initCycle, creator.Individual, (toolbox.genome, toolbox.history,
+                                    toolbox.scores, toolbox.stats, toolbox.attr_int, toolbox.attr_int,
+                                    toolbox.attr_int, toolbox.gradual), n=1)
 
     toolbox.register("population", tools.initRepeat, list, toolbox.individual)
 
@@ -86,14 +117,14 @@ def main():
 
     # change this depending on the desired trial
     # change to 'AX' for training against Axelrod, or 'POP' to train within population
-    TRAINING_GROUP = 'AX'
+    TRAINING_GROUP = 'POP'
 
     best_players = defaultdict(list)
     filename = str((os.getpid() * time.time()) % 4919) + '.png'
 
     # To hold the top players based on test results throughout the run
     # Each element is a list containing a member and the generation of the test
-    num_best = 10
+    num_best = 20
     best_tested = []
     
     for POP_SIZE in pop_sizes:
@@ -103,22 +134,37 @@ def main():
         random.seed(rseed)
         print("\n\nRandom seed: {}\n".format(rseed))
 
+        #
+        # axelrod population
+        #
+        axelrodPop = toolbox.population(n=((NUM_TYPES - 1) * NUM_EACH_TYPE))
 
-        # 4 subpopulations
+        arod_counts = [NUM_EACH_TYPE] * NUM_TYPES
+        arod_counts[len(arod_counts) - 1] = 0
+        std.init_pop(axelrodPop, arod_counts)
+
+        #
+        # 4 evolving subpopulations
+        #
         selfish_population = toolbox.population(n=POP_SIZE / 4)
         communal_population = toolbox.population(n=POP_SIZE / 4)
         cooperative_population = toolbox.population(n=POP_SIZE / 4)
         selfless_population = toolbox.population(n=POP_SIZE / 4)
 
-        # assign ids to the members
+        # assign ids and player type to the members
         n = POP_SIZE/4
-        i = 0
-        while i < n:
-            selfish_population[i][6] = i
-            communal_population[i][6] = n + i
-            cooperative_population[i][6] = 2 * n + i
-            selfless_population[i][6] = 3 * n + i
-            i += 1
+        j = 0
+        while j < n:
+            selfish_population[j][i.id] = j
+            selfish_population[j][i.type] = NUM_TYPES - 1
+            communal_population[j][i.id] = n + j
+            communal_population[j][i.type] = NUM_TYPES - 1
+            cooperative_population[j][i.id] = 2 * n + j
+            cooperative_population[j][i.type] = NUM_TYPES - 1
+            selfless_population[j][i.id] = 3 * n + j
+            selfless_population[j][i.type] = NUM_TYPES - 1
+            j += 1
+
 
         # set an id variable to use for assigning ids to offspring
         memb_id = POP_SIZE
@@ -137,12 +183,14 @@ def main():
                 dpg.setHistBits(pair[1])
                 dpg.playMultiRounds(*pair)
         elif TRAINING_GROUP == 'AX':
-            axelrodPop = ap.initAxpop()
+            # axelrodPop = ap.initAxpop()
+            # std.init_pop(axelrodPop, arod_counts)
             for population in [selfish_population, communal_population, cooperative_population, selfless_population]:
                 for member in population:
                     for opponent in axelrodPop:
                         dpg.setHistBits(member)
-                        ap.playAxelrodPop(member, opponent)
+                        # ap.playAxelrodPop(member, opponent)
+                        std.playMultiRounds(member, opponent)
         else:
             print 'Invalid training group- please fix.'
             quit()
@@ -160,7 +208,7 @@ def main():
 
             # SELFISH
             for member in selfish_population:
-                member = dpg.resetPlayer(member)
+                dpg.resetPlayer(member)
 
             # create offspring
             offspring = toolbox.map(toolbox.clone, selfish_population)
@@ -168,17 +216,17 @@ def main():
             # shuffle offspring to ensure different pairings for crossover in each generation
             random.shuffle(offspring)
 
-            for i in range(len(offspring)):
-                offspring[i][6] = memb_id
+            for k in range(len(offspring)):
+                offspring[k][i.id] = memb_id
                 memb_id += 1
 
             # crossover
             for child1, child2 in zip(offspring[::2], offspring[1::2]):
                 # mates with probability 0.9
                 if random.random() < CXPB:
-                    toolbox.mate(child1[0], child2[0])
-                    del child1.fitness.values
-                    del child2.fitness.values
+                    toolbox.mate(child1[i.genome], child2[i.genome])
+                    # del child1.fitness.values
+                    # del child2.fitness.values
 
             # mutation
             for mutant in offspring:
@@ -192,7 +240,7 @@ def main():
 
             # COMMUNAL
             for member in communal_population:
-                member = dpg.resetPlayer(member)
+                dpg.resetPlayer(member)
 
 
             # create offspring
@@ -201,17 +249,17 @@ def main():
             # shuffle offspring to ensure different pairings for crossover in each generation
             random.shuffle(offspring)
 
-            for i in range(len(offspring)):
-                offspring[i][6] = memb_id
+            for k in range(len(offspring)):
+                offspring[k][i.id] = memb_id
                 memb_id += 1
 
             # crossover
             for child1, child2 in zip(offspring[::2], offspring[1::2]):
                 # mates with probability 0.9
                 if random.random() < CXPB:
-                    toolbox.mate(child1[0], child2[0])
-                    del child1.fitness.values
-                    del child2.fitness.values
+                    toolbox.mate(child1[i.genome], child2[i.genome])
+                    # del child1.fitness.values
+                    # del child2.fitness.values
 
             # mutation
             for mutant in offspring:
@@ -226,7 +274,7 @@ def main():
 
             # COOPERATIVE
             for member in cooperative_population:
-                member = dpg.resetPlayer(member)
+                dpg.resetPlayer(member)
 
 
             # create offspring
@@ -235,17 +283,17 @@ def main():
             # shuffle offspring to ensure different pairings for crossover in each generation
             random.shuffle(offspring)
 
-            for i in range(len(offspring)):
-                offspring[i][6] = memb_id
+            for k in range(len(offspring)):
+                offspring[k][i.id] = memb_id
                 memb_id += 1
 
             # crossover
             for child1, child2 in zip(offspring[::2], offspring[1::2]):
                 # mates with probability 0.9
                 if random.random() < CXPB:
-                    toolbox.mate(child1[0], child2[0])
-                    del child1.fitness.values
-                    del child2.fitness.values
+                    toolbox.mate(child1[i.genome], child2[i.genome])
+                    # del child1.fitness.values
+                    # del child2.fitness.values
 
             # mutation
             for mutant in offspring:
@@ -260,7 +308,7 @@ def main():
 
             # SELFLESS
             for member in selfless_population:
-                member = dpg.resetPlayer(member)
+                dpg.resetPlayer(member)
 
 
             # create offspring
@@ -269,17 +317,17 @@ def main():
             # shuffle offspring to ensure different pairings for crossover in each generation
             random.shuffle(offspring)
 
-            for i in range(len(offspring)):
-                offspring[i][6] = memb_id
+            for k in range(len(offspring)):
+                offspring[k][i.id] = memb_id
                 memb_id += 1
 
             # crossover
             for child1, child2 in zip(offspring[::2], offspring[1::2]):
                 # mates with probability 0.9
                 if random.random() < CXPB:
-                    toolbox.mate(child1[0], child2[0])
-                    del child1.fitness.values
-                    del child2.fitness.values
+                    toolbox.mate(child1[i.genome], child2[i.genome])
+                    # del child1.fitness.values
+                    # del child2.fitness.values
 
             # mutation
             for mutant in offspring:
@@ -300,11 +348,15 @@ def main():
                     dpg.setHistBits(pair[1])
                     dpg.playMultiRounds(*pair)
             elif TRAINING_GROUP == 'AX':
+                for opponent in axelrodPop:
+                    dpg.resetPlayer(opponent)
+
                 for population in [selfish_population, communal_population, cooperative_population, selfless_population]:
                     for member in population:
                         for opponent in axelrodPop:
                             dpg.setHistBits(member)
-                            ap.playAxelrodPop(member, opponent)
+                            # ap.playAxelrodPop(member, opponent)
+                            std.playMultiRounds(member, opponent)
             else:
                 print 'Invalid training group- please fix.'
                 quit()
@@ -363,7 +415,7 @@ def main():
                 best_player_current = sorted(selfish_population + cooperative_population + communal_population +
                                              selfless_population, key=sort_key, reverse=True)[0]
 
-                current_best_score = best_player_current[1] / float(best_player_current[4])
+                current_best_score = best_player_current[i.scores][i.self] / float(best_player_current[i.scores][i.games])
                 best_players['Train'].append(current_best_score)
 
                 all_ind = selfish_population + communal_population + cooperative_population + selfless_population
@@ -374,12 +426,17 @@ def main():
                 for member in test_pop:
                     dpg.resetPlayer(member)
 
+                # reset scores for axelrod pop
+                for member in axelrodPop:
+                    dpg.resetPlayer(member)
+
                 # play against Axelrod -- 150 rounds for each member-opponent pair
-                axelrodPop = ap.initAxpop()
+                # axelrodPop = ap.initAxpop()
                 for member in test_pop:
                     for opponent in axelrodPop:
                         dpg.setHistBits(member)
-                        ap.playAxelrodPop(member, opponent)
+                        # ap.playAxelrodPop(member, opponent)
+                        std.playMultiRounds(member, opponent)
 
                 # sort the test_pop by decreasing value of self score
                 # testing is single objective - self score only
@@ -387,7 +444,7 @@ def main():
                 # sorted_test_self = sorted(test_pop, key=lambda member: member[1], reverse=True)
                 sorted_test_self = sorted(test_pop, key=sort_key, reverse=True)
 
-                current_best_score_test = sorted_test_self[0][1] / float(sorted_test_self[0][4])
+                current_best_score_test = sorted_test_self[0][i.scores][i.self] / float(sorted_test_self[0][i.scores][i.games])
                 sorted_test_self = sorted_test_self[:num_best]
                 for e in sorted_test_self:
                     best_tested.append([deepcopy(e), g])
@@ -408,7 +465,7 @@ def main():
                 del test_pop
                 del sorted_test_self
 
-        print("-- End of evolution --")
+        print("-- End of evolution --\n")
 
 
 
@@ -430,7 +487,7 @@ def main():
         selfless = 0
         mutual = 0
         for x in range(len(all_ind)):
-            objectives = all_ind[x][5]
+            objectives = all_ind[x][i.pair]
             if objectives == 0:
                 selfish += 1
             elif objectives == 1:
@@ -460,21 +517,26 @@ def main():
         for member in test_pop:
             dpg.resetPlayer(member)
 
+        # reset scores for axelrod pop
+        for member in axelrodPop:
+            dpg.resetPlayer(member)
+
         # play against Axelrod -- 150 rounds for each member-opponent pair
-        axelrodPop = ap.initAxpop()
+        # axelrodPop = ap.initAxpop()
         for member in test_pop:
             for opponent in axelrodPop:
                 dpg.setHistBits(member)
-                ap.playAxelrodPop(member, opponent)
+                # ap.playAxelrodPop(member, opponent)
+                std.playMultiRounds(member, opponent)
 
         # sort the test_pop by decreasing value of self score
         # testing is single objective - self score only
         # to use cooperation as single objective: change member[1] to member[3]
         sorted_test_self = sorted(test_pop, key=sort_key, reverse=True)
 
-        sorted_test_opp = sorted(test_pop, key=lambda member: member[2], reverse=True)
+        sorted_test_opp = sorted(test_pop, key=lambda member: member[i.scores][i.opp], reverse=True)
         # sorted_test_opp = None
-        sorted_test_coop = sorted(test_pop, key=lambda member: member[3], reverse=True)
+        sorted_test_coop = sorted(test_pop, key=lambda member: member[i.scores][i.coop], reverse=True)
         # sorted_test_coop = None
 
         # flags for which test objectives to log in csv file

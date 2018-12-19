@@ -74,7 +74,7 @@ def main():
         # set an id variable to use for assigning ids to offspring
         id = POP_SIZE
 
-        #make initial objectives of population uniformly distributed
+        # set objectives flag for members of each population
         selfish_population = deapplaygame.uniformobjectivesSelfish(selfish_population)
         communal_population = deapplaygame.uniformobjectivesCommunal(communal_population)
         cooperative_population = deapplaygame.uniformobjectivesCoop(cooperative_population)
@@ -232,7 +232,8 @@ def main():
 
             #conducts round-robin, depending on who's the training population
             if TRAINING_GROUP == 'POP':
-                for pair in itertools.combinations(selfish_population + communal_population + cooperative_population + selfless_population, r=2):
+                for pair in itertools.combinations(selfish_population + communal_population + cooperative_population +
+                                                   selfless_population, r=2):
                     deapplaygame.playMultiRounds(*pair)
             elif TRAINING_GROUP == 'AX':
                 for population in [selfish_population, communal_population, cooperative_population, selfless_population]:
