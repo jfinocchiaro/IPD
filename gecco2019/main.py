@@ -5,6 +5,7 @@ from copy import deepcopy
 from deap import tools, base, creator, algorithms
 import itertools
 import os
+import platform
 from collections import defaultdict
 
 import deapplaygame2 as dpg
@@ -46,6 +47,14 @@ def sort_key_best(member):
         return member[0][i.stats][i.draw]
 
 
+# set the logging path for running on comet
+logpath = ''
+if 'comet' in platform.node():
+    logpath += '/oasis/scratch/comet/'
+    logpath += os.getlogin()
+    logpath += '/temp_project/'
+
+
 def main():
 
     creator.create("FitnessMulti", base.Fitness, weights=(1.0,1.0))
@@ -54,11 +63,15 @@ def main():
     # global-ish variables won't be changed
     IND_SIZE = 70
     pop_sizes = [120]
-    NGEN = 2500
+    NGEN = 100
     CXPB = 0.9
 
     NUM_EACH_TYPE = 1
     NUM_TYPES = 18
+
+    # change this depending on the desired trial
+    # change to 'AX' for training against Axelrod, or 'POP' to train within population
+    TRAINING_GROUP = 'AX'
 
     toolbox = base.Toolbox()
     toolbox.register("attr_int", random.randint, 0, 0)
@@ -114,10 +127,6 @@ def main():
     # toolbox.register("mate", tools.cxUniform, indpb=0.2)
     toolbox.register("mutate", dpg.mutInternalFlipBit)
     toolbox.register("select", tools.selNSGA2)
-
-    # change this depending on the desired trial
-    # change to 'AX' for training against Axelrod, or 'POP' to train within population
-    TRAINING_GROUP = 'POP'
 
     best_players = defaultdict(list)
     filename = str((os.getpid() * time.time()) % 4919) + '.png'
@@ -571,13 +580,13 @@ def main():
 
         # write to csv file
         if TRAINING_GROUP == 'POP':
-            timestr = 'train_pop/'
+            logpath += 'train_pop/'
         else:
-            timestr = 'train_axelrod/'
-        timestr += time.strftime("%Y%m%d-%H%M%S")
-        timestr += '-{}'.format(os.getpid())
-        timestr += '.csv'
-        dpg.exportGenometoCSV(timestr, all_ind, run_info, test_pops, test_labels, best_tested)
+            logpath = 'train_axelrod/'
+        logpath += time.strftime("%Y%m%d-%H%M%S")
+        logpath += '-{}'.format(os.getpid())
+        logpath += '.csv'
+        dpg.exportGenometoCSV(logpath, all_ind, run_info, test_pops, test_labels, best_tested)
 
 
     # dpg.plotbestplayers(best_players, training_group=TRAINING_GROUP, filename=filename)
