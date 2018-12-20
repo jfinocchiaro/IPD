@@ -580,10 +580,11 @@ def main():
             test_pops[2] = sorted_test_coop
 
         # write to csv file
+        global logpath
         if TRAINING_GROUP == 'POP':
             logpath += 'train_pop/'
         else:
-            logpath = 'train_axelrod/'
+            logpath += 'train_axelrod/'
         logpath += time.strftime("%Y%m%d-%H%M%S")
         logpath += '-{}'.format(os.getpid())
         logpath += '.csv'
