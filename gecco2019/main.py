@@ -5,6 +5,7 @@ from copy import deepcopy
 from deap import tools, base, creator, algorithms
 import itertools
 import os
+import pwd
 import platform
 from collections import defaultdict
 
@@ -51,7 +52,7 @@ def sort_key_best(member):
 logpath = ''
 if 'comet' in platform.node():
     logpath += '/oasis/scratch/comet/'
-    logpath += os.getlogin()
+    logpath += pwd.getpwuid(os.getuid())[0]
     logpath += '/temp_project/'
 
 
