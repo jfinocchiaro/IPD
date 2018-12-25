@@ -168,6 +168,8 @@ def calc_wdl(p1, p2):
 def playMultiRounds(ind1, ind2, numRounds=150):
     ind1[i.scores][i.match] = 0
     ind2[i.scores][i.match] = 0
+    setHistBits(ind1)
+    setHistBits(ind2)
     for x in range(numRounds):
         playround(ind1, ind2)
 
@@ -199,6 +201,7 @@ def playroundtrump(member1):
 
 # a player faces a defector for numRounds times
 def playMultiRoundsTrump(ind1, numRounds=150):
+    setHistBits(ind1)
     for x in range(numRounds):
         playroundtrump(ind1)
 
@@ -233,6 +236,32 @@ def resetPlayer(member):
     member[i.scores][i.coop] = 0
     member[i.scores][i.games] = 0
     member[i.scores][i.match] = 0
+
+
+def load_evolved_players(population, NUM_EACH_TYPE, NUM_TYPES):
+    csvfile = open('best-players-notrump.csv', 'r')
+    reader = csv.reader(csvfile)
+
+    # read evolved players from csv and put in population
+    evolved_candidates = []
+    for row in reader:
+        evolved_candidates.append(row)
+
+    evolved_obj_pairs = [0] * 4
+    j = 0
+    while j < NUM_EACH_TYPE:
+        ind = random.randint(0, len(evolved_candidates) - 1)
+        i = 0
+        genome = []
+        for i in range(70):
+            genome.append(int(evolved_candidates[ind][i+1]))
+
+        index = (NUM_TYPES - 1) * NUM_EACH_TYPE + j
+        population[index][0] = deepcopy(genome)
+        population[index][6] = NUM_TYPES - 1
+        evolved_obj_pairs[int(evolved_candidates[ind][75])] += 1
+        del evolved_candidates[ind]
+        j += 1
 
 
 # used to see how population size and best player scores converge with number of generations
@@ -280,7 +309,7 @@ def exportGenometoCSV(filename, population, run_vars, test_pops=None, test_label
             [float(member[i.scores][i.coop]) / member[i.scores][i.games]] +                            \
             [member[i.scores][i.games]] +                                               \
             [member[i.pair]] +                                               \
-            [member[i.id]])
+            [member[i.type]])
 
         if test_pops is not None:
             k = 0
@@ -299,7 +328,7 @@ def exportGenometoCSV(filename, population, run_vars, test_pops=None, test_label
                         [float(member[i.scores][i.coop]) / member[i.scores][i.games]] +                            \
                         [member[i.scores][i.games]] +                                               \
                         [member[i.pair]] +                                               \
-                        [member[i.id]])
+                        [member[i.type]])
                 k += 1
 
         if best is not None:
@@ -316,7 +345,7 @@ def exportGenometoCSV(filename, population, run_vars, test_pops=None, test_label
                 [float(member[0][i.scores][i.coop]) / member[0][i.scores][i.games]] +                            \
                 [member[0][i.scores][i.games]] +                                               \
                 [member[0][i.pair]] +                                               \
-                [member[0][i.id]])
+                [member[0][i.type]])
 
 
         if counts is not None:

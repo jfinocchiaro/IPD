@@ -41,7 +41,9 @@ def main():
     #   4: number of games
     #   5: objective pair
     #   6: id
-    toolbox.register("individual", tools.initCycle, creator.Individual, (toolbox.genome,                           toolbox.attr_int,toolbox.attr_int,toolbox.attr_int,toolbox.attr_int,                         toolbox.attr_int,toolbox.attr_int), n=1)
+    toolbox.register("individual", tools.initCycle, creator.Individual, (toolbox.genome, toolbox.attr_int,
+                                                            toolbox.attr_int,toolbox.attr_int,toolbox.attr_int,
+                                                            toolbox.attr_int,toolbox.attr_int), n=1)
     
     toolbox.register("population", tools.initRepeat, list, toolbox.individual)
 

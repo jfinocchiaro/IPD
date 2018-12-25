@@ -18,6 +18,8 @@ def init_pop(pop, counts):
         for j in range(counts[k]):
             index = sum + j
             pop[index][i.type] = k
+            if std_types[k] != 'EVOLVED':
+                pop[index][i.pair] = -1
         sum += counts[k]
 
 
@@ -215,11 +217,15 @@ def playMultiRounds(player1, player2, rounds=150):
     player1[i.scores][i.match] = 0
     player2[i.scores][i.match] = 0
 
-    if player1[i.type] == 'GRADUAL':
+    if std_types[player1[i.type]] == 'GRADUAL':
         reset_gradual(player1)
+    elif std_types[player1[i.type]] == 'EVOLVED':
+        dpg.setHistBits(player1)
 
-    if player2[i.type] == 'GRADUAL':
+    if std_types[player2[i.type]] == 'GRADUAL':
         reset_gradual(player2)
+    elif std_types[player2[i.type]] == 'EVOLVED':
+        dpg.setHistBits(player2)
 
     for n in range(rounds):
         decision1 = get_decision(player1, decisionHist1, decisionHist2, n)

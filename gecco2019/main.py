@@ -2,7 +2,7 @@ import time
 # import numpy as np
 import random
 from copy import deepcopy
-from deap import tools, base, creator, algorithms
+from deap import tools, base, creator
 import itertools
 import os
 import pwd
@@ -13,6 +13,8 @@ import deapplaygame2 as dpg
 import axelrodplayers2 as ap
 import std_players as std
 from globals import index as i
+import ipd_types
+
 
 # change this to determine the evaluation metric for testing
 SELF = 0    # self score
@@ -58,9 +60,6 @@ if 'comet' in platform.node():
 
 def main():
 
-    creator.create("FitnessMulti", base.Fitness, weights=(1.0,1.0))
-    creator.create("Individual", list, fitness=creator.FitnessMulti)
-
     # global-ish variables won't be changed
     IND_SIZE = 70
     pop_sizes = [120]
@@ -74,54 +73,9 @@ def main():
     # change to 'AX' for training against Axelrod, or 'POP' to train within population
     TRAINING_GROUP = 'AX'
 
-    toolbox = base.Toolbox()
-    toolbox.register("attr_int", random.randint, 0, 0)
-    toolbox.register("bit", random.randint, 0, 1)
-    toolbox.register("genome", tools.initRepeat, list, toolbox.bit, IND_SIZE)
+    toolbox = ipd_types.make_types()
 
-    # history bits:
-    #   xyxyxy
-    #   each xy is: opp_decision self_decision
-    #   left pair is oldest, right is most recent
-    toolbox.register("history", tools.initRepeat, list, toolbox.bit, 6)
-
-    # fields in scores:
-    #   0: self score
-    #   1: opponent score
-    #   2: cooperation score
-    #   3: number of games
-    #   4: score this match (each match is some number of games)
-    toolbox.register("scores", tools.initRepeat, list, toolbox.attr_int, 5)
-
-    # fields in stats:
-    #   0: matches won
-    #   1: matches drawn
-    #   2: matches lost
-    toolbox.register("stats", tools.initRepeat, list, toolbox.attr_int, 3)
-
-    # fields for gradual players:
-    #   0: opponent last play
-    #   1: opponent defects
-    #   2: defect flag
-    #   3: self consecutive defects
-    #   4: coop flag
-    #   5: coop count
-    toolbox.register("gradual", tools.initRepeat, list, toolbox.attr_int, 6)
-
-    # fields in individual:
-    #   0: genome
-    #   1: history (last 3 moves -- history in genome is only for start of game)
-    #   2: scores
-    #   3: stats
-    #   4: objective pair
-    #   5: player type
-    #   6: id
-    #   7: gradual fields (for gradual players only)
-    toolbox.register("individual", tools.initCycle, creator.Individual, (toolbox.genome, toolbox.history,
-                                    toolbox.scores, toolbox.stats, toolbox.attr_int, toolbox.attr_int,
-                                    toolbox.attr_int, toolbox.gradual), n=1)
-
-    toolbox.register("population", tools.initRepeat, list, toolbox.individual)
+    toolbox.register("population", tools.initRepeat, list, toolbox.indv_multi)
 
     toolbox.register("evaluate", dpg.evaluate)
     toolbox.register("mate", dpg.cxOnePointGenome)
@@ -189,8 +143,8 @@ def main():
         if TRAINING_GROUP == 'POP':
             for pair in itertools.combinations(selfish_population + communal_population + cooperative_population +
                                                selfless_population, r=2):
-                dpg.setHistBits(pair[0])
-                dpg.setHistBits(pair[1])
+                # dpg.setHistBits(pair[0])
+                # dpg.setHistBits(pair[1])
                 dpg.playMultiRounds(*pair)
         elif TRAINING_GROUP == 'AX':
             # axelrodPop = ap.initAxpop()
@@ -198,7 +152,7 @@ def main():
             for population in [selfish_population, communal_population, cooperative_population, selfless_population]:
                 for member in population:
                     for opponent in axelrodPop:
-                        dpg.setHistBits(member)
+                        # dpg.setHistBits(member)
                         # ap.playAxelrodPop(member, opponent)
                         std.playMultiRounds(member, opponent)
         else:
