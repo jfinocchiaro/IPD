@@ -82,6 +82,7 @@ def main():
     # toolbox.register("mate", tools.cxUniform, indpb=0.2)
     toolbox.register("mutate", dpg.mutInternalFlipBit)
     toolbox.register("select", tools.selNSGA2)
+    # toolbox.register("select", tools.selSPEA2)
 
     best_players = defaultdict(list)
     filename = str((os.getpid() * time.time()) % 4919) + '.png'
@@ -432,14 +433,17 @@ def main():
         print("-- End of evolution --\n")
 
 
-
         # print outcome of evolution
         print ("%s total individuals in each population" % len(selfish_population))
         #all_ind = tools.selBest(population, (len(population)))
-        sorted_selfish = sorted(selfish_population, key=lambda member: (abs(member.fitness.values[0]) + abs(member.fitness.values[1])) / 2)
-        sorted_communal = sorted(communal_population, key=lambda member: (abs(member.fitness.values[0]) + abs(member.fitness.values[1])) / 2)
-        sorted_cooperative = sorted(cooperative_population, key=lambda member: (abs(member.fitness.values[0]) + abs(member.fitness.values[1])) / 2)
-        sorted_selfless = sorted(selfless_population, key=lambda member: (abs(member.fitness.values[0]) + abs(member.fitness.values[1])) / 2)
+        sorted_selfish = toolbox.select(selfless_population, POP_SIZE / 4)
+        sorted_selfish = toolbox.map(toolbox.clone, sorted_selfish)
+        sorted_communal = toolbox.select(selfless_population, POP_SIZE / 4)
+        sorted_communal = toolbox.map(toolbox.clone, sorted_communal)
+        sorted_cooperative = toolbox.select(selfless_population, POP_SIZE / 4)
+        sorted_cooperative = toolbox.map(toolbox.clone, sorted_cooperative)
+        sorted_selfless = toolbox.select(selfless_population, POP_SIZE / 4)
+        sorted_selfless = toolbox.map(toolbox.clone, sorted_selfless)
         all_ind = sorted_selfish + sorted_communal + sorted_cooperative + sorted_selfless
 
         for member in all_ind:
