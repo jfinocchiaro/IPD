@@ -7,6 +7,7 @@ import itertools
 import os
 import pwd
 import platform
+import csv
 from collections import defaultdict
 
 import deapplaygame2 as dpg
@@ -69,6 +70,8 @@ def main():
     NUM_EACH_TYPE = 1
     NUM_TYPES = 18
 
+    BEST_EACH = True
+
     # change this depending on the desired trial
     # change to 'AX' for training against Axelrod, or 'POP' to train within population
     TRAINING_GROUP = 'AX'
@@ -95,7 +98,7 @@ def main():
     for POP_SIZE in pop_sizes:
         run_info = [POP_SIZE, NGEN, TRAINING_GROUP]
 
-        rseed = os.getpid() * (time.time() % 4919)
+        rseed = int(os.getpid() * (time.time() % 4919))
         random.seed(rseed)
         print("\n\nRandom seed: {}\n".format(rseed))
 
@@ -436,15 +439,22 @@ def main():
         # print outcome of evolution
         print ("%s total individuals in each population" % len(selfish_population))
         #all_ind = tools.selBest(population, (len(population)))
-        sorted_selfish = toolbox.select(selfless_population, POP_SIZE / 4)
+        sorted_selfish = toolbox.select(selfish_population, POP_SIZE / 4)
         sorted_selfish = toolbox.map(toolbox.clone, sorted_selfish)
-        sorted_communal = toolbox.select(selfless_population, POP_SIZE / 4)
+        sorted_communal = toolbox.select(communal_population, POP_SIZE / 4)
         sorted_communal = toolbox.map(toolbox.clone, sorted_communal)
-        sorted_cooperative = toolbox.select(selfless_population, POP_SIZE / 4)
+        sorted_cooperative = toolbox.select(cooperative_population, POP_SIZE / 4)
         sorted_cooperative = toolbox.map(toolbox.clone, sorted_cooperative)
         sorted_selfless = toolbox.select(selfless_population, POP_SIZE / 4)
         sorted_selfless = toolbox.map(toolbox.clone, sorted_selfless)
         all_ind = sorted_selfish + sorted_communal + sorted_cooperative + sorted_selfless
+
+        if BEST_EACH:
+            best_each_pop = []
+            best_each_pop.extend(sorted_selfish[:5])
+            best_each_pop.extend(sorted_communal[:5])
+            best_each_pop.extend(sorted_cooperative[:5])
+            best_each_pop.extend(sorted_selfless[:5])
 
         for member in all_ind:
             print member
@@ -539,6 +549,7 @@ def main():
 
         # write to csv file
         global logpath
+        best_each_path = logpath
         if TRAINING_GROUP == 'POP':
             logpath += 'train_pop/'
         else:
@@ -548,6 +559,30 @@ def main():
         logpath += '.csv'
         dpg.exportGenometoCSV(logpath, all_ind, run_info, test_pops, test_labels, best_tested)
 
+        if BEST_EACH:
+            best_each_path += 'best_each/'
+            best_each_path += time.strftime("%Y%m%d-%H%M%S")
+            best_each_path += '-{}'.format(os.getpid())
+            best_each_path += '.csv'
+
+            with open(best_each_path, 'wb') as csvfile:
+                writer = csv.writer(csvfile, delimiter=',', quotechar='"',
+                                    quoting=csv.QUOTE_MINIMAL)
+
+                writer.writerow(["population: " + str(POP_SIZE)])
+                writer.writerow(["generations: " + str(NGEN)])
+                writer.writerow(["training: " + TRAINING_GROUP])
+                writer.writerow("")
+                for member in best_each_pop:
+                    writer.writerow([''] + \
+                                    member[i.genome] + \
+                                    [float(member[i.scores][i.self]) / member[i.scores][i.games]] + \
+                                    [float(member[i.scores][i.opp]) / member[i.scores][i.games]] + \
+                                    # [ min(6* float(member[3])/member[4], COOPERATION_MAX)] +    \
+                                    [float(member[i.scores][i.coop]) / member[i.scores][i.games]] + \
+                                    [member[i.scores][i.games]] + \
+                                    [member[i.pair]] + \
+                                    [member[i.type]])
 
     # dpg.plotbestplayers(best_players, training_group=TRAINING_GROUP, filename=filename)
 

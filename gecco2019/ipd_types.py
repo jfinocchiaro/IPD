@@ -6,7 +6,7 @@ import time
 
 
 def make_types():
-    rseed = os.getpid() * (time.time() % 4919)
+    rseed = int(os.getpid() * (time.time() % 7589))
     random.seed(rseed)
     print("\n\nRandom seed: {}\n".format(rseed))
 
