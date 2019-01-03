@@ -66,11 +66,13 @@ def main():
     POP_SIZE = NUM_EACH_TYPE * NUM_TYPES
     COMPETITION_ROUNDS = 20
 
+    TRAINING_GROUP = 'AX'
+
     filename = str((os.getpid() * time.time()) % 4919) + '.png'
 
     run_info = [NUM_EACH_TYPE, NUM_TYPES, 150]
 
-    rseed = os.getpid() * (time.time() % 4919)
+    rseed = int(os.getpid() * (time.time() % 4919))
     random.seed(rseed)
     print("\n\nRandom seed: {}\n".format(rseed))
 
@@ -89,7 +91,10 @@ def main():
     exit_order = []
     type_sum_score = []
 
-    csvfile = open('best-players-notrump.csv', 'r')
+    if TRAINING_GROUP == 'AX':
+        csvfile = open('best-players-ax.csv', 'r')
+    else:
+        csvfile = open('best-players-pop.csv', 'r')
     reader = csv.reader(csvfile)
 
     # read evolved players from csv and put in population
@@ -140,6 +145,35 @@ def main():
     for member in sorted_pop:
         print("{}\n".format(member))
 
+    logpath = ''
+    if TRAINING_GROUP == 'POP':
+        logpath += 'train_pop/'
+    else:
+        logpath += 'train_axelrod/'
+    logpath += 'rr-'
+    logpath += time.strftime("%Y%m%d-%H%M%S")
+    logpath += '-{}'.format(os.getpid())
+    logpath += '.csv'
+
+    with open(logpath, 'wb') as csvfile:
+        writer = csv.writer(csvfile, delimiter=',', quotechar='"',
+                            quoting=csv.QUOTE_MINIMAL)
+        writer.writerow(["training: " + TRAINING_GROUP])
+        writer.writerow(["population: " + str(POP_SIZE)])
+        writer.writerow(["number each pair: "])
+        writer.writerow(["  " + str(x) for x in evolved_obj_pairs])
+        writer.writerow("")
+
+        for member in sorted_pop:
+            writer.writerow([''] + \
+                            member[i.genome] + \
+                            [float(member[i.scores][i.self]) / member[i.scores][i.games]] + \
+                            [float(member[i.scores][i.opp]) / member[i.scores][i.games]] + \
+                            # [ min(6* float(member[3])/member[4], COOPERATION_MAX)] +    \
+                            [float(member[i.scores][i.coop]) / member[i.scores][i.games]] + \
+                            [member[i.scores][i.games]] + \
+                            [member[i.pair]] + \
+                            [member[i.type]])
 
 if __name__ == "__main__":
     main()

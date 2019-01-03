@@ -71,6 +71,7 @@ def main():
     NUM_TYPES = 18
 
     BEST_EACH = True
+    NUM_TO_SAVE = 5
 
     # change this depending on the desired trial
     # change to 'AX' for training against Axelrod, or 'POP' to train within population
@@ -449,13 +450,6 @@ def main():
         sorted_selfless = toolbox.map(toolbox.clone, sorted_selfless)
         all_ind = sorted_selfish + sorted_communal + sorted_cooperative + sorted_selfless
 
-        if BEST_EACH:
-            best_each_pop = []
-            best_each_pop.extend(sorted_selfish[:5])
-            best_each_pop.extend(sorted_communal[:5])
-            best_each_pop.extend(sorted_cooperative[:5])
-            best_each_pop.extend(sorted_selfless[:5])
-
         for member in all_ind:
             print member
 
@@ -517,6 +511,19 @@ def main():
         sorted_test_coop = sorted(test_pop, key=lambda member: member[i.scores][i.coop], reverse=True)
         # sorted_test_coop = None
 
+        if BEST_EACH:
+            best_each_pop = []
+            num_each = [0, 0, 0, 0]
+            done = False
+            j = 0
+            while not done:
+                if num_each[sorted_test_self[j][i.pair]] < NUM_TO_SAVE:
+                    best_each_pop.append(sorted_test_self[j])
+                    num_each[sorted_test_self[j][i.pair]] += 1
+                j += 1
+                done = num_each[0] == NUM_TO_SAVE and num_each[1] == NUM_TO_SAVE and \
+                       num_each[2] == NUM_TO_SAVE and num_each[3] == NUM_TO_SAVE
+
         # flags for which test objectives to log in csv file
         #     test_pops[0]: self score
         #     test_pops[1]: opppnent score
@@ -547,7 +554,7 @@ def main():
                 sorted_test_coop = sorted_test_coop[:m]
             test_pops[2] = sorted_test_coop
 
-        # write to csv file
+        # write best members for each objective pair to csv file
         global logpath
         best_each_path = logpath
         if TRAINING_GROUP == 'POP':
@@ -561,18 +568,15 @@ def main():
 
         if BEST_EACH:
             best_each_path += 'best_each/'
-            best_each_path += time.strftime("%Y%m%d-%H%M%S")
-            best_each_path += '-{}'.format(os.getpid())
+            best_each_path += 'current_run'
+            # best_each_path += time.strftime("%Y%m%d-%H%M%S")
+            # best_each_path += '-{}'.format(os.getpid())
             best_each_path += '.csv'
 
-            with open(best_each_path, 'wb') as csvfile:
+            with open(best_each_path, 'ab') as csvfile:
                 writer = csv.writer(csvfile, delimiter=',', quotechar='"',
                                     quoting=csv.QUOTE_MINIMAL)
 
-                writer.writerow(["population: " + str(POP_SIZE)])
-                writer.writerow(["generations: " + str(NGEN)])
-                writer.writerow(["training: " + TRAINING_GROUP])
-                writer.writerow("")
                 for member in best_each_pop:
                     writer.writerow([''] + \
                                     member[i.genome] + \
