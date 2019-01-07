@@ -210,6 +210,12 @@ def reset_scores(p):
     p[i.scores][i.match] = 0
 
 
+def reset_wdl(p):
+    p[i.stats][i.win] = 0
+    p[i.stats][i.draw] = 0
+    p[i.stats][i.loss] = 0
+
+
 def playMultiRounds(player1, player2, rounds=150):
     decisionHist1 = []
     decisionHist2 = []
@@ -259,6 +265,8 @@ def playMultiRounds(player1, player2, rounds=150):
         else:
             scorechange.mutualdefect2(player1)
             scorechange.mutualdefect2(player2)
+
+    dpg.calc_wdl(player1, player2)
 
     del decisionHist1
     del decisionHist2

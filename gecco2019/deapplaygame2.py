@@ -288,10 +288,72 @@ def plotbestplayers(trials_dict, training_group=None, filename = None):
     # plt.show()
 
 
+# build a population from a csv file
+def pop_from_csv(filename):
+    # the population to be returned
+    pop = []
+
+    csvfile = open(filename, 'r')
+    reader = csv.reader(csvfile)
+
+    # read players from csv and put in a list for processing
+    members = []
+    for row in reader:
+        members.append(row)
+
+    # identify the preamble lines in csv file and
+    # read the population size
+    j = 0
+    while len(members[j]) < 70:
+        if len(members[j]) > 0 and 'population' in members[j][0]:
+            pop_size = int(members[0][0][12:])
+        j += 1
+
+    # delete the preamble lines and the lines after the last player
+    # from the list
+    del members[:j]
+    del members[pop_size:]
+
+    # process the members in the list
+    for m in members:
+        genome = [0] * 70
+        scores = [0] * 5
+        stats = [0] * 3
+        gradual = [0] * 6
+
+        pos = 1
+        for k in range(len(genome)):
+            genome[k] = int(m[pos + k])
+        history = deepcopy(genome[64:])
+
+        pos += len(genome)
+        for k in range(len(scores)):
+            scores[k] = int(m[pos + k])
+
+        pos += len(scores)
+        for k in range(len(stats)):
+            stats[k] = int(m[pos + k])
+
+        pos += len(stats)
+        pair = int(m[pos])
+
+        pos += 1
+        p_type = int(m[pos])
+
+        pos += 1
+        id = int(m[pos])
+
+        indv = [genome, history, scores, stats, pair, p_type, id, gradual]
+        pop.append(deepcopy(indv))
+        del indv
+
+    return pop
+
+
 # write data to a CSV
 # added test_pop as a parameter so that we can write data from the
 # testing phase to the same csv, if there was a testing phase.
-def exportGenometoCSV(filename, population, run_vars, test_pops=None, test_labels=None, best=None, counts=None):
+def exportPoptoCSV(filename, population, run_vars, test_pops=None, test_labels=None, best=None, counts=None):
     with open(filename, 'wb') as csvfile:
         writer = csv.writer(csvfile, delimiter=',', quotechar='"',
                             quoting=csv.QUOTE_MINIMAL)
@@ -299,17 +361,19 @@ def exportGenometoCSV(filename, population, run_vars, test_pops=None, test_label
         writer.writerow(["population: " + str(run_vars[0])])
         writer.writerow(["generations: " + str(run_vars[1])])
         writer.writerow(["training: " + run_vars[2]])
+        writer.writerow(["testing: " + run_vars[3]])
         writer.writerow("")
         for member in population:
             writer.writerow([''] +                                       \
-            member[i.genome]+                                                  \
-            [float(member[i.scores][i.self])/member[i.scores][i.games]] +                              \
-            [float(member[i.scores][i.opp])/member[i.scores][i.games]] +                              \
-            # [ min(6* float(member[3])/member[4], COOPERATION_MAX)] +    \
-            [float(member[i.scores][i.coop]) / member[i.scores][i.games]] +                            \
-            [member[i.scores][i.games]] +                                               \
-            [member[i.pair]] +                                               \
-            [member[i.type]])
+            member[i.genome] +                                           \
+            # [float(member[i.scores][i.self])/member[i.scores][i.games]] +                              \
+            # [float(member[i.scores][i.opp])/member[i.scores][i.games]] +                              \
+            # [float(member[i.scores][i.coop]) / member[i.scores][i.games]] +                            \
+            member[i.scores] +                                           \
+            member[i.stats] +                                            \
+            [member[i.pair]] +                                           \
+            [member[i.type]] +                                           \
+            [member[i.id]])
 
         if test_pops is not None:
             k = 0
@@ -354,3 +418,28 @@ def exportGenometoCSV(filename, population, run_vars, test_pops=None, test_label
             writer.writerow(["Objective Pair Counts for each Testing Phase:"])
             for e in counts:
                 writer.writerow([''] + e)
+
+
+# write data to a CSV
+# This is for the writing the collection of best members throughout the run
+# to a separate CSV to ease importing for later testing
+def exportBesttoCSV(filename, population, run_vars, num_members, test_pops=None, test_labels=None, best=None, counts=None):
+    with open(filename, 'wb') as csvfile:
+        writer = csv.writer(csvfile, delimiter=',', quotechar='"',
+                            quoting=csv.QUOTE_MINIMAL)
+
+        writer.writerow(["population: " + str(num_members)])
+        writer.writerow(["generations: " + str(run_vars[1])])
+        writer.writerow(["training: " + run_vars[2]])
+        writer.writerow(["testing: " + run_vars[3]])
+        writer.writerow("")
+        for member in population:
+            # member in this context is a list consisting of [individual, generation]
+            writer.writerow([''] + \
+            member[0][i.genome] + \
+            member[0][i.scores] + \
+            member[0][i.stats] + \
+            [member[0][i.pair]] + \
+            [member[0][i.type]] + \
+            [member[0][i.id]] + \
+            [member[1]])

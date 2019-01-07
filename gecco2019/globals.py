@@ -37,3 +37,8 @@ class index:
     c_flag = 4          # flag set when player is cooperating
     c_cnt = 5           # self coop count
 
+    # ids for objective pairs
+    selfish = 0
+    communal = 1
+    cooperative = 2
+    selfless = 3

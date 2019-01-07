@@ -64,14 +64,23 @@ def main():
     # global-ish variables won't be changed
     IND_SIZE = 70
     pop_sizes = [120]
-    NGEN = 100
+    NGEN = 2000
     CXPB = 0.9
 
+    # number of player types (including Axelrod and Gradual) and the
+    # number of each type to include in the test population
     NUM_EACH_TYPE = 1
     NUM_TYPES = 18
 
-    BEST_EACH = True
+    # set to indicate if capturing the best members, based on testing at end of run,
+    #  for each objective pair
+    BEST_EACH_POST = True
     NUM_TO_SAVE = 5
+
+    # set to indicate if capturing the best members, based on testing at end of run,
+    #  for each objective pair
+    BEST_EACH_DURING = True
+    NUM_BEST_DURING = 20
 
     # change this depending on the desired trial
     # change to 'AX' for training against Axelrod, or 'POP' to train within population
@@ -95,9 +104,12 @@ def main():
     # Each element is a list containing a member and the generation of the test
     num_best = 20
     best_tested = []
-    
+
+    # lists for best tested players for each objective pair
+    best_tested_by_pair = [[], [], [], []]
+
     for POP_SIZE in pop_sizes:
-        run_info = [POP_SIZE, NGEN, TRAINING_GROUP]
+        run_info = [POP_SIZE, NGEN, TRAINING_GROUP, TESTING_METRIC]
 
         rseed = int(os.getpid() * (time.time() % 4919))
         random.seed(rseed)
@@ -413,6 +425,16 @@ def main():
                 # sorted_test_self = sorted(test_pop, key=lambda member: member[1], reverse=True)
                 sorted_test_self = sorted(test_pop, key=sort_key, reverse=True)
 
+                if BEST_EACH_DURING:
+                    sorted_by_pair = sorted(test_pop, key=lambda m: m[i.pair])
+
+                    for e in sorted_by_pair:
+                        best_tested_by_pair[e[i.pair]].append([deepcopy(e), g])
+
+                    for j in range(len(best_tested_by_pair)):
+                        best_tested_by_pair[j] = sorted(best_tested_by_pair[j], key=sort_key_best, reverse=True)
+                        del best_tested_by_pair[j][NUM_BEST_DURING:]
+
                 current_best_score_test = sorted_test_self[0][i.scores][i.self] / float(sorted_test_self[0][i.scores][i.games])
                 sorted_test_self = sorted_test_self[:num_best]
                 for e in sorted_test_self:
@@ -427,7 +449,6 @@ def main():
                 # best_tested = sorted(best_tested, key=lambda member: member[0][1], reverse=True)
                 best_tested = sorted(best_tested, key=sort_key_best, reverse=True)
 
-                # best_tested = best_tested[:num_best]
                 del best_tested[num_best:]
                 # best_players['Test'].append(current_best_score_test)
 
@@ -511,7 +532,9 @@ def main():
         sorted_test_coop = sorted(test_pop, key=lambda member: member[i.scores][i.coop], reverse=True)
         # sorted_test_coop = None
 
-        if BEST_EACH:
+        # if capturing the best members for each objective pair (after evolution),
+        # grab an equal number for each pair from the sorted test population
+        if BEST_EACH_POST:
             best_each_pop = []
             num_each = [0, 0, 0, 0]
             done = False
@@ -563,13 +586,22 @@ def main():
             logpath += 'train_axelrod/'
         logpath += time.strftime("%Y%m%d-%H%M%S")
         logpath += '-{}'.format(os.getpid())
+        logpath_best = logpath
         logpath += '.csv'
-        dpg.exportGenometoCSV(logpath, all_ind, run_info, test_pops, test_labels, best_tested)
+        logpath_best += '-best.csv' \
+                        ''
+        dpg.exportPoptoCSV(logpath, all_ind, run_info, test_pops, test_labels, best_tested)
 
-        if BEST_EACH:
+        if BEST_EACH_DURING:
+            best_by_pair = best_tested_by_pair[0] + best_tested_by_pair[1] + best_tested_by_pair[2] + best_tested_by_pair[3]
+            dpg.exportBesttoCSV(logpath_best, best_by_pair, run_info, NUM_BEST_DURING * 4)
+
+        # if capturing the best members -- from end of run -- for each objective pair,
+        # write the members (captured above) to a csv file
+        if BEST_EACH_POST:
             best_each_path += 'best_each/'
-            best_each_path += 'current_run'
-            # best_each_path += time.strftime("%Y%m%d-%H%M%S")
+            # best_each_path += 'current_run'
+            best_each_path += time.strftime("%Y%m%d")
             # best_each_path += '-{}'.format(os.getpid())
             best_each_path += '.csv'
 

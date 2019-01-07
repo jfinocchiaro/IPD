@@ -7,18 +7,14 @@
 #
 
 import time
-import numpy as np
 import random
 import csv
 from copy import deepcopy
 from deap import tools, base, creator, algorithms
-import deapplaygame2 as dpg
-import itertools
 import os
 import std_players
 from globals import index as i
 import ipd_types
-from collections import defaultdict
 
 # change this to determine the evaluation metric for testing
 SELF = 0    # self score
@@ -27,7 +23,8 @@ WDL = 2     # 3 pts for win, 1 pt for draw, 0 pts for loss
 DRAWS = 3   # number of draws
 COOP = 4    # mutual cooperation score
 MUT = 5     # mutual benefit -- minimize difference between self and opp scores
-TESTING_METRIC = MUT
+MATCH = 6   # match score
+TESTING_METRIC = MATCH
 
 # used in calls to sorted to get the sort key (rather than use a lambda function)
 def sort_key(member):
@@ -43,6 +40,8 @@ def sort_key(member):
         return member[i.scores][i.coop]
     elif TESTING_METRIC == MUT:
         return -1 * abs(member[i.scores][i.self] - member[i.scores][i.opp])
+    elif TESTING_METRIC == MATCH:
+        return member[i.scores][i.match]
 
 # used in calls to sorted to get the sort key (rather than use a lambda function)
 # In this version, the member is a list containing a member of the
@@ -62,6 +61,8 @@ def sort_key_best(member):
         return member[i.scores][i.coop]
     elif TESTING_METRIC == MUT:
         return -1 * abs(member[i.scores][i.self] - member[i.scores][i.opp])
+    elif TESTING_METRIC == MATCH:
+        return member[i.scores][i.match]
 
 def main():
 
@@ -71,9 +72,10 @@ def main():
 
     # global-ish variables won't be changed
     # IND_SIZE = 70
-    NUM_EACH_TYPE = 10
+    NUM_EACH_TYPE = 1
+    NUM_EACH_EVOLVED = 2
     NUM_TYPES = 18
-    POP_SIZE = NUM_EACH_TYPE * NUM_TYPES
+    POP_SIZE = NUM_EACH_TYPE * (NUM_TYPES - 1)
     COMPETITION_ROUNDS = 20
 
     TRAINING_GROUP = 'POP'
@@ -96,6 +98,9 @@ def main():
     type_counts = [NUM_EACH_TYPE] * NUM_TYPES
     std_players.init_pop(population, type_counts)
 
+    # need 16 standard players so deleting DEFECT
+    del population[1]
+
     # keep track of the order in which strategies exit the competition
     # and the score for each strategy type
     exit_order = []
@@ -113,27 +118,97 @@ def main():
         evolved_candidates.append(row)
 
     evolved_obj_pairs = [0] * 4
-    j = 0
-    while j < NUM_EACH_TYPE:
+    done = False
+
+    history = [0] * 6
+    scores = [0] * 5
+    stats = [0] * 3
+    gradual = [0] * 6
+    id = 0
+
+    logpath = ''
+    if TRAINING_GROUP == 'POP':
+        logpath += 'train_pop/'
+    else:
+        logpath += 'train_axelrod/'
+    logpath += 'bracket-'
+    logpath += time.strftime("%Y%m%d-%H%M%S")
+    logpath += '-{}'.format(os.getpid())
+    logpath += '.log'
+
+    fname = open(logpath, 'w')
+    fname.write("\ntraining: {}\n".format(TRAINING_GROUP))
+    fname.write("num of each standard type: {}\n".format(NUM_EACH_TYPE))
+    fname.write("num of each evolved type: {}\n".format(NUM_EACH_EVOLVED))
+
+    while not done:
         ind = random.randint(0, len(evolved_candidates) - 1)
-        genome = []
-        for k in range(70):
-            genome.append(int(evolved_candidates[ind][k+1]))
+        pair = int(evolved_candidates[ind][75])
+        type = int(evolved_candidates[ind][76])
+        if evolved_obj_pairs[pair] < NUM_EACH_EVOLVED:
+            genome = []
+            for k in range(70):
+                genome.append(int(evolved_candidates[ind][k + 1]))
 
-        index = (NUM_TYPES - 1) * NUM_EACH_TYPE + j
-        population[index][i.genome] = deepcopy(genome)
-        population[index][i.type] = NUM_TYPES - 1
-        population[index][i.pair] = int(evolved_candidates[ind][75])
-        evolved_obj_pairs[int(evolved_candidates[ind][75])] += 1
+            population.append([genome, history, scores, stats, pair, type, id, gradual])
+            evolved_obj_pairs[pair] += 1
+
         del evolved_candidates[ind]
-        j += 1
+        done = evolved_obj_pairs[0] == NUM_EACH_EVOLVED and evolved_obj_pairs[1] == NUM_EACH_EVOLVED and \
+               evolved_obj_pairs[2] == NUM_EACH_EVOLVED and evolved_obj_pairs[3] == NUM_EACH_EVOLVED
 
-    # play round robin
-    for pair in itertools.combinations(population, r=2):
-       std_players.playMultiRounds(*pair)
+    random.shuffle(population)
+    winners = deepcopy(population[:8])
+    del population[:8]
 
-    sorted_pop = sorted(population, key=sort_key, reverse=True)
+    k = 1
+    while len(population) > 1:
+        print('\nRound {}'.format(k))
+        fname.write('\nRound {}\n'.format(k))
+        print('Number of players: {}\n'.format(len(population)))
+        fname.write('Number of players: {}\n'.format(len(population)))
+        while len(population) > 0:
+            j = 0
+            p1 = deepcopy(population[j])
+            p2 = deepcopy(population[j+1])
+            # std_players.reset_scores(p1)
+            # std_players.reset_scores(p2)
+            del population[:2]
 
+            std_players.playMultiRounds(p1, p2)
+
+            score1 = sort_key(p1)
+            score2 = sort_key(p2)
+            if score1 > score2:
+                winners.append(p1)
+                lose = p2
+            elif score2 > score1:
+                winners.append(p2)
+                lose = p1
+            else:
+                if random.randint(0, 1):
+                    winners.append(p1)
+                    lose = p2
+                else:
+                    winners.append(p2)
+                    lose = p1
+
+            print("Player 1: {} {} {} vs Player 2: {} {} {}".format(p1[i.pair], p1[i.type], score1,
+                                                            p2[i.pair], p2[i.type], score2))
+            fname.write("Player 1: {} {} {} vs Player 2: {} {} {}\n".format(p1[i.pair], p1[i.type], score1,
+                                                            p2[i.pair], p2[i.type], score2))
+            print("    Player {} {} eliminated".format(lose[i.pair], lose[i.type]))
+            fname.write("    Player {} {} eliminated\n".format(lose[i.pair], lose[i.type]))
+
+        population = deepcopy(winners)
+        random.shuffle(population)
+        del winners
+        winners = []
+        k += 1
+
+    print('')
+    print("Winner: Player {} {}\n".format(population[0][i.pair], population[0][i.type]))
+    fname.write("\nWinner: Player {} {}\n\n".format(population[0][i.pair], population[0][i.type]))
 
     # timestr = 'logs/'
     # timestr += time.strftime("%Y%m%d-%H%M%S")
@@ -145,45 +220,8 @@ def main():
     # deapplaygame.plotbestplayers(best_players, training_group=TRAINING_GROUP, filename=filename)
 
     csvfile.close()
+    fname.close()
 
-    # for m in population:
-    #     print m
-
-    print("\n\nEnd of run:\n")
-
-    print("Evolved member pairs: {}\n".format(evolved_obj_pairs))
-    for member in sorted_pop:
-        print("{}\n".format(member))
-
-    logpath = ''
-    if TRAINING_GROUP == 'POP':
-        logpath += 'train_pop/'
-    else:
-        logpath += 'train_axelrod/'
-    logpath += 'rr-'
-    logpath += time.strftime("%Y%m%d-%H%M%S")
-    logpath += '-{}'.format(os.getpid())
-    logpath += '.csv'
-
-    with open(logpath, 'wb') as csvfile:
-        writer = csv.writer(csvfile, delimiter=',', quotechar='"',
-                            quoting=csv.QUOTE_MINIMAL)
-        writer.writerow(["training: " + TRAINING_GROUP])
-        writer.writerow(["population: " + str(POP_SIZE)])
-        writer.writerow(["number each pair: "])
-        writer.writerow(["  " + str(x) for x in evolved_obj_pairs])
-        writer.writerow("")
-
-        for member in sorted_pop:
-            writer.writerow([''] + \
-                            member[i.genome] + \
-                            [float(member[i.scores][i.self]) / member[i.scores][i.games]] + \
-                            [float(member[i.scores][i.opp]) / member[i.scores][i.games]] + \
-                            # [ min(6* float(member[3])/member[4], COOPERATION_MAX)] +    \
-                            [float(member[i.scores][i.coop]) / member[i.scores][i.games]] + \
-                            [member[i.scores][i.games]] + \
-                            [member[i.pair]] + \
-                            [member[i.type]])
 
 if __name__ == "__main__":
     main()
