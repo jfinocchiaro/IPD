@@ -361,7 +361,7 @@ def exportPoptoCSV(filename, population, run_vars, test_pops=None, test_labels=N
         writer.writerow(["population: " + str(run_vars[0])])
         writer.writerow(["generations: " + str(run_vars[1])])
         writer.writerow(["training: " + run_vars[2]])
-        writer.writerow(["testing: " + run_vars[3]])
+        writer.writerow(["testing: " + str(run_vars[3])])
         writer.writerow("")
         for member in population:
             writer.writerow([''] +                                       \
@@ -423,7 +423,7 @@ def exportPoptoCSV(filename, population, run_vars, test_pops=None, test_labels=N
 # write data to a CSV
 # This is for the writing the collection of best members throughout the run
 # to a separate CSV to ease importing for later testing
-def exportBesttoCSV(filename, population, run_vars, num_members, test_pops=None, test_labels=None, best=None, counts=None):
+def exportBesttoCSV(filename, population, run_vars, num_members):
     with open(filename, 'wb') as csvfile:
         writer = csv.writer(csvfile, delimiter=',', quotechar='"',
                             quoting=csv.QUOTE_MINIMAL)
@@ -431,7 +431,7 @@ def exportBesttoCSV(filename, population, run_vars, num_members, test_pops=None,
         writer.writerow(["population: " + str(num_members)])
         writer.writerow(["generations: " + str(run_vars[1])])
         writer.writerow(["training: " + run_vars[2]])
-        writer.writerow(["testing: " + run_vars[3]])
+        writer.writerow(["testing: " + str(run_vars[3])])
         writer.writerow("")
         for member in population:
             # member in this context is a list consisting of [individual, generation]

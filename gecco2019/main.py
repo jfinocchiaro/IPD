@@ -75,7 +75,7 @@ def main():
     # set to indicate if capturing the best members, based on testing at end of run,
     #  for each objective pair
     BEST_EACH_POST = True
-    NUM_TO_SAVE = 5
+    NUM_TO_SAVE = 10
 
     # set to indicate if capturing the best members, based on testing at end of run,
     #  for each objective pair
