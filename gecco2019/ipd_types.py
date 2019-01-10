@@ -8,12 +8,18 @@ import time
 def make_types():
     rseed = int(os.getpid() * (time.time() % 7589))
     random.seed(rseed)
-    print("\n\nRandom seed: {}\n".format(rseed))
+    # print("\n\nRandom seed: {}\n".format(rseed))
 
-    creator.create("FitnessSingle", base.Fitness, weights=(1.0,))
-    creator.create("FitnessMulti", base.Fitness, weights=(1.0, 1.0))
-    creator.create("Indv_multi", list, fitness=creator.FitnessMulti)
-    creator.create("Indv_single", list, fitness=creator.FitnessSingle)
+    # when running from multi_rr, this try avoids redeclaration errors
+    # the check for in dir() doesn't do anything - accessing creator.FitnessSingle
+    # if it doesn't exist gives and AttributeError which we are catching
+    try:
+        creator.FitnessSingle in dir()
+    except AttributeError:
+        creator.create("FitnessSingle", base.Fitness, weights=(1.0,))
+        creator.create("FitnessMulti", base.Fitness, weights=(1.0, 1.0))
+        creator.create("Indv_multi", list, fitness=creator.FitnessMulti)
+        creator.create("Indv_single", list, fitness=creator.FitnessSingle)
 
     # global-ish variables won't be changed
     IND_SIZE = 70

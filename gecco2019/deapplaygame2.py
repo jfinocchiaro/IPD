@@ -6,6 +6,7 @@ import random
 
 import scorechange
 from globals import index as i
+from globals import keys
 
 # 0 = Cooperate
 # 1 = Defect
@@ -48,6 +49,46 @@ def evaluate_three_obj(member):
     score3 = min(float(member[i.scores][i.coop]) / member[i.scores][i.games] * 6, COOPERATION_MAX)
 
     return score1, score2, score3
+
+
+# used in calls to sorted to get the sort key (rather than use a lambda function)
+def sort_key(member, metric):
+    if metric == keys.SELF:
+        return member[i.scores][i.self]
+    elif metric == keys.WINS:
+        return member[i.stats][i.win]
+    elif metric == keys.WDL:
+        return 3 * member[i.stats][i.win] + member[i.stats][i.draw]
+    elif metric == keys.DRAWS:
+        return member[i.stats][i.draw]
+    elif metric == keys.COOP:
+        return member[i.scores][i.coop]
+    elif metric == keys.MUT:
+        return -1 * abs(member[i.scores][i.self] - member[i.scores][i.opp])
+    elif metric == keys.MATCH:
+        return member[i.scores][i.match]
+
+
+# used in calls to sorted to get the sort key (rather than use a lambda function)
+# In this version, the member is a list containing a member of the
+# population and the generation in which the member was added to
+# the best_tested list.  That's the reason for the additional [0]
+# index at the front of the accessors
+def sort_key_best(member, metric):
+    if metric == keys.SELF:
+        return member[0][i.scores][i.self]
+    elif metric == keys.WINS:
+        return member[0][i.stats][i.win]
+    elif metric == keys.WDL:
+        return 3 * member[0][i.stats][i.win] + member[0][i.stats][i.draw]
+    elif metric == keys.DRAWS:
+        return member[0][i.stats][i.draw]
+    elif metric == keys.COOP:
+        return member[i.scores][i.coop]
+    elif metric == keys.MUT:
+        return -1 * abs(member[i.scores][i.self] - member[i.scores][i.opp])
+    elif metric == keys.MATCH:
+        return member[i.scores][i.match]
 
 
 # initialize each player with one of four objectives uniformly.
@@ -312,7 +353,7 @@ def pop_from_csv(filename):
     # delete the preamble lines and the lines after the last player
     # from the list
     del members[:j]
-    del members[pop_size:]
+    # del members[pop_size:]
 
     # process the members in the list
     for m in members:

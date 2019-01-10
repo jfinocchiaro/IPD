@@ -42,3 +42,17 @@ class index:
     communal = 1
     cooperative = 2
     selfless = 3
+
+
+class keys:
+    def __init__(self):
+        pass
+
+    # values used in sort_key()
+    SELF = 0  # self score
+    WINS = 1  # number of wins
+    WDL = 2  # 3 pts for win, 1 pt for draw, 0 pts for loss
+    DRAWS = 3  # number of draws
+    COOP = 4  # mutual cooperation score
+    MUT = 5  # mutual benefit -- minimize difference between self and opp scores
+    MATCH = 6  # score of most recent match

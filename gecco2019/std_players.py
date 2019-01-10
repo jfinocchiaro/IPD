@@ -9,12 +9,12 @@ from globals import index as i
 # Define standard player types (used in benchmark type)
 std_types = {0: 'COOP', 1: 'DEFECT', 2: 'TFT', 3: 'STFT', 4: 'PAVLOV', 5: 'SPITE', 6: 'RANDOM',
              7: 'CD', 8: 'DDC', 9: 'CCD', 10: 'TF2T', 11: 'SOFTMAJ', 12: 'HARDMAJ', 13: 'HARDTFT',
-             14: 'NAIVE', 15: 'REMORSE', 16: 'GRADUAL', 17: 'EVOLVED'}
+             14: 'NAIVE', 15: 'REMORSE', 16: 'GRADUAL', 17: 'EVOLVED', 18: 'EVOLVED', 19: 'EVOLVED', 20: 'EVOLVED'}
 
 
 def init_pop(pop, counts):
     sum = 0
-    for k in range(len(counts) - 1):
+    for k in range(len(std_types) - 4):
         for j in range(counts[k]):
             index = sum + j
             pop[index][i.type] = k
