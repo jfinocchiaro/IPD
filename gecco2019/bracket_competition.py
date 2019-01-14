@@ -31,6 +31,8 @@ import ipd_types
 # MATCH = 6   # score of most recent match
 TESTING_METRIC = keys.MATCH
 
+main_run = False
+
 
 def run_bracket(t_group=None, num_each=None, num_evolved=None):
 
@@ -43,12 +45,12 @@ def run_bracket(t_group=None, num_each=None, num_evolved=None):
     if num_each is not None:
         NUM_EACH_TYPE = num_each
     else:
-        NUM_EACH_TYPE = 4
+        NUM_EACH_TYPE = 1
 
     if num_evolved is not None:
         NUM_EACH_EVOLVED = num_evolved
     else:
-        NUM_EACH_EVOLVED = 4
+        NUM_EACH_EVOLVED = 1
 
     NUM_TYPES = 21
     POP_SIZE = NUM_EACH_TYPE * (NUM_TYPES - 4)
@@ -165,13 +167,24 @@ def run_bracket(t_group=None, num_each=None, num_evolved=None):
     # del population[:8]
     winners = []
 
-    k = 1
+    # list to be returned for writing to csv file
+    bracket = []
+
+    rnd = 1
     while len(population) > 1:
-        print('\nRound {}'.format(k))
-        fname.write('\nRound {}\n'.format(k))
-        print('Number of players: {}\n'.format(len(population)))
+        if main_run:
+            print('\nRound {}'.format(rnd))
+            print('Number of players: {}\n'.format(len(population)))
+        fname.write('\nRound {}\n'.format(rnd))
         fname.write('Number of players: {}\n'.format(len(population)))
+        first = True
         while len(population) > 0:
+            line = []
+            if first:
+                line.append(rnd)
+                first = False
+            else:
+                line.append(None)
             j = 0
             p1 = deepcopy(population[j])
             p2 = deepcopy(population[j+1])
@@ -197,22 +210,30 @@ def run_bracket(t_group=None, num_each=None, num_evolved=None):
                     winners.append(p2)
                     lose = p1
 
-            print("Player 1: {} {} {} vs Player 2: {} {} {}".format(p1[i.pair], p1[i.type], score1,
-                                                            p2[i.pair], p2[i.type], score2))
+            if main_run:
+                print("Player 1: {} {} {} vs Player 2: {} {} {}".format(p1[i.pair], p1[i.type], score1,
+                                                                p2[i.pair], p2[i.type], score2))
+                print("    Player {} {} eliminated".format(lose[i.pair], lose[i.type]))
             fname.write("Player 1: {} {} {} vs Player 2: {} {} {}\n".format(p1[i.pair], p1[i.type], score1,
                                                             p2[i.pair], p2[i.type], score2))
-            print("    Player {} {} eliminated".format(lose[i.pair], lose[i.type]))
             fname.write("    Player {} {} eliminated\n".format(lose[i.pair], lose[i.type]))
 
+            line.extend([p1[i.type], p1[i.pair], score1, p2[i.type], p2[i.pair], score2])
+            bracket.append(line)
+
+        bracket.append([])
         population = deepcopy(winners)
         random.shuffle(population)
         del winners
         winners = []
-        k += 1
+        rnd += 1
 
-    print('')
-    print("Winner: Player {} {}\n".format(population[0][i.pair], population[0][i.type]))
+    if main_run:
+        print('')
+        print("Winner: Player {} {}\n".format(population[0][i.pair], population[0][i.type]))
     fname.write("\nWinner: Player {} {}\n\n".format(population[0][i.pair], population[0][i.type]))
+    bracket.append([None, population[0][i.type], population[0][i.pair]])
+    bracket.append([])
 
     # timestr = 'logs/'
     # timestr += time.strftime("%Y%m%d-%H%M%S")
@@ -226,6 +247,8 @@ def run_bracket(t_group=None, num_each=None, num_evolved=None):
     csvfile.close()
     fname.close()
 
+    return bracket
 
 if __name__ == "__main__":
+    main_run = True
     run_bracket()

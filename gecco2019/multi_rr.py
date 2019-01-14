@@ -27,7 +27,7 @@ def multi_rr():
 
     num_each_std = 20
     num_each_evolved = 20
-    training_group = 'POP'
+    training_group = 'AX'
 
     NUM_COMPETITIONS = 100
 

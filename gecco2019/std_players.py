@@ -270,3 +270,48 @@ def playMultiRounds(player1, player2, rounds=150):
 
     del decisionHist1
     del decisionHist2
+
+
+# the second player is a Trump -- no need to pass as
+# a parameter or to track scores.
+def playMultiRoundsTrump(player1, rounds=150):
+    decisionHist1 = []
+    decisionHist2 = []
+
+    player1[i.scores][i.match] = 0
+
+    if std_types[player1[i.type]] == 'GRADUAL':
+        reset_gradual(player1)
+    elif std_types[player1[i.type]] == 'EVOLVED':
+        dpg.setHistBits(player1)
+
+    for n in range(rounds):
+        decision1 = get_decision(player1, decisionHist1, decisionHist2, n)
+        decision2 = 1
+
+        decisionHist1.append(decision1)
+        decisionHist2.append(decision2)
+
+        if std_types[player1[i.type]] == 'EVOLVED':
+            dpg.shift_decisions(player1[i.hist], decision2, decision1)
+
+        # mutual cooperation
+        if decision1 == 0 and decision2 == 0:
+            scorechange.mutualcooperation2(player1)
+
+        # player 1 is screwed
+        elif decision1 == 0 and decision2 == 1:
+            scorechange.screwed2(player1)
+
+        # player 2 is screwed
+        elif decision1 == 1 and decision2 == 0:
+            scorechange.tempt2(player1)
+
+        # both players defect
+        else:
+            scorechange.mutualdefect2(player1)
+
+    # dpg.calc_wdl(player1, player2)
+
+    del decisionHist1
+    del decisionHist2

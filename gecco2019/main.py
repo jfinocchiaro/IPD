@@ -63,14 +63,17 @@ def main():
 
     # global-ish variables won't be changed
     IND_SIZE = 70
-    pop_sizes = [120]
-    NGEN = 2000
+    pop_sizes = [40]
+    NGEN = 100
     CXPB = 0.9
 
     # number of player types (including Axelrod and Gradual) and the
     # number of each type to include in the test population
     NUM_EACH_TYPE = 1
     NUM_TYPES = 18
+
+    # number of players who always defect (used during training)
+    NUM_TRUMP = 10
 
     # set to indicate if capturing the best members, based on testing at end of run,
     #  for each objective pair
@@ -84,7 +87,7 @@ def main():
 
     # change this depending on the desired trial
     # change to 'AX' for training against Axelrod, or 'POP' to train within population
-    TRAINING_GROUP = 'AX'
+    TRAINING_GROUP = 'POP'
 
     toolbox = ipd_types.make_types()
 
@@ -175,6 +178,13 @@ def main():
         else:
             print 'Invalid training group- please fix.'
             quit()
+
+        # play against Trumps
+        if NUM_TRUMP > 0:
+            for population in [selfish_population, communal_population, cooperative_population, selfless_population]:
+                for member in population:
+                    for x in range(NUM_TRUMP):
+                        std.playMultiRoundsTrump(member)
 
         # Evaluate each population
         for population in [selfish_population, communal_population, cooperative_population, selfless_population]:
@@ -342,6 +352,13 @@ def main():
                 print 'Invalid training group- please fix.'
                 quit()
 
+            # play against Trumps
+            if NUM_TRUMP > 0:
+                for population in [selfish_population, communal_population, cooperative_population,
+                                   selfless_population]:
+                    for member in population:
+                        for x in range(NUM_TRUMP):
+                            std.playMultiRoundsTrump(member)
 
             # SELFISH
             # evaluate how well players did
