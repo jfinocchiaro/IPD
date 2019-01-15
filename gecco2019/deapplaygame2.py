@@ -403,6 +403,7 @@ def exportPoptoCSV(filename, population, run_vars, test_pops=None, test_labels=N
         writer.writerow(["generations: " + str(run_vars[1])])
         writer.writerow(["training: " + run_vars[2]])
         writer.writerow(["testing: " + str(run_vars[3])])
+        writer.writerow(["trumps: " + str(run_vars[4])])
         writer.writerow("")
         for member in population:
             writer.writerow([''] +                                       \
@@ -473,6 +474,7 @@ def exportBesttoCSV(filename, population, run_vars, num_members):
         writer.writerow(["generations: " + str(run_vars[1])])
         writer.writerow(["training: " + run_vars[2]])
         writer.writerow(["testing: " + str(run_vars[3])])
+        writer.writerow(["trumps: " + str(run_vars[4])])
         writer.writerow("")
         for member in population:
             # member in this context is a list consisting of [individual, generation]

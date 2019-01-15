@@ -63,8 +63,8 @@ def main():
 
     # global-ish variables won't be changed
     IND_SIZE = 70
-    pop_sizes = [40]
-    NGEN = 100
+    pop_sizes = [120]
+    NGEN = 2000
     CXPB = 0.9
 
     # number of player types (including Axelrod and Gradual) and the
@@ -73,7 +73,7 @@ def main():
     NUM_TYPES = 18
 
     # number of players who always defect (used during training)
-    NUM_TRUMP = 10
+    NUM_TRUMP = 30
 
     # set to indicate if capturing the best members, based on testing at end of run,
     #  for each objective pair
@@ -112,7 +112,7 @@ def main():
     best_tested_by_pair = [[], [], [], []]
 
     for POP_SIZE in pop_sizes:
-        run_info = [POP_SIZE, NGEN, TRAINING_GROUP, TESTING_METRIC]
+        run_info = [POP_SIZE, NGEN, TRAINING_GROUP, TESTING_METRIC, NUM_TRUMP]
 
         rseed = int(os.getpid() * (time.time() % 4919))
         random.seed(rseed)
