@@ -79,9 +79,9 @@ def run_rr(t_group=None, num_each=None, num_evolved=None):
     std_players.init_pop(population, type_counts)
 
     if TRAINING_GROUP == 'AX':
-        csvfile = open('ax_during_self.csv', 'r')
+        csvfile = open('ax_during_self_trump15.csv', 'r')
     else:
-        csvfile = open('pop_during_self.csv', 'r')
+        csvfile = open('pop_during_self_trump15.csv', 'r')
     reader = csv.reader(csvfile)
 
     # read evolved players from csv and put in population

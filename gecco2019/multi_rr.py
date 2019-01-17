@@ -5,6 +5,9 @@
 
 import time
 import csv
+import os
+import pwd
+import platform
 
 import deapplaygame2 as dpg
 from globals import index as i
@@ -27,11 +30,16 @@ def multi_rr():
 
     num_each_std = 20
     num_each_evolved = 20
-    training_group = 'AX'
+    training_group = 'POP'
 
     NUM_COMPETITIONS = 100
 
     logpath = ''
+    if 'comet' in platform.node():
+        logpath += '/oasis/scratch/comet/'
+        logpath += pwd.getpwuid(os.getuid())[0]
+        logpath += '/temp_project/'
+
     if training_group == 'POP':
         logpath += 'train_pop/'
     else:
