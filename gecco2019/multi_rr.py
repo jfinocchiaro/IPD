@@ -28,8 +28,8 @@ def multi_rr():
 
     NUM_TYPES = 21
 
-    num_each_std = 20
-    num_each_evolved = 20
+    num_each_std = 10
+    num_each_evolved = 10
     training_group = 'POP'
 
     NUM_COMPETITIONS = 100

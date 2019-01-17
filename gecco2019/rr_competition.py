@@ -15,6 +15,8 @@ from deap import tools, base, creator, algorithms
 import deapplaygame2 as dpg
 import itertools
 import os
+import platform
+import pwd
 import std_players
 from globals import index as i
 from globals import keys
@@ -79,9 +81,9 @@ def run_rr(t_group=None, num_each=None, num_evolved=None):
     std_players.init_pop(population, type_counts)
 
     if TRAINING_GROUP == 'AX':
-        csvfile = open('ax_during_self_trump15.csv', 'r')
+        csvfile = open('ax_during_self_trump30.csv', 'r')
     else:
-        csvfile = open('pop_during_self_trump15.csv', 'r')
+        csvfile = open('pop_during_self_trump30.csv', 'r')
     reader = csv.reader(csvfile)
 
     # read evolved players from csv and put in population
@@ -142,6 +144,11 @@ def run_rr(t_group=None, num_each=None, num_evolved=None):
             print("{}\n".format(member))
 
     logpath = ''
+    if 'comet' in platform.node():
+        logpath += '/oasis/scratch/comet/'
+        logpath += pwd.getpwuid(os.getuid())[0]
+        logpath += '/temp_project/'
+
     if TRAINING_GROUP == 'POP':
         logpath += 'train_pop/'
     else:
