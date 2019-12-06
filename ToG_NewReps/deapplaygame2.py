@@ -194,16 +194,21 @@ def playround(member1, member2):
         # get the index of the decision we want to make
         decisionind1 = (''.join(map(str, member1[i.hist])))
         decisionind1 = int(decisionind1, 2)
-        # the decision is the value at the above index
-        decision1 = ind1[decisionind1]
 
         # genome of decision bits
         ind2 = member2[i.genome]
         # get the index of the decision we want to make
         decisionind2 = (''.join(map(str, member2[i.hist])))
         decisionind2 = int(decisionind2, 2)
-        # the decision is the value at the above index
-        decision2 = ind2[decisionind2]
+
+        if REP in MARKOV:
+            # indexed value is the probability of cooperation
+            decision1 = 0 if random.random() < ind1[decisionind1] else 1
+            decision2 = 0 if random.random() < ind2[decisionind2] else 1
+        else:           
+            # the decision is the value at the above index
+            decision1 = ind1[decisionind1]
+            decision2 = ind2[decisionind2]
 
     # apply noise
     decision1 = (1 - decision1) if random.random() < NOISE else decision1
