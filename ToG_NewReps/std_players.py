@@ -185,7 +185,7 @@ def get_decision(p, self_hist, opp_hist, n):
     elif p_type == 'EVOLVED':
         if REP == FSM:
             # get member1 decision
-            decision1 = dpg.get_FSM_decision(p)
+            decision = dpg.get_FSM_decision(p)
             # set member1 new state
             p[i.state] = dpg.get_FSM_state(p)
 

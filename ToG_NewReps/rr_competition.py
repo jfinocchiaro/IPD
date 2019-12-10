@@ -11,17 +11,18 @@ import numpy as np
 import random
 import csv
 from copy import deepcopy
-from deap import tools, base, creator, algorithms
-import deapplaygame2 as dpg
 import itertools
 import os
 import platform
 import pwd
+from collections import defaultdict
+
+from deap import tools, base, creator, algorithms
+import deapplaygame2 as dpg
 import std_players
 from globals import index as i
 from globals import keys
 import ipd_types
-from collections import defaultdict
 
 # change this to determine the evaluation metric for testing
 # SELF = 0    # self score

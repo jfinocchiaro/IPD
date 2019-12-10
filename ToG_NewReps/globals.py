@@ -8,10 +8,10 @@
 #   2: markov process: 8 decision floats (probabilities); 3 history bits (opponent only)
 #   3: markov process: 64 decision floats (probabilities); 6 history bits (opp and self)
 #   4: FSM (Mealy machine)
-REP = 1
+REP = 4
 
 # list of representations using 3 history bits
-HIST3 = [1, 2]
+HIST3 = [1, 2, 4]
 
 # list of representations using 6 history bits
 HIST6 = [0, 3]

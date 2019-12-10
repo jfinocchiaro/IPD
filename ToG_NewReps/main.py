@@ -64,7 +64,7 @@ def main():
     # global-ish variables won't be changed
     IND_SIZE = 70
     pop_sizes = [120]
-    NGEN = 1000
+    NGEN = 50
     CXPB = 0.9
 
     MARKOV_MUT_MU = 0.0

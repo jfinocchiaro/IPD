@@ -50,6 +50,7 @@ def make_types():
     toolbox.register("attr_int", random.randint, 0, 0)
     toolbox.register("bit", random.randint, 0, 1)
     toolbox.register("state", random.randint, 0, FSM_STATES - 1)
+    toolbox.register("init_state", random.randint, 0, 0)        # init state always 0
     toolbox.register("prob", random.random)
     toolbox.register("prob_list", tools.initRepeat, list, toolbox.prob, TABLE_SIZE)
 
@@ -124,9 +125,9 @@ def make_types():
                                     toolbox.history, toolbox.scores, toolbox.stats, toolbox.attr_int, toolbox.attr_int, toolbox.attr_int, toolbox.gradual, toolbox.state), n=1)
     if REP == 4:
         toolbox.register("indv_multi", tools.initCycle, creator.Indv_multi, (toolbox.fsm_genome, 
-                                    toolbox.history, toolbox.scores, toolbox.stats, toolbox.attr_int, toolbox.attr_int, toolbox.attr_int, toolbox.gradual, toolbox.state), n=1)
+                                    toolbox.history, toolbox.scores, toolbox.stats, toolbox.attr_int, toolbox.attr_int, toolbox.attr_int, toolbox.gradual, toolbox.init_state), n=1)
 
         toolbox.register("indv_single", tools.initCycle, creator.Indv_single, (toolbox.fsm_genome,
-                                    toolbox.history, toolbox.scores, toolbox.stats, toolbox.attr_int, toolbox.attr_int, toolbox.attr_int, toolbox.gradual, toolbox.state), n=1)
+                                    toolbox.history, toolbox.scores, toolbox.stats, toolbox.attr_int, toolbox.attr_int, toolbox.attr_int, toolbox.gradual, toolbox.init_state), n=1)
 
     return toolbox
