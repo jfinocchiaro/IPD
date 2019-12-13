@@ -8,7 +8,7 @@
 #   2: markov process: 8 decision floats (probabilities); 3 history bits (opponent only)
 #   3: markov process: 64 decision floats (probabilities); 6 history bits (opp and self)
 #   4: FSM (Mealy machine)
-REP = 4
+REP = 0
 
 # list of representations using 3 history bits
 HIST3 = [1, 2, 4]
@@ -25,7 +25,7 @@ BINARY = [0, 1]
 # Mealy machine representation
 FSM = 4
 
-NOISE = 0.0
+NOISE = 0.05
 
 if REP in HIST6:
     TABLE_SIZE = 64

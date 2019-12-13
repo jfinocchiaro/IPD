@@ -11,6 +11,7 @@ import platform
 
 import deapplaygame2 as dpg
 from globals import index as i
+from globals import REP
 from rr_competition import run_rr
 
 # change this to determine the evaluation metric for testing
@@ -30,7 +31,7 @@ def multi_rr():
 
     num_each_std = 10
     num_each_evolved = 10
-    training_group = 'POP'
+    training_group = 'AX'
 
     NUM_COMPETITIONS = 100
 
@@ -44,7 +45,7 @@ def multi_rr():
         logpath += 'train_pop/'
     else:
         logpath += 'train_axelrod/'
-    logpath += 'rr-'
+    logpath += 'rr-rep{}-'.format(REP)
     logpath += time.strftime("%Y%m%d")
     logpath += '-{}'.format(NUM_COMPETITIONS)
 

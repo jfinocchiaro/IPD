@@ -21,7 +21,7 @@ from deap import tools, base, creator, algorithms
 import deapplaygame2 as dpg
 import std_players
 from globals import index as i
-from globals import keys
+from globals import keys, REP, HIST3, HIST6
 import ipd_types
 
 # change this to determine the evaluation metric for testing
@@ -45,6 +45,17 @@ def run_rr(t_group=None, num_each=None, num_evolved=None):
 
     # global-ish variables won't be changed
     # IND_SIZE = 70
+
+    if t_group is not None:
+        TRAINING_GROUP = t_group
+    else:
+        TRAINING_GROUP = 'POP'
+
+    if TRAINING_GROUP == 'AX':
+        in_filename = 'newreps_trained_axelrod/rep0_axelrod_noise05/rep0_noise05_best-during_selfscore.csv'
+    else:
+        in_filename = 'pop_during_self_trump30.csv'
+
     if num_each is not None:
         NUM_EACH_TYPE = num_each
     else:
@@ -57,13 +68,6 @@ def run_rr(t_group=None, num_each=None, num_evolved=None):
 
     NUM_TYPES = 21
     POP_SIZE = NUM_EACH_TYPE * (NUM_TYPES - 4)
-
-    if t_group is not None:
-        TRAINING_GROUP = t_group
-    else:
-        TRAINING_GROUP = 'POP'
-
-    filename = str((os.getpid() * time.time()) % 4919) + '.png'
 
     run_info = [NUM_EACH_TYPE, NUM_TYPES, 150]
 
@@ -81,52 +85,66 @@ def run_rr(t_group=None, num_each=None, num_evolved=None):
     type_counts = [NUM_EACH_TYPE] * NUM_TYPES
     std_players.init_pop(population, type_counts)
 
-    if TRAINING_GROUP == 'AX':
-        csvfile = open('ax_during_self_trump30.csv', 'r')
-    else:
-        csvfile = open('pop_during_self_trump30.csv', 'r')
+    csvfile = open(in_filename, 'r')
     reader = csv.reader(csvfile)
 
     # read evolved players from csv and put in population
     evolved_candidates = []
     for row in reader:
-        evolved_candidates.append(row)
+        # remove blank cell at beginning of row
+        row.pop(0)
+        # cast the individual strings to numeric types
+        n_line = [float(x) if '.' in x else int(x) for x in row]
+
+        evolved_candidates.append(n_line)
 
     csvfile.close()
 
-    # delete the preamble lines, if any
-    while len(evolved_candidates[0]) < 70:
-        del evolved_candidates[0]
-
+    # list of counts of number of each objective pair added to population
     evolved_obj_pairs = [0] * 4
-    done = False
 
-    history = [0] * 6
+    # elements to be added to the individuals
+    if REP in HIST3:
+        history = [0] * 3
+    else:
+        history = [0] * 6
     scores = [0] * 5
     stats = [0] * 3
     gradual = [0] * 6
-    id = 0
+    ident = 0
 
     # determine if the members begin with generation or genome
     # if former, must offest indices by 1
-    if int(evolved_candidates[0][1]) > 1:
-        base = 1
+    # if int(evolved_candidates[0][1]) > 1:
+    #     base = 1
+    # else:
+    #     base = 0
+
+    if REP == 0 or REP == 3:
+        pair_index = 78
+        g_len = 70
+    elif REP == 1 or REP == 2:
+        pair_index = 19
+        g_len = 11
     else:
-        base = 0
-
+        pair_index = 73
+        g_len = 65
+        
+    done = False
     while not done:
-        ind = random.randint(0, len(evolved_candidates) - 1)
-        pair = int(evolved_candidates[ind][79 + base])
-        p_type = int(evolved_candidates[ind][80 + base]) + pair
+        index = random.randint(0, len(evolved_candidates) - 1)
+        indiv = evolved_candidates.pop(index)
+        pair = indiv[pair_index]
+        p_type = indiv[pair_index + 1] + pair
+        # print('pair: {}   type: {}'.format(pair, p_type))
         if evolved_obj_pairs[pair] < NUM_EACH_EVOLVED:
-            genome = []
-            for k in range(70):
-                genome.append(int(evolved_candidates[ind][k + 1 + base]))
+            genome = indiv[0:g_len]
+            # for k in range(70):
+            #     genome.append(int(evolved_candidates[ind][k + 1 + base]))
 
-            population.append(deepcopy([genome, history, scores, stats, pair, p_type, id, gradual]))
+            population.append(deepcopy([genome, history, scores, stats, pair, p_type, ident, gradual]))
             evolved_obj_pairs[pair] += 1
 
-        del evolved_candidates[ind]
         done = evolved_obj_pairs[0] == NUM_EACH_EVOLVED and evolved_obj_pairs[1] == NUM_EACH_EVOLVED and \
                evolved_obj_pairs[2] == NUM_EACH_EVOLVED and evolved_obj_pairs[3] == NUM_EACH_EVOLVED
 
@@ -154,7 +172,7 @@ def run_rr(t_group=None, num_each=None, num_evolved=None):
         logpath += 'train_pop/'
     else:
         logpath += 'train_axelrod/'
-    logpath += 'rr-'
+    logpath += 'rr-rep{}-'.format(REP)
     logpath += time.strftime("%Y%m%d-%H%M%S")
     logpath += '-{}'.format(os.getpid())
     logpath += '.csv'

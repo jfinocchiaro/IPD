@@ -23,7 +23,7 @@ from globals import keys
 # REP = 2
 
 # list of representations using 3 history bits
-# HIST3 = [1, 2]
+# HIST3 = [1, 2, 4]
 
 # list of representations using 6 history bits
 # HIST6 = [0, 3]
