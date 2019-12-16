@@ -174,18 +174,24 @@ def get_FSM_decision(ind):
 
     
 # play one round of IPD
-def playround(member1, member2):
+def playround(member1, member2, round):
     # FSM represenation -- doesn't use history as index into list
     if REP == FSM:
-        # get member1 decision
-        decision1 = get_FSM_decision(member1)
-        # set member1 new state
-        member1[i.state] = get_FSM_state(member1)
+        # if round is 0, decision is initial decision that is part of genome
+        # and state is 0 which is initial state value in individual
+        if round == 0:
+            decision1 = member1[i.genome][0]
+            decision2 = member2[i.genome][0]
+        else:
+            # get member1 decision
+            decision1 = get_FSM_decision(member1)
+            # set member1 new state
+            member1[i.state] = get_FSM_state(member1)
 
-        # get member2 decision
-        decision2 = get_FSM_decision(member2)
-        # set member2 new state
-        member2[i.state] = get_FSM_state(member2)
+            # get member2 decision
+            decision2 = get_FSM_decision(member2)
+            # set member2 new state
+            member2[i.state] = get_FSM_state(member2)
             
     # history-based representations
     else:    
@@ -255,10 +261,14 @@ def shift_decisions(hist, oppdec, yourdec):
 
 # set history bits to bits 64..69 of genome
 def setHistBits(ind):
-    if REP in HIST6:
+    if REP == 0:
         ind[i.hist] = ind[i.genome][64:70]
-    elif REP in HIST3:
+    elif REP == 1:
         ind[i.hist] = ind[i.genome][8:11]
+    elif REP == 2:
+        ind[i.hist] = ind[i.genome][8:11]
+    elif REP == 3:
+        ind[i.hist] = ind[i.genome][64:70]
 
 
 def calc_wdl(p1, p2):
@@ -279,8 +289,8 @@ def playMultiRounds(ind1, ind2, numRounds=150):
     ind2[i.scores][i.match] = 0
     setHistBits(ind1)
     setHistBits(ind2)
-    for x in range(numRounds):
-        playround(ind1, ind2)
+    for round in range(numRounds):
+        playround(ind1, ind2, round)
 
     calc_wdl(ind1, ind2)
 

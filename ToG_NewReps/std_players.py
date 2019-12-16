@@ -184,10 +184,15 @@ def get_decision(p, self_hist, opp_hist, n):
 
     elif p_type == 'EVOLVED':
         if REP == FSM:
-            # get member1 decision
-            decision = dpg.get_FSM_decision(p)
-            # set member1 new state
-            p[i.state] = dpg.get_FSM_state(p)
+            # if n (round number) is 0, decision is initial decision that is part of genome
+            # and state is 0 which is initial state value in individual
+            if n == 0:
+                decision = p[i.genome][0]
+            else:
+                # get member1 decision
+                decision = dpg.get_FSM_decision(p)
+                # set member1 new state
+                p[i.state] = dpg.get_FSM_state(p)
 
         else:    
             ind = p[i.genome]
