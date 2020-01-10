@@ -31,7 +31,7 @@ def multi_rr():
 
     num_each_std = 10
     num_each_evolved = 10
-    training_group = 'AX'
+    training_group = 'POP'
 
     NUM_COMPETITIONS = 100
 
@@ -59,7 +59,7 @@ def multi_rr():
     writer_type = csv.writer(f_type, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 
     for comps in range(NUM_COMPETITIONS):
-        print("\n\n Run number: {}\n".format(comps))
+        print("\n Begin run number: {}".format(comps))
 
         result_pop = run_rr(training_group, num_each_std, num_each_evolved)
 
@@ -88,7 +88,9 @@ def multi_rr():
         del result_pop
         del sorted_by_type
 
-
+        print(" End run number: {}\n".format(comps))
+        
+        
 def write_member(writer, member):
     writer.writerow([member[i.pair]] + \
                     [member[i.type]] + \

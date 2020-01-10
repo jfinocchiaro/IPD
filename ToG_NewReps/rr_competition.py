@@ -7,7 +7,7 @@
 #
 
 import time
-import numpy as np
+# import numpy as np
 import random
 import csv
 from copy import deepcopy
@@ -52,9 +52,9 @@ def run_rr(t_group=None, num_each=None, num_evolved=None):
         TRAINING_GROUP = 'POP'
 
     if TRAINING_GROUP == 'AX':
-        in_filename = 'newreps_trained_axelrod/rep0_axelrod_noise05/rep0_noise05_best-during_selfscore.csv'
+        in_filename = 'newreps_trained_axelrod/rep3_axelrod_no-noise_5k/rep3_axelrod_no-noise_5k_best-during_selfscore.csv'
     else:
-        in_filename = 'pop_during_self_trump30.csv'
+        in_filename = 'newreps_trained_pop/rep4_pop_noise05_5k/rep4_pop_noise05_5k_best-during_selfscore.csv'
 
     if num_each is not None:
         NUM_EACH_TYPE = num_each
@@ -112,6 +112,7 @@ def run_rr(t_group=None, num_each=None, num_evolved=None):
     stats = [0] * 3
     gradual = [0] * 6
     ident = 0
+    state = 0
 
     # determine if the members begin with generation or genome
     # if former, must offest indices by 1
@@ -142,7 +143,7 @@ def run_rr(t_group=None, num_each=None, num_evolved=None):
             # for k in range(70):
             #     genome.append(int(evolved_candidates[ind][k + 1 + base]))
 
-            population.append(deepcopy([genome, history, scores, stats, pair, p_type, ident, gradual]))
+            population.append(deepcopy([genome, history, scores, stats, pair, p_type, ident, gradual, state]))
             evolved_obj_pairs[pair] += 1
 
         done = evolved_obj_pairs[0] == NUM_EACH_EVOLVED and evolved_obj_pairs[1] == NUM_EACH_EVOLVED and \
@@ -155,7 +156,7 @@ def run_rr(t_group=None, num_each=None, num_evolved=None):
 
     sorted_pop = sorted(population, key=lambda m: dpg.sort_key(m, TESTING_METRIC), reverse=True)
 
-    print("\n\nEnd of run:\n")
+    # print("\n\nEnd of run:\n")
 
     if main_run:
         print("Evolved member pairs: {}\n".format(evolved_obj_pairs))
