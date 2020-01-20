@@ -54,7 +54,7 @@ def run_rr(t_group=None, num_each=None, num_evolved=None):
     if TRAINING_GROUP == 'AX':
         in_filename = 'newreps_trained_axelrod/rep3_axelrod_no-noise_5k/rep3_axelrod_no-noise_5k_best-during_selfscore.csv'
     else:
-        in_filename = 'newreps_trained_pop/rep4_pop_noise05_5k/rep4_pop_noise05_5k_best-during_selfscore.csv'
+        in_filename = 'newreps_trained_pop/rep2_pop_no-noise_5k/rep2_pop_no-noise_5k_best-during_selfscore.csv'
 
     if num_each is not None:
         NUM_EACH_TYPE = num_each

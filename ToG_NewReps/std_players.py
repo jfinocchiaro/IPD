@@ -311,6 +311,9 @@ def playMultiRoundsTrump(player1, rounds=150):
         decision1 = get_decision(player1, decisionHist1, decisionHist2, n)
         decision2 = 1
 
+        # apply noise
+        decision1 = (1 - decision1) if random.random() < NOISE else decision1
+
         decisionHist1.append(decision1)
         decisionHist2.append(decision2)
 

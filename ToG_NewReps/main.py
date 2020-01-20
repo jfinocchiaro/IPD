@@ -644,7 +644,8 @@ def main():
                                     [float(member[i.scores][i.coop]) / member[i.scores][i.games]] + \
                                     [member[i.scores][i.games]] + \
                                     [member[i.pair]] + \
-                                    [member[i.type]])
+                                    [member[i.type]] + \
+                                    [member[i.rep]])
 
     # dpg.plotbestplayers(best_players, training_group=TRAINING_GROUP, filename=filename)
 

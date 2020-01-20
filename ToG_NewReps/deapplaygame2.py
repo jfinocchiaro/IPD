@@ -20,7 +20,7 @@ from globals import keys
 #   2: markov process: 8 decision floats (probabilities); 3 history bits (opponent only)
 #   3: markov process: 64 decision floats (probabilities); 6 history bits (opp and self)
 #   4: FSM (Mealy machine)
-# REP = 2
+# 
 
 # list of representations using 3 history bits
 # HIST3 = [1, 2, 4]
@@ -297,12 +297,34 @@ def playMultiRounds(ind1, ind2, numRounds=150):
 
 # have player play against a member that always defects
 def playroundtrump(member1):
-    # get player genome
-    ind1 = member1[i.genome]
-    decisionind1 = (''.join(map(str, member1[i.hist])))
-    decisionind1 = int(decisionind1, 2)
-    # index in to see ultimate decision
-    decision1 = ind1[decisionind1]
+    if REP == FSM:
+        # if round is 0, decision is initial decision that is part of genome
+        # and state is 0 which is initial state value in individual
+        if round == 0:
+            decision1 = member1[i.genome][0]
+        else:
+            # get member1 decision
+            decision1 = get_FSM_decision(member1)
+            # set member1 new state
+            member1[i.state] = get_FSM_state(member1)
+            
+    # history-based representations
+    else:    
+        # genome of decision bits
+        ind1 = member1[i.genome]
+        # get the index of the decision we want to make
+        decisionind1 = (''.join(map(str, member1[i.hist])))
+        decisionind1 = int(decisionind1, 2)
+
+        if REP in MARKOV:
+            # indexed value is the probability of cooperation
+            decision1 = 0 if random.random() < ind1[decisionind1] else 1
+        else:           
+            # the decision is the value at the above index
+            decision1 = ind1[decisionind1]
+
+    # apply noise
+    decision1 = (1 - decision1) if random.random() < NOISE else decision1
 
     # opponent decision is always 1
     shift_decisions(member1[i.hist], 1, decision1)
@@ -548,15 +570,16 @@ def exportPoptoCSV(filename, population, run_vars, test_pops=None, test_labels=N
             writer.writerow(["Best Tested Members:"])
             # member in this context is a list consisting of [individual, generation]
             for member in best:
-                writer.writerow([member[1]] +                                            \
+                writer.writerow([member[1]] +                                          \
                 member[0][i.genome] +                                                  \
-                [float(member[0][i.scores][i.self])/member[0][i.scores][i.games]] +                              \
-                [float(member[0][i.scores][i.opp])/member[0][i.scores][i.games]] +                              \
-                # [ min(6* float(member[3])/member[4], COOPERATION_MAX)] +    \
-                [float(member[0][i.scores][i.coop]) / member[0][i.scores][i.games]] +                            \
-                [member[0][i.scores][i.games]] +                                               \
-                [member[0][i.pair]] +                                               \
-                [member[0][i.type]])
+                [float(member[0][i.scores][i.self])/member[0][i.scores][i.games]] +    \
+                [float(member[0][i.scores][i.opp])/member[0][i.scores][i.games]] +     \
+                # [ min(6* float(member[3])/member[4], COOPERATION_MAX)] +             \
+                [float(member[0][i.scores][i.coop]) / member[0][i.scores][i.games]] +  \
+                [member[0][i.scores][i.games]] +                                       \
+                [member[0][i.pair]] +                                                  \
+                [member[0][i.type]] +                                                  \
+                [member[0][i.rep]])
 
 
         if counts is not None:
@@ -584,10 +607,11 @@ def exportBesttoCSV(filename, population, run_vars, num_members):
         for member in population:
             # member in this context is a list consisting of [individual, generation]
             writer.writerow([''] + \
-            member[0][i.genome] + \
-            member[0][i.scores] + \
-            member[0][i.stats] + \
-            [member[0][i.pair]] + \
-            [member[0][i.type]] + \
-            [member[0][i.id]] + \
+            member[0][i.genome] +  \
+            member[0][i.scores] +  \
+            member[0][i.stats] +   \
+            [member[0][i.pair]] +  \
+            [member[0][i.type]] +  \
+            [member[0][i.rep]]  +  \
+            [member[0][i.id]] +    \
             [member[1]])

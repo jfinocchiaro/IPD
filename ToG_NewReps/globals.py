@@ -8,7 +8,7 @@
 #   2: markov process: 8 decision floats (probabilities); 3 history bits (opponent only)
 #   3: markov process: 64 decision floats (probabilities); 6 history bits (opp and self)
 #   4: FSM (Mealy machine)
-REP = 4
+REP = 2
 
 # list of representations using 3 history bits
 HIST3 = [1, 2, 4]
@@ -52,6 +52,7 @@ class index:
     id = 6              # player id (integer identifier)
     grad = 7            # gradual fields -- used for Gradual players only
     state = 8           # current state -- used for FSM players only
+    rep = 9             # representation used for individuals
 
     # indices into scores
     self = 0            # self score
