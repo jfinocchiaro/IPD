@@ -33,7 +33,7 @@ def multi_rr():
     num_each_evolved = 10
     training_group = 'POP'
 
-    NUM_COMPETITIONS = 100
+    NUM_COMPETITIONS = 1000
 
     logpath = ''
     if 'comet' in platform.node():
