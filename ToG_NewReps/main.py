@@ -12,8 +12,8 @@ from collections import defaultdict
 
 import deapplaygame2 as dpg
 import axelrodplayers2 as ap
-import std_players as std
-from globals import index as i, HIST_SIZE, TABLE_SIZE, FSM_STATES, BINARY, MARKOV, FSM, REP
+import newreps_std_players as std
+from globals import index as i, HIST_SIZE, TABLE_SIZE, FSM_STATES, BINARY, MARKOV, FSM, REP, MULTI
 import ipd_types
 
 
@@ -24,6 +24,36 @@ WDL = 2     # 3 pts for win, 1 pt for draw, 0 pts for loss
 DRAWS = 3   # number of draws
 TESTING_METRIC = SELF
 
+# change this depending on the desired trial
+# 'AX' for training against Axelrod 
+# 'POP' to train within population
+TRAINING_GROUP = 'POP'
+
+# determine the player type base on:
+#   REP
+#   objective pair
+#   MULTI
+#   TRAINING_GROUP
+def calc_player_type(obj_pair):
+    base = 0
+    if REP == 0:
+        base = 17
+    elif REP == 1:
+        base = 21
+    elif REP == 2:
+        base = 25
+    elif REP == 4:
+        base = 29
+    
+    p_type = base + obj_pair
+    if TRAINING_GROUP == 'AX':
+        p_type += 16
+    if not MULTI:
+        p_type += 32
+        
+    return p_type
+    
+    
 # used in calls to sorted to get the sort key (rather than use a lambda function)
 def sort_key(member):
     if TESTING_METRIC == SELF:
@@ -64,7 +94,7 @@ def main():
     # global-ish variables won't be changed
     IND_SIZE = 70
     pop_sizes = [120]
-    NGEN = 50
+    NGEN = 5000
     CXPB = 0.9
 
     MARKOV_MUT_MU = 0.0
@@ -73,7 +103,7 @@ def main():
     # number of player types (including Axelrod and Gradual) and the
     # number of each type to include in the test population
     NUM_EACH_TYPE = 1
-    NUM_TYPES = 18
+    # NUM_STD_TYPES = 17
 
     # number of players who always defect (used during training)
     NUM_TRUMP = 0
@@ -88,17 +118,21 @@ def main():
     BEST_EACH_DURING = True
     NUM_BEST_DURING = 20
 
-    # change this depending on the desired trial
-    # 'AX' for training against Axelrod 
-    # 'POP' to train within population
-    TRAINING_GROUP = 'AX'
-
     toolbox = ipd_types.make_types()
 
-    toolbox.register("population", tools.initRepeat, list, toolbox.indv_multi)
-
+    # create population dependent on multi-objective or single-objective
+    if MULTI:
+        toolbox.register("population", tools.initRepeat, list, toolbox.indv_multi)
+    else:
+        toolbox.register("population", tools.initRepeat, list, toolbox.indv_single)
+        
+        
     # variation and selection operators
-    toolbox.register("evaluate", dpg.evaluate)
+    if MULTI:
+        toolbox.register("evaluate", dpg.evaluate)
+    else:
+        toolbox.register("evaluate", dpg.evaluate_single)
+        
     toolbox.register("mate", dpg.cxOnePointGenome)
     # toolbox.register("mate", tools.cxUniform, indpb=0.2)
     if REP in BINARY:
@@ -130,9 +164,9 @@ def main():
         #
         # axelrod population
         #
-        axelrodPop = toolbox.population(n=((NUM_TYPES - 1) * NUM_EACH_TYPE))
+        axelrodPop = toolbox.population(n=(std.NUM_STD_TYPES * NUM_EACH_TYPE))
 
-        arod_counts = [NUM_EACH_TYPE] * NUM_TYPES
+        arod_counts = [NUM_EACH_TYPE] * std.NUM_STD_TYPES
         arod_counts[len(arod_counts) - 1] = 0
         std.init_pop(axelrodPop, arod_counts)
 
@@ -144,29 +178,34 @@ def main():
         cooperative_population = toolbox.population(n=POP_SIZE / 4)
         selfless_population = toolbox.population(n=POP_SIZE / 4)
 
+        # THIS IS NOW ASSIGNED IN THE LOOP BELOW
+        # set objectives flag for members of each population
+        # selfish_population = dpg.uniformobjectivesSelfish(selfish_population)
+        # communal_population = dpg.uniformobjectivesCommunal(communal_population)
+        # cooperative_population = dpg.uniformobjectivesCoop(cooperative_population)
+        # selfless_population = dpg.uniformobjectivesSelfless(selfless_population)
+
         # assign ids and player type to the members
         n = POP_SIZE/4
         j = 0
         while j < n:
             selfish_population[j][i.id] = j
-            selfish_population[j][i.type] = NUM_TYPES - 1
+            selfish_population[j][i.pair] = 0
+            selfish_population[j][i.type] = calc_player_type(0)
             communal_population[j][i.id] = n + j
-            communal_population[j][i.type] = NUM_TYPES - 1
+            communal_population[j][i.pair] = 1
+            communal_population[j][i.type] = calc_player_type(1)
             cooperative_population[j][i.id] = 2 * n + j
-            cooperative_population[j][i.type] = NUM_TYPES - 1
+            cooperative_population[j][i.pair] = 2
+            cooperative_population[j][i.type] = calc_player_type(2)
             selfless_population[j][i.id] = 3 * n + j
-            selfless_population[j][i.type] = NUM_TYPES - 1
+            selfless_population[j][i.pair] = 3
+            selfless_population[j][i.type] = calc_player_type(3)
             j += 1
 
 
         # set an id variable to use for assigning ids to offspring
         memb_id = POP_SIZE
-
-        # set objectives flag for members of each population
-        selfish_population = dpg.uniformobjectivesSelfish(selfish_population)
-        communal_population = dpg.uniformobjectivesCommunal(communal_population)
-        cooperative_population = dpg.uniformobjectivesCoop(cooperative_population)
-        selfless_population = dpg.uniformobjectivesSelfless(selfless_population)
 
         # conducts round-robin, depending on who's the training population
         if TRAINING_GROUP == 'POP':
@@ -610,6 +649,7 @@ def main():
             logpath += 'train_pop/'
         else:
             logpath += 'train_axelrod/'
+        logpath += 'rep' + str(REP) + '/'
         logpath += time.strftime("%Y%m%d-%H%M%S")
         logpath += '-{}'.format(os.getpid())
         logpath_best = logpath
@@ -626,7 +666,7 @@ def main():
         # write the members (captured above) to a csv file
         if BEST_EACH_POST:
             best_each_path += 'best_each/'
-            # best_each_path += 'current_run'
+            best_each_path += 'rep' + str(REP) + '_'
             best_each_path += time.strftime("%Y%m%d")
             # best_each_path += '-{}'.format(os.getpid())
             best_each_path += '.csv'

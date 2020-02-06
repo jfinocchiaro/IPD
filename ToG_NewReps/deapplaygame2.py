@@ -65,6 +65,27 @@ def evaluate(member):
     return score1, score2
 
 
+def evaluate_single(member):
+    score1 = 0
+    objectives = member[i.pair]
+    if objectives == 0:
+        # maximize personal score
+        score1 = float(member[i.scores][i.self]) / member[i.scores][i.games]
+    if objectives == 1:
+        # minimize difference between self score and opp score
+        # to facilitate this given other objectives are maximized, we
+        # maximize 3 - (abs(diff))
+        score1 = 3 - abs((float(member[i.scores][i.self]) / member[i.scores][i.games]) -
+                         (float(member[i.scores][i.opp]) / member[i.scores][i.games]))
+    if objectives == 2:
+        # maximize cooperation
+        score1 = float(member[i.scores][i.coop]) / member[i.scores][i.games]
+    if objectives == 3:
+        # maximize opp score
+        score1 = float(member[i.scores][i.opp]) / member[i.scores][i.games]
+    return score1,
+
+
 # in case we wanted to max personal score, min opponent score, and maximize cooperation
 def evaluate_three_obj(member):
     score1 = float(member[i.scores][i.self]) / member[i.scores][i.games]

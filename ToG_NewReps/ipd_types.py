@@ -59,6 +59,14 @@ def make_types():
     fsm_func_list = [lambda: toolbox.state(), lambda: toolbox.bit()]
     toolbox.register("binary_genome", tools.initRepeat, list, toolbox.bit, TABLE_SIZE + HIST_SIZE)
     toolbox.register("markov_genome", make_markov_genome, markov_func_list)
+    # FSM genome format:
+    #   first move followed by 16 states
+    #
+    #   format of a state (condition indicates opponent's last move):
+    #       next state if C
+    #       move if C
+    #       next state if D
+    #       move if D
     toolbox.register("fsm_genome", make_fsm_genome, fsm_func_list, FSM_STATES)
 
     # history bits:
