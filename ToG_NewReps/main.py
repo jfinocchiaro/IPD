@@ -2,19 +2,18 @@ import time
 # import numpy as np
 import random
 from copy import deepcopy
-from deap import tools, base, creator
 import itertools
 import os
+import sys
 import pwd
 import platform
 import csv
 from collections import defaultdict
 
-import deapplaygame2 as dpg
-import axelrodplayers2 as ap
-import newreps_std_players as std
+from deap import tools, base, creator
+
+import globals
 from globals import index as i, HIST_SIZE, TABLE_SIZE, FSM_STATES, BINARY, MARKOV, FSM, REP, MULTI
-import ipd_types
 
 
 # change this to determine the evaluation metric for testing
@@ -90,7 +89,6 @@ if 'comet' in platform.node():
 
 
 def main():
-
     # global-ish variables won't be changed
     IND_SIZE = 70
     pop_sizes = [120]
@@ -666,7 +664,7 @@ def main():
         # write the members (captured above) to a csv file
         if BEST_EACH_POST:
             best_each_path += 'best_each/'
-            best_each_path += 'rep' + str(REP) + '_'
+            best_each_path += 'rep' + str(REP) + '_' + TRAINING_GROUP + '_'
             best_each_path += time.strftime("%Y%m%d")
             # best_each_path += '-{}'.format(os.getpid())
             best_each_path += '.csv'
@@ -690,4 +688,20 @@ def main():
     # dpg.plotbestplayers(best_players, training_group=TRAINING_GROUP, filename=filename)
 
 if __name__ == "__main__":
+    global TRAINING_GROUP
+    
+    numargs = len(sys.argv)
+    if numargs == 3:
+        globals.REP = int(sys.argv[1])
+        REP = int(sys.argv[1])
+        TRAINING_GROUP = sys.argv[2]
+    else:
+        print('USAGE: python main.py rep_number training_group=[AX, POP]')
+        raise SystemExit(1)
+        
+    import deapplaygame2 as dpg
+    import axelrodplayers2 as ap
+    import newreps_std_players as std
+    import ipd_types
+
     main()
