@@ -13,7 +13,7 @@ TOTAL_TYPES = 81
 #   2: markov process: 8 decision floats (probabilities); 3 history bits (opponent only)
 #   3: markov process: 64 decision floats (probabilities); 6 history bits (opp and self)
 #   4: FSM (Mealy machine)
-REP = 4
+REP = 0
 
 # indicates if multiple objectives are being used
 #   False: single-objective individuals
@@ -35,10 +35,14 @@ BINARY = [0, 1]
 # Mealy machine representation
 FSM = 4
 
-NOISE = 0.0
+NOISE = 0.05
 
-TABLE_SIZE = 8
-HIST_SIZE = 3
+if REP in HIST6:
+    TABLE_SIZE = 64
+    HIST_SIZE = 6
+else:
+    TABLE_SIZE = 8
+    HIST_SIZE = 3
 
 FSM_STATES = 16
     
