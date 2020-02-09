@@ -13,8 +13,6 @@ from collections import defaultdict
 from deap import tools, base, creator
 
 import globals
-from globals import index as i, HIST_SIZE, TABLE_SIZE, FSM_STATES, BINARY, MARKOV, FSM, REP, MULTI
-
 
 # change this to determine the evaluation metric for testing
 SELF = 0    # self score
@@ -26,7 +24,7 @@ TESTING_METRIC = SELF
 # change this depending on the desired trial
 # 'AX' for training against Axelrod 
 # 'POP' to train within population
-TRAINING_GROUP = 'POP'
+# TRAINING_GROUP = 'POP'
 
 # determine the player type base on:
 #   REP
@@ -34,6 +32,7 @@ TRAINING_GROUP = 'POP'
 #   MULTI
 #   TRAINING_GROUP
 def calc_player_type(obj_pair):
+    print(FOO)
     base = 0
     if REP == 0:
         base = 17
@@ -91,8 +90,8 @@ if 'comet' in platform.node():
 def main():
     # global-ish variables won't be changed
     IND_SIZE = 70
-    pop_sizes = [120]
-    NGEN = 5000
+    pop_sizes = [80]
+    NGEN = 20
     CXPB = 0.9
 
     MARKOV_MUT_MU = 0.0
@@ -688,17 +687,25 @@ def main():
     # dpg.plotbestplayers(best_players, training_group=TRAINING_GROUP, filename=filename)
 
 if __name__ == "__main__":
-    global TRAINING_GROUP
     
     numargs = len(sys.argv)
     if numargs == 3:
         globals.REP = int(sys.argv[1])
-        REP = int(sys.argv[1])
+        # REP = int(sys.argv[1])
         TRAINING_GROUP = sys.argv[2]
     else:
         print('USAGE: python main.py rep_number training_group=[AX, POP]')
         raise SystemExit(1)
-        
+
+    if globals.REP in [0, 3]:
+        globals.TABLE_SIZE = 64
+        globals.HIST_SIZE = 6
+    else:
+        globals.TABLE_SIZE = 8
+        globals.HIST_SIZE = 3
+
+    from globals import index as i, HIST_SIZE, TABLE_SIZE, FSM_STATES, BINARY, MARKOV, FSM, REP, MULTI
+
     import deapplaygame2 as dpg
     import axelrodplayers2 as ap
     import newreps_std_players as std

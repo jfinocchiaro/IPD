@@ -2,13 +2,18 @@
 # values needed in multiple files in the project
 #
 
+# total number of player types including:
+#   standard strategies
+#   evolved types
+TOTAL_TYPES = 81
+
 # version of representation being used:
 #   0: 64 bits for decisions, 6 bits for history
 #   1: lookup table: 8 decision bits; 3 history bits (opponent only)
 #   2: markov process: 8 decision floats (probabilities); 3 history bits (opponent only)
 #   3: markov process: 64 decision floats (probabilities); 6 history bits (opp and self)
 #   4: FSM (Mealy machine)
-REP = 0
+REP = 4
 
 # indicates if multiple objectives are being used
 #   False: single-objective individuals
@@ -32,12 +37,8 @@ FSM = 4
 
 NOISE = 0.0
 
-if REP in HIST6:
-    TABLE_SIZE = 64
-    HIST_SIZE = 6
-else:
-    TABLE_SIZE = 8
-    HIST_SIZE = 3
+TABLE_SIZE = 8
+HIST_SIZE = 3
 
 FSM_STATES = 16
     
