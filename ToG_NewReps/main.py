@@ -90,8 +90,8 @@ if 'comet' in platform.node():
 def main():
     # global-ish variables won't be changed
     IND_SIZE = 70
-    pop_sizes = [80]
-    NGEN = 20
+    pop_sizes = [120]
+    NGEN = 5000
     CXPB = 0.9
 
     MARKOV_MUT_MU = 0.0
