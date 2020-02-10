@@ -218,7 +218,7 @@ def get_decision(p, self_hist, opp_hist, n):
                 p[i.grad][i.d_cnt] = 1
 
     elif p_type == 'EVOLVED':
-        rep = p[len(p) - 1]
+        rep = p[-1]
         if rep == FSM:
             # if n (round number) is 0, decision is initial decision that is part of genome
             # and state is 0 which is initial state value in individual

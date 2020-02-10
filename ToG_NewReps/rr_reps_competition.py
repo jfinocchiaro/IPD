@@ -52,7 +52,7 @@ def run_rr(t_group=None, num_each=None, num_evolved=None, num_reps=None):
     # global-ish variables won't be changed
     # IND_SIZE = 70
 
-    NUM_EVOLVED_TYPES = 16
+    # NUM_EVOLVED_TYPES = 16
 
     if t_group is not None:
         TRAINING_GROUP = t_group
@@ -63,12 +63,20 @@ def run_rr(t_group=None, num_each=None, num_evolved=None, num_reps=None):
         in_filenames = ['newreps_trained_axelrod/rep0_axelrod_no-noise_5k/rep0_axelrod_no-noise_5k_best-during_selfscore.csv',
                         'newreps_trained_axelrod/rep1_axelrod_no-noise_5k/rep1_axelrod_no-noise_5k_best-during_selfscore.csv',
                         'newreps_trained_axelrod/rep2_axelrod_no-noise_5k/rep2_axelrod_no-noise_5k_best-during_selfscore.csv',
-                        'newreps_trained_axelrod/rep4_axelrod_no-noise_5k/rep4_axelrod_no-noise_5k_best-during_selfscore.csv']
+                        'newreps_trained_axelrod/rep4_axelrod_no-noise_5k/rep4_axelrod_no-noise_5k_best-during_selfscore.csv',
+                        'newreps_trained_axelrod/rep0_axelrod_single-obj_no-noise_5k/rep0_axelrod_single-obj_no-             noise_5k_best-during_selfscore.csv',
+                        'newreps_trained_axelrod/rep1_axelrod_single-obj_no-noise_5k/rep1_axelrod_single-obj_no-noise_5k_best-during_selfscore.csv',
+                        'newreps_trained_axelrod/rep2_axelrod_single-obj_no-noise_5k/rep2_axelrod_single-obj_no-noise_5k_best-during_selfscore.csv',
+                        'newreps_trained_axelrod/rep4_axelrod_single-obj_no-noise_5k/rep4_axelrod_single-obj_no-noise_5k_best-during_selfscore.csv']
     elif TRAINING_GROUP == 'POP':
         in_filenames = ['newreps_trained_pop/rep0_pop_no-noise_5k/rep0_pop_no-noise_5k_best-during_selfscore.csv',
                         'newreps_trained_pop/rep1_pop_no-noise_5k/rep1_pop_no-noise_5k_best-during_selfscore.csv',
                         'newreps_trained_pop/rep2_pop_no-noise_5k/rep2_pop_no-noise_5k_best-during_selfscore.csv',
-                        'newreps_trained_pop/rep4_pop_no-noise_5k/rep4_pop_no-noise_5k_best-during_selfscore.csv']
+                        'newreps_trained_pop/rep4_pop_no-noise_5k/rep4_pop_no-noise_5k_best-during_selfscore.csv',
+                        'newreps_trained_pop/rep0_pop_single-obj_no-noise_5k/rep0_pop_single-obj_no-noise_5k_best-during_selfscore.csv',
+                        'newreps_trained_pop/rep1_pop_single-obj_no-noise_5k/rep1_pop_single-obj_no-noise_5k_best-during_selfscore.csv',
+                        'newreps_trained_pop/rep2_pop_single-obj_no-noise_5k/rep2_pop_single-obj_no-noise_5k_best-during_selfscore.csv',
+                        'newreps_trained_pop/rep4_pop_single-obj_no-noise_5k/rep4_pop_single-obj_no-noise_5k_best-during_selfscore.csv']
     else:
         in_filenames = ['newreps_trained_axelrod/rep0_axelrod_no-noise_5k/rep0_axelrod_no-noise_5k_best-during_selfscore.csv',
                         'newreps_trained_axelrod/rep1_axelrod_no-noise_5k/rep1_axelrod_no-noise_5k_best-during_selfscore.csv',
@@ -79,6 +87,17 @@ def run_rr(t_group=None, num_each=None, num_evolved=None, num_reps=None):
                         'newreps_trained_pop/rep2_pop_no-noise_5k/rep2_pop_no-noise_5k_best-during_selfscore.csv',
                         'newreps_trained_pop/rep4_pop_no-noise_5k/rep4_pop_no-noise_5k_best-during_selfscore.csv']
 
+    # set the input file path for running on comet
+    path = ''
+    if 'comet' in platform.node():
+        path += '/oasis/scratch/comet/'
+        path += pwd.getpwuid(os.getuid())[0]
+        path += '/temp_project/'
+
+    # prepend path onto filenames:
+    for i, f in enumerate(in_filenames):
+        in_filenames[i] = path + f
+        
     if num_each is not None:
         NUM_EACH_TYPE = num_each
     else:
@@ -198,7 +217,8 @@ def run_rr(t_group=None, num_each=None, num_evolved=None, num_reps=None):
             ident = 0
             state = 0
 
-            genome = indiv[1:g_len + 1]
+            # genome = indiv[1:g_len + 1]
+            genome = indiv[:g_len]
 
             if history == []:
                 print('history is empty: {}'.format(rep))

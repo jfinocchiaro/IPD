@@ -35,7 +35,7 @@ BINARY = [0, 1]
 # Mealy machine representation
 FSM = 4
 
-NOISE = 0.05
+NOISE = 0.0
 
 if REP in HIST6:
     TABLE_SIZE = 64
