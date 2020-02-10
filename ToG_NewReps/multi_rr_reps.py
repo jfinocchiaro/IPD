@@ -12,7 +12,7 @@ import platform
 import deapplaygame2 as dpg
 from globals import index as i
 from globals import REP
-from rr_competition import run_rr
+from rr_reps_competition import run_rr
 
 # change this to determine the evaluation metric for testing
 # SELF = 0    # self score
@@ -27,13 +27,14 @@ from rr_competition import run_rr
 
 def multi_rr():
 
-    NUM_TYPES = 21
+    # NUM_TYPES = 33
 
     num_each_std = 10
     num_each_evolved = 10
-    training_group = 'POP'
+    training_group = 'AX'
+    # num_reps = 4
 
-    NUM_COMPETITIONS = 100
+    NUM_COMPETITIONS = 50
 
     logpath = ''
     if 'comet' in platform.node():
@@ -42,10 +43,16 @@ def multi_rr():
         logpath += '/temp_project/'
 
     if training_group == 'POP':
-        logpath += 'rr_pop/'
+        logpath += 'train_pop/'
+    elif training_group == 'AX':
+        logpath += 'train_axelrod/'
     else:
-        logpath += 'rr_axelrod/'
-    logpath += 'rr-rep{}-'.format(REP)
+        logpath += 'train_both/'
+    
+    if training_group == 'BOTH':
+        logpath += 'rr-rep-all-'
+    else:
+        logpath += 'rr-rep{}-'.format(REP)
     logpath += time.strftime("%Y%m%d")
     logpath += '-{}'.format(os.getpid())
     logpath += '-{}'.format(NUM_COMPETITIONS)
@@ -62,6 +69,7 @@ def multi_rr():
     for comps in range(NUM_COMPETITIONS):
         print("\n Begin run number: {}".format(comps))
 
+        # result_pop = run_rr(training_group, num_each_std, num_each_evolved, num_reps)
         result_pop = run_rr(training_group, num_each_std, num_each_evolved)
 
         for j in range(10):

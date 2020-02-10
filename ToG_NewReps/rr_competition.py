@@ -54,7 +54,7 @@ def run_rr(t_group=None, num_each=None, num_evolved=None):
     if TRAINING_GROUP == 'AX':
         in_filename = 'newreps_trained_axelrod/rep3_axelrod_no-noise_5k/rep3_axelrod_no-noise_5k_best-during_selfscore.csv'
     else:
-        in_filename = 'newreps_trained_pop/rep1_pop_no-noise_5k/rep1_pop_no-noise_5k_best-during_selfscore.csv'
+        in_filename = 'newreps_trained_pop/rep4_pop_no-noise_trump30_5k/rep4_pop_no-noise_t30_5k_best-during_selfscore.csv'
 
     if num_each is not None:
         NUM_EACH_TYPE = num_each
@@ -170,9 +170,9 @@ def run_rr(t_group=None, num_each=None, num_evolved=None):
         logpath += '/temp_project/'
 
     if TRAINING_GROUP == 'POP':
-        logpath += 'train_pop/'
+        logpath += 'rr_pop/'
     else:
-        logpath += 'train_axelrod/'
+        logpath += 'rr_axelrod/'
     logpath += 'rr-rep{}-'.format(REP)
     logpath += time.strftime("%Y%m%d-%H%M%S")
     logpath += '-{}'.format(os.getpid())
