@@ -155,7 +155,7 @@ def run_rr(t_group=None, num_each=None, num_evolved=None, num_reps=None):
             
             # this if statement allows us to skip adding single objectives 2 and 3 to
             # the list of candidate rr players
-            if p_type not in elim_types or (p_type in elim_types and not elim_single_2-3):
+            if p_type not in elim_types or not elim_single_2-3:
                 # check if player type for this row already in p_types
                 # if not, add it
                 if not p_type in p_types:
