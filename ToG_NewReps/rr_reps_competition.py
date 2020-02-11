@@ -58,7 +58,7 @@ def run_rr(t_group=None, num_each=None, num_evolved=None, num_reps=None):
     #    obj 2: maximize cooperation
     #    obj 3: maximize opponent score
     #    player types: 51, 52, 55, 56, 59, 60, 63, 64, 67, 68, 71, 72, 75, 76, 79, 80
-    elim_single_2-3 = True
+    elim_single_2_3 = True
     elim_types = [51, 52, 55, 56, 59, 60, 63, 64, 67, 68, 71, 72, 75, 76, 79, 80]
     
     if t_group is not None:
@@ -155,7 +155,7 @@ def run_rr(t_group=None, num_each=None, num_evolved=None, num_reps=None):
             
             # this if statement allows us to skip adding single objectives 2 and 3 to
             # the list of candidate rr players
-            if p_type not in elim_types or not elim_single_2-3:
+            if p_type not in elim_types or not elim_single_2_3:
                 # check if player type for this row already in p_types
                 # if not, add it
                 if not p_type in p_types:
