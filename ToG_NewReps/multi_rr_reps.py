@@ -34,7 +34,7 @@ def multi_rr():
     training_group = 'POP'
     # num_reps = 4
 
-    NUM_COMPETITIONS = 5
+    NUM_COMPETITIONS = 50
 
     logpath = ''
     if 'comet' in platform.node():
@@ -43,16 +43,16 @@ def multi_rr():
         logpath += '/temp_project/'
 
     if training_group == 'POP':
-        logpath += 'train_pop/'
+        logpath += 'rr_pop/'
     elif training_group == 'AX':
-        logpath += 'train_axelrod/'
+        logpath += 'rr_axelrod/'
     else:
-        logpath += 'train_both/'
+        logpath += 'rr_both/'
     
     if training_group == 'BOTH':
         logpath += 'rr-rep-all-'
     else:
-        logpath += 'rr-rep{}-'.format(REP)
+        logpath += 'rr-rep-all-'
     logpath += time.strftime("%Y%m%d")
     logpath += '-{}'.format(os.getpid())
     logpath += '-{}'.format(NUM_COMPETITIONS)

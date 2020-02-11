@@ -21,7 +21,7 @@ from collections import defaultdict
 from deap import tools, base, creator, algorithms
 import deapplaygame2 as dpg
 import newreps_std_players as sp
-from globals import index as i
+from globals import index as idx
 from globals import keys, REP, HIST3, HIST6, MULTI, TOTAL_TYPES
 import ipd_types
 
@@ -54,6 +54,13 @@ def run_rr(t_group=None, num_each=None, num_evolved=None, num_reps=None):
 
     # NUM_EVOLVED_TYPES = 16
 
+    # eliminate the single objectives 2 & 3 from rr tournament
+    #    obj 2: maximize cooperation
+    #    obj 3: maximize opponent score
+    #    player types: 51, 52, 55, 56, 59, 60, 63, 64, 67, 68, 71, 72, 75, 76, 79, 80
+    elim_single_2-3 = True
+    elim_types = [51, 52, 55, 56, 59, 60, 63, 64, 67, 68, 71, 72, 75, 76, 79, 80]
+    
     if t_group is not None:
         TRAINING_GROUP = t_group
     else:
@@ -95,8 +102,8 @@ def run_rr(t_group=None, num_each=None, num_evolved=None, num_reps=None):
         path += '/temp_project/'
 
     # prepend path onto filenames:
-    for i, f in enumerate(in_filenames):
-        in_filenames[i] = path + f
+    for j, f in enumerate(in_filenames):
+        in_filenames[j] = path + f
         
     if num_each is not None:
         NUM_EACH_TYPE = num_each
@@ -144,16 +151,20 @@ def run_rr(t_group=None, num_each=None, num_evolved=None, num_reps=None):
         for row in reader:
             # remove blank cell at beginning of row and insert rep at beginning
             row.pop(0)
-            # check if player type for this row already in p_types
-            # if not, add it
             p_type = int(row[-4])
-            if not p_type in p_types:
-                p_types.append(p_type)
             
-            # cast the individual strings to numeric types
-            n_line = [float(x) if '.' in x else int(x) for x in row]
+            # this if statement allows us to skip adding single objectives 2 and 3 to
+            # the list of candidate rr players
+            if p_type not in elim_types or (p_type in elim_types and not elim_single_2-3):
+                # check if player type for this row already in p_types
+                # if not, add it
+                if not p_type in p_types:
+                    p_types.append(p_type)
 
-            evolved_candidates.append(n_line)
+                # cast the individual strings to numeric types
+                n_line = [float(x) if '.' in x else int(x) for x in row]
+
+                evolved_candidates.append(n_line)
 
         csvfile.close()
 
@@ -249,12 +260,12 @@ def run_rr(t_group=None, num_each=None, num_evolved=None, num_reps=None):
     if PLAY == 'ALL':
         # play round robin against axelrod and evolved players
         for pair in itertools.combinations(population, r=2):
-            if pair[0][i.type] != pair[1][i.type]:
+            if pair[0][idx.type] != pair[1][idx.type]:
                 sp.playMultiRounds(*pair)
     else:
         # play round robin against axelros players only
         for pair in itertools.combinations(population, r=2):
-            if (pair[0][i.type] < 17 and pair[1][i.type] >= 17) or (pair[0][i.type] >= 17 and pair[1][i.type] < 17):
+            if (pair[0][idx.type] < 17 and pair[1][idx.type] >= 17) or (pair[0][idx.type] >= 17 and pair[1][idx.type] < 17):
                 sp.playMultiRounds(*pair)
         
     sorted_pop = sorted(population, key=lambda m: dpg.sort_key(m, TESTING_METRIC), reverse=True)
@@ -295,14 +306,14 @@ def run_rr(t_group=None, num_each=None, num_evolved=None, num_reps=None):
 
         for member in sorted_pop:
             writer.writerow([''] + \
-                            member[i.genome] + \
-                            [float(member[i.scores][i.self]) / member[i.scores][i.games]] + \
-                            [float(member[i.scores][i.opp]) / member[i.scores][i.games]] + \
+                            member[idx.genome] + \
+                            [float(member[idx.scores][idx.self]) / member[idx.scores][idx.games]] + \
+                            [float(member[idx.scores][idx.opp]) / member[idx.scores][idx.games]] + \
                             # [ min(6* float(member[3])/member[4], COOPERATION_MAX)] +    \
-                            [float(member[i.scores][i.coop]) / member[i.scores][i.games]] + \
-                            [member[i.scores][i.games]] + \
-                            [member[i.pair]] + \
-                            [member[i.type]])
+                            [float(member[idx.scores][idx.coop]) / member[idx.scores][idx.games]] + \
+                            [member[idx.scores][idx.games]] + \
+                            [member[idx.pair]] + \
+                            [member[idx.type]])
 
     return sorted_pop
 
