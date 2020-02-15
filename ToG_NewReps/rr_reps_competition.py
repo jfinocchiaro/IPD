@@ -22,7 +22,7 @@ from deap import tools, base, creator, algorithms
 import deapplaygame2 as dpg
 import newreps_std_players as sp
 from globals import index as idx
-from globals import keys, REP, HIST3, HIST6, MULTI, TOTAL_TYPES
+from globals import keys, REP, HIST3, HIST6, MULTI, TOTAL_TYPES, NOISE
 import ipd_types
 
 # change this to determine the evaluation metric for testing
@@ -42,6 +42,24 @@ PLAY = 'ALL'
 
 main_run = False
 
+if NOISE > 0.0:
+    ax_path_m = 'axelrod_noise05_5k/'
+    pop_path_m = 'pop_noise05_5k/'
+    ax_path_s = 'axelrod_single-obj_noise05_5k/'
+    pop_path_s = 'pop_single-obj_noise05_5k/'
+    ax_file_m = 'axelrod_noise05_5k_best-during_selfscore.csv'
+    pop_file_m = 'pop_noise05_5k_best-during_selfscore.csv'
+    ax_file_s = 'axelrod_single-obj_noise05_5k_best-during_selfscore.csv'
+    pop_file_s = 'pop_single_obj_noise05_5k_best-during_selfscore.csv'
+else:
+    ax_path_m = 'axelrod_no-noise_5k/'
+    pop_path_m = 'pop_no-noise_5k/'
+    ax_path_s = 'axelrod_single-obj_no-noise_5k/'
+    pop_path_s = 'pop_single-obj_no-noise_5k/'
+    ax_file_m = 'axelrod_no-noise_5k_best-during_selfscore.csv'
+    pop_file_m = 'pop_no-noise_5k_best-during_selfscore.csv'
+    ax_file_s = 'axelrod_single-obj_no-noise_5k_best-during_selfscore.csv'
+    pop_file_s = 'pop_single_obj_no-noise_5k_best-during_selfscore.csv'
 
 def run_rr(t_group=None, num_each=None, num_evolved=None, num_reps=None):
 
@@ -67,32 +85,40 @@ def run_rr(t_group=None, num_each=None, num_evolved=None, num_reps=None):
         TRAINING_GROUP = 'BOTH'
 
     if TRAINING_GROUP == 'AX':
-        in_filenames = ['newreps_trained_axelrod/rep0_axelrod_no-noise_5k/rep0_axelrod_no-noise_5k_best-during_selfscore.csv',
-                        'newreps_trained_axelrod/rep1_axelrod_no-noise_5k/rep1_axelrod_no-noise_5k_best-during_selfscore.csv',
-                        'newreps_trained_axelrod/rep2_axelrod_no-noise_5k/rep2_axelrod_no-noise_5k_best-during_selfscore.csv',
-                        'newreps_trained_axelrod/rep4_axelrod_no-noise_5k/rep4_axelrod_no-noise_5k_best-during_selfscore.csv',
-                        'newreps_trained_axelrod/rep0_axelrod_single-obj_no-noise_5k/rep0_axelrod_single-obj_no-             noise_5k_best-during_selfscore.csv',
-                        'newreps_trained_axelrod/rep1_axelrod_single-obj_no-noise_5k/rep1_axelrod_single-obj_no-noise_5k_best-during_selfscore.csv',
-                        'newreps_trained_axelrod/rep2_axelrod_single-obj_no-noise_5k/rep2_axelrod_single-obj_no-noise_5k_best-during_selfscore.csv',
-                        'newreps_trained_axelrod/rep4_axelrod_single-obj_no-noise_5k/rep4_axelrod_single-obj_no-noise_5k_best-during_selfscore.csv']
+        in_filenames = ['newreps_trained_axelrod/rep0_' + ax_path_m + 'rep0_' + ax_file_m,
+                        'newreps_trained_axelrod/rep1_' + ax_path_m + 'rep1_' + ax_file_m,
+                        'newreps_trained_axelrod/rep2_' + ax_path_m + 'rep2_' + ax_file_m,
+                        'newreps_trained_axelrod/rep4_' + ax_path_m + 'rep4_' + ax_file_m,
+                        'newreps_trained_axelrod/rep0_' + ax_path_s + 'rep0_' + ax_file_s,
+                        'newreps_trained_axelrod/rep1_' + ax_path_s + 'rep1_' + ax_file_s,
+                        'newreps_trained_axelrod/rep2_' + ax_path_s + 'rep2_' + ax_file_s,
+                        'newreps_trained_axelrod/rep4_' + ax_path_s + 'rep4_' + ax_file_s]
     elif TRAINING_GROUP == 'POP':
-        in_filenames = ['newreps_trained_pop/rep0_pop_no-noise_5k/rep0_pop_no-noise_5k_best-during_selfscore.csv',
-                        'newreps_trained_pop/rep1_pop_no-noise_5k/rep1_pop_no-noise_5k_best-during_selfscore.csv',
-                        'newreps_trained_pop/rep2_pop_no-noise_5k/rep2_pop_no-noise_5k_best-during_selfscore.csv',
-                        'newreps_trained_pop/rep4_pop_no-noise_5k/rep4_pop_no-noise_5k_best-during_selfscore.csv',
-                        'newreps_trained_pop/rep0_pop_single-obj_no-noise_5k/rep0_pop_single-obj_no-noise_5k_best-during_selfscore.csv',
-                        'newreps_trained_pop/rep1_pop_single-obj_no-noise_5k/rep1_pop_single-obj_no-noise_5k_best-during_selfscore.csv',
-                        'newreps_trained_pop/rep2_pop_single-obj_no-noise_5k/rep2_pop_single-obj_no-noise_5k_best-during_selfscore.csv',
-                        'newreps_trained_pop/rep4_pop_single-obj_no-noise_5k/rep4_pop_single-obj_no-noise_5k_best-during_selfscore.csv']
+        in_filenames = ['newreps_trained_pop/rep0_' + pop_path_m + 'rep0_' + pop_file_m,
+                        'newreps_trained_pop/rep1_' + pop_path_m + 'rep1_' + pop_file_m,
+                        'newreps_trained_pop/rep2_' + pop_path_m + 'rep2_' + pop_file_m,
+                        'newreps_trained_pop/rep4_' + pop_path_m + 'rep4_' + pop_file_m,
+                        'newreps_trained_pop/rep0_' + pop_path_s + 'rep0_' + pop_file_s,
+                        'newreps_trained_pop/rep1_' + pop_path_s + 'rep1_' + pop_file_s,
+                        'newreps_trained_pop/rep2_' + pop_path_s + 'rep2_' + pop_file_s,
+                        'newreps_trained_pop/rep4_' + pop_path_s + 'rep4_' + pop_file_s]
     else:
-        in_filenames = ['newreps_trained_axelrod/rep0_axelrod_no-noise_5k/rep0_axelrod_no-noise_5k_best-during_selfscore.csv',
-                        'newreps_trained_axelrod/rep1_axelrod_no-noise_5k/rep1_axelrod_no-noise_5k_best-during_selfscore.csv',
-                        'newreps_trained_axelrod/rep2_axelrod_no-noise_5k/rep2_axelrod_no-noise_5k_best-during_selfscore.csv',
-                        'newreps_trained_axelrod/rep4_axelrod_no-noise_5k/rep4_axelrod_no-noise_5k_best-during_selfscore.csv',
-                        'newreps_trained_pop/rep0_pop_no-noise_5k/rep0_pop_no-noise_5k_best-during_selfscore.csv',
-                        'newreps_trained_pop/rep1_pop_no-noise_5k/rep1_pop_no-noise_5k_best-during_selfscore.csv',
-                        'newreps_trained_pop/rep2_pop_no-noise_5k/rep2_pop_no-noise_5k_best-during_selfscore.csv',
-                        'newreps_trained_pop/rep4_pop_no-noise_5k/rep4_pop_no-noise_5k_best-during_selfscore.csv']
+        in_filenames = ['newreps_trained_axelrod/rep0_' + ax_path_m + 'rep0_' + ax_file_m,
+                        'newreps_trained_axelrod/rep1_' + ax_path_m + 'rep1_' + ax_file_m,
+                        'newreps_trained_axelrod/rep2_' + ax_path_m + 'rep2_' + ax_file_m,
+                        'newreps_trained_axelrod/rep4_' + ax_path_m + 'rep4_' + ax_file_m,
+                        'newreps_trained_axelrod/rep0_' + ax_path_s + 'rep0_' + ax_file_s,
+                        'newreps_trained_axelrod/rep1_' + ax_path_s + 'rep1_' + ax_file_s,
+                        'newreps_trained_axelrod/rep2_' + ax_path_s + 'rep2_' + ax_file_s,
+                        'newreps_trained_axelrod/rep4_' + ax_path_s + 'rep4_' + ax_file_s,
+                        'newreps_trained_pop/rep0_' + pop_path_m + 'rep0_' + pop_file_m,
+                        'newreps_trained_pop/rep1_' + pop_path_m + 'rep1_' + pop_file_m,
+                        'newreps_trained_pop/rep2_' + pop_path_m + 'rep2_' + pop_file_m,
+                        'newreps_trained_pop/rep4_' + pop_path_m + 'rep4_' + pop_file_m,
+                        'newreps_trained_pop/rep0_' + pop_path_s + 'rep0_' + pop_file_s,
+                        'newreps_trained_pop/rep1_' + pop_path_s + 'rep1_' + pop_file_s,
+                        'newreps_trained_pop/rep2_' + pop_path_s + 'rep2_' + pop_file_s,
+                        'newreps_trained_pop/rep4_' + pop_path_s + 'rep4_' + pop_file_s]
 
     # set the input file path for running on comet
     path = ''

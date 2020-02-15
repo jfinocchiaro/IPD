@@ -31,10 +31,10 @@ def multi_rr():
 
     num_each_std = 10
     num_each_evolved = 10
-    training_group = 'POP'
+    training_group = 'BOTH'
     # num_reps = 4
 
-    NUM_COMPETITIONS = 50
+    NUM_COMPETITIONS = 1
 
     logpath = ''
     if 'comet' in platform.node():
@@ -99,6 +99,10 @@ def multi_rr():
         del sorted_by_type
 
         print(" End run number: {}\n".format(comps))
+        
+        # if population is small, need to slow down to avoid file name collisions
+        if num_each_std <= 3:
+            time.sleep(1)
         
         
 def write_member(writer, member):
