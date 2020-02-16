@@ -50,7 +50,7 @@ if NOISE > 0.0:
     ax_file_m = 'axelrod_noise05_5k_best-during_selfscore.csv'
     pop_file_m = 'pop_noise05_5k_best-during_selfscore.csv'
     ax_file_s = 'axelrod_single-obj_noise05_5k_best-during_selfscore.csv'
-    pop_file_s = 'pop_single_obj_noise05_5k_best-during_selfscore.csv'
+    pop_file_s = 'pop_single-obj_noise05_5k_best-during_selfscore.csv'
 else:
     ax_path_m = 'axelrod_no-noise_5k/'
     pop_path_m = 'pop_no-noise_5k/'
@@ -59,7 +59,7 @@ else:
     ax_file_m = 'axelrod_no-noise_5k_best-during_selfscore.csv'
     pop_file_m = 'pop_no-noise_5k_best-during_selfscore.csv'
     ax_file_s = 'axelrod_single-obj_no-noise_5k_best-during_selfscore.csv'
-    pop_file_s = 'pop_single_obj_no-noise_5k_best-during_selfscore.csv'
+    pop_file_s = 'pop_single-obj_no-noise_5k_best-during_selfscore.csv'
 
 def run_rr(t_group=None, num_each=None, num_evolved=None, num_reps=None):
 
