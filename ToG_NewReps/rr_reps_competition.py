@@ -6,6 +6,8 @@
 # strategy is assigned a number of members proportional to its success.  The strategy
 # with the most members at the end is the winner.
 #
+# WORKS FOR TOURNAMENTS THAT INCLUDE PLAYERS WITH DIFFERENT REPS
+#
 
 import time
 # import numpy as np
@@ -42,6 +44,7 @@ PLAY = 'ALL'
 
 main_run = False
 
+# helps determine input filenames based on presence of noise
 if NOISE > 0.0:
     ax_path_m = 'axelrod_noise05_5k/'
     pop_path_m = 'pop_noise05_5k/'
@@ -61,6 +64,7 @@ else:
     ax_file_s = 'axelrod_single-obj_no-noise_5k_best-during_selfscore.csv'
     pop_file_s = 'pop_single-obj_no-noise_5k_best-during_selfscore.csv'
 
+    
 def run_rr(t_group=None, num_each=None, num_evolved=None, num_reps=None):
 
     # creator.create("FitnessSingle", base.Fitness, weights=(1.0,))
@@ -84,15 +88,16 @@ def run_rr(t_group=None, num_each=None, num_evolved=None, num_reps=None):
     else:
         TRAINING_GROUP = 'BOTH'
 
+    # determine the input files to use
     if TRAINING_GROUP == 'AX':
         in_filenames = ['newreps_trained_axelrod/rep0_' + ax_path_m + 'rep0_' + ax_file_m,
-                        'newreps_trained_axelrod/rep1_' + ax_path_m + 'rep1_' + ax_file_m,
-                        'newreps_trained_axelrod/rep2_' + ax_path_m + 'rep2_' + ax_file_m,
-                        'newreps_trained_axelrod/rep4_' + ax_path_m + 'rep4_' + ax_file_m,
-                        'newreps_trained_axelrod/rep0_' + ax_path_s + 'rep0_' + ax_file_s,
-                        'newreps_trained_axelrod/rep1_' + ax_path_s + 'rep1_' + ax_file_s,
-                        'newreps_trained_axelrod/rep2_' + ax_path_s + 'rep2_' + ax_file_s,
-                        'newreps_trained_axelrod/rep4_' + ax_path_s + 'rep4_' + ax_file_s]
+                        # 'newreps_trained_axelrod/rep1_' + ax_path_m + 'rep1_' + ax_file_m,
+                        # 'newreps_trained_axelrod/rep2_' + ax_path_m + 'rep2_' + ax_file_m,
+                        # 'newreps_trained_axelrod/rep4_' + ax_path_m + 'rep4_' + ax_file_m,
+                        'newreps_trained_axelrod/rep0_' + ax_path_s + 'rep0_' + ax_file_s]
+                        # 'newreps_trained_axelrod/rep1_' + ax_path_s + 'rep1_' + ax_file_s,
+                        # 'newreps_trained_axelrod/rep2_' + ax_path_s + 'rep2_' + ax_file_s,
+                        # 'newreps_trained_axelrod/rep4_' + ax_path_s + 'rep4_' + ax_file_s]
     elif TRAINING_GROUP == 'POP':
         in_filenames = ['newreps_trained_pop/rep0_' + pop_path_m + 'rep0_' + pop_file_m,
                         'newreps_trained_pop/rep1_' + pop_path_m + 'rep1_' + pop_file_m,
@@ -140,11 +145,6 @@ def run_rr(t_group=None, num_each=None, num_evolved=None, num_reps=None):
         NUM_EACH_EVOLVED = num_evolved
     else:
         NUM_EACH_EVOLVED = 10
-
-#    if num_reps is not None:
-#        NUM_REPS = num_reps
-#    else:
-#        NUM_REPS = 4
     
     POP_SIZE = NUM_EACH_TYPE * sp.NUM_STD_TYPES
 
@@ -152,7 +152,6 @@ def run_rr(t_group=None, num_each=None, num_evolved=None, num_reps=None):
 
     rseed = int(os.getpid() * (time.time() % 4919))
     random.seed(rseed)
-    # print("\n\nRandom seed: {}\n".format(rseed))
 
     toolbox = ipd_types.make_types()
 
@@ -193,25 +192,15 @@ def run_rr(t_group=None, num_each=None, num_evolved=None, num_reps=None):
                 evolved_candidates.append(n_line)
 
         csvfile.close()
-
-    ###
-    ### added the representation as element 0 in each element in evolved candidates
-    ### will need to change some indices below to deal with this
-    ###
     
     # list of counts of number of individuals to add to population
     # for each (objective pair x representation) being tested added to population
     # evolved_obj_pairs = [0] * (4 * NUM_REPS)
     evolved_obj_pairs = [0] * TOTAL_TYPES
 
-
-    # determine if the members begin with generation or genome
-    # if former, must offest indices by 1
-    # if int(evolved_candidates[0][1]) > 1:
-    #     base = 1
-    # else:
-    #     base = 0
-
+    # build the population of players to take part in the tournament
+    # population is comprised of NUM_EACH players of each type
+    # players are randomly drawn from the list built above from contents of input files
     done = False
     while not done:
         index = random.randint(0, len(evolved_candidates) - 1)
@@ -274,15 +263,7 @@ def run_rr(t_group=None, num_each=None, num_evolved=None, num_reps=None):
         # done is True if all checks are True
         done_vector = [evolved_obj_pairs[e] >= NUM_EACH_EVOLVED for e in p_types]
         done = all(done_vector)
-        
-#        full = True
-#        j = 0
-#        while j < NUM_REPS * 4 and full:
-#            full = (evolved_obj_pairs[j] == NUM_EACH_EVOLVED)
-#            j += 1
-#
-#        done = full
-    
+            
     if PLAY == 'ALL':
         # play round robin against axelrod and evolved players
         for pair in itertools.combinations(population, r=2):

@@ -1,3 +1,7 @@
+#
+# Evolve players for IPD using one of four representations for individuals
+#
+
 import time
 # import numpy as np
 import random
@@ -18,6 +22,15 @@ import newreps_std_players as std
 import ipd_types
 
 import globals
+# index: indices of elements in genome, scores, stats, gradual, and objective pairs
+# HIST_SIZE: number of history bits for the representation used
+# TABLE_SIZE: size of the lookup table used for 3 of the 4 representations
+# FSM_STATES: the number of states in the FSM representation
+# BINARY: list of the states that use a binary representation
+# MARKOV: integer indicating id of the 8 row Markov chain representation
+# FSM: integer indicating the id of the FSM representation
+# REP: integer indicating the representation being used in this run
+# MULTI: boolean flag indicating if MULTI objectives or Single objectives being used
 from globals import index as i, HIST_SIZE, TABLE_SIZE, FSM_STATES, BINARY, MARKOV, FSM, REP, MULTI
 
 # change this to determine the evaluation metric for testing

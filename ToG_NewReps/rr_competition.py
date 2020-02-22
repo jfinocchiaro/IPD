@@ -52,7 +52,7 @@ def run_rr(t_group=None, num_each=None, num_evolved=None):
         TRAINING_GROUP = 'POP'
 
     if TRAINING_GROUP == 'AX':
-        in_filename = 'newreps_trained_axelrod/rep3_axelrod_no-noise_5k/rep3_axelrod_no-noise_5k_best-during_selfscore.csv'
+        in_filename = 'newreps_trained_axelrod/rep0_axelrod_no-noise_5k/rep0_axelrod_no-noise_5k_best-during_selfscore.csv'
     else:
         in_filename = 'newreps_trained_pop/rep4_pop_no-noise_trump30_5k/rep4_pop_no-noise_t30_5k_best-during_selfscore.csv'
 

@@ -65,6 +65,7 @@ def evaluate(member):
     return score1, score2
 
 
+# assign fitness value for single-objective players
 def evaluate_single(member):
     score1 = 0
     objectives = member[i.pair]

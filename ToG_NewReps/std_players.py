@@ -12,6 +12,7 @@ std_types = {0: 'COOP', 1: 'DEFECT', 2: 'TFT', 3: 'STFT', 4: 'PAVLOV', 5: 'SPITE
              14: 'NAIVE', 15: 'REMORSE', 16: 'GRADUAL', 17: 'EVOLVED', 18: 'EVOLVED', 19: 'EVOLVED', 20: 'EVOLVED'}
 
 
+# initialize the population with fixed-strategy players
 def init_pop(pop, counts):
     sum = 0
     for k in range(len(std_types) - 4):
@@ -23,6 +24,8 @@ def init_pop(pop, counts):
         sum += counts[k]
 
 
+# determine the decision of player p
+# p can be a fixed-strategy player or an evolved player
 def get_decision(p, self_hist, opp_hist, n):
     p_type = std_types[p[i.type]]
     decision = -1
@@ -234,13 +237,17 @@ def reset_wdl(p):
     p[i.stats][i.loss] = 0
 
 
+# control play of multiple rounds of IPD
 def playMultiRounds(player1, player2, rounds=150):
     decisionHist1 = []
     decisionHist2 = []
 
+    # intialize the score in this match
     player1[i.scores][i.match] = 0
     player2[i.scores][i.match] = 0
 
+    # initial history bits for evolved players and the
+    # gradual fields for gradual players
     if std_types[player1[i.type]] == 'GRADUAL':
         reset_gradual(player1)
     elif std_types[player1[i.type]] == 'EVOLVED':

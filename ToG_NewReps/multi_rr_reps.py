@@ -2,6 +2,8 @@
 # shell to make multiple calls to run_rr round-robin competition
 # and record the results
 #
+# This version is for tournaments that include players with different representations
+#
 
 import time
 import csv
@@ -27,15 +29,14 @@ from rr_reps_competition import run_rr
 
 def multi_rr():
 
-    # NUM_TYPES = 33
 
     num_each_std = 10
     num_each_evolved = 10
-    training_group = 'BOTH'
-    # num_reps = 4
+    training_group = 'AX'
 
-    NUM_COMPETITIONS = 1
+    NUM_COMPETITIONS = 2
 
+    # determine where output files are written
     logpath = ''
     if 'comet' in platform.node():
         logpath += '/oasis/scratch/comet/'
@@ -66,10 +67,11 @@ def multi_rr():
     f_type = open(fname_type, 'wb')
     writer_type = csv.writer(f_type, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 
+    # run the requested number of tournaments
     for comps in range(NUM_COMPETITIONS):
         print("\n Begin run number: {}".format(comps))
 
-        # result_pop = run_rr(training_group, num_each_std, num_each_evolved, num_reps)
+        # call run_rr (in rr_reps_competition.py)
         result_pop = run_rr(training_group, num_each_std, num_each_evolved)
 
         for j in range(10):
@@ -78,7 +80,6 @@ def multi_rr():
 
         sorted_by_type = sorted(result_pop, key=lambda m: (m[i.type], -m[i.scores][i.self]))
 
-        # for j in range(NUM_TYPES):
         while sorted_by_type:
             write_member(writer_type, sorted_by_type[0])
             m_type = sorted_by_type[0][i.type]

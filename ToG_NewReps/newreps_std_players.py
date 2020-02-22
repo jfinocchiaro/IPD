@@ -40,7 +40,7 @@ def shift_decisions(hist, oppdec, yourdec, rep):
         del hist[:2]
         hist.append(oppdec)
         hist.append(yourdec)
-    elif rep in HIST3 or REP == FSM:
+    elif rep in HIST3 or rep == FSM:
         # history contains 3 bits - 1 per round (opponent only)
         del hist[:1]
         hist.append(oppdec)
